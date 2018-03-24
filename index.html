@@ -13,7 +13,9 @@
         crossorigin="anonymous"></script>
     <script src="View/js/bootstrap/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="View/css/login/Style.css">
+    <link rel="stylesheet" href="View/css/login/Style.css">
+    <link rel="stylesheet" href="View/css/">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
 
     <title>Login</title>
@@ -23,10 +25,32 @@
 <body>
     <div class="container">
         <div class="row">
+            <div class="col-12" style="padding-top: 1vh;">
+                <h1 class="title">Bienvenido</h1>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-12 colum-img">
                 <img class="img-celeri" src="View/img/Celeri Callcenter.png">
             </div>
         </div>
+
+        <!-- Formulario Login -->
+        <form action="" method="POST">
+            <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate="Enter username">
+                <input class="input100" type="text" name="username">
+                <span class="focus-input100" data-placeholder="Username"></span>
+            </div>
+            <div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
+                <input class="input100" type="password" name="pass">
+                <span class="focus-input100" data-placeholder="Password"></span>
+            </div>
+            <div class="container-login100-form-btn">
+                <button class="login100-form-btn">
+                    Login
+                </button>
+            </div>
+        </form>
     </div>
 </body>
 
