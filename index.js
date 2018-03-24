@@ -7,7 +7,9 @@ const url = require('url');
 let win = null
 
 app.on('ready', function(){
-    win = new BrowserWindow({width:500, height:800})
+    
+    win = new BrowserWindow({width:500, height:800, icon: __dirname + '/images/icons/favicon.icoo'})
+    win.setMenu(null);
     win.loadURL(
         url.format({
             pathname: path.join(__dirname, 'index.html'),
