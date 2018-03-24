@@ -1,0 +1,17 @@
+{
+  "name": "ejercicio1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^1.8.4"
+  },
+  "devDependencies": {
+    "electron-prebuilt": "^1.4.13"
+  },
+  "description": ""
+}
