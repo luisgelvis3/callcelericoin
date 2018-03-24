@@ -1,19 +1,45 @@
 
-body{
-    background-color: #ececec;
+
+
+
+/*//////////////////////////////////////////////////////////////////
+[ FONT ]*/
+
+@font-face {
+  font-family: Poppins-Regular;
+  src: url('../fonts/poppins/Poppins-Regular.ttf'); 
 }
 
-.title{
-    text-align: center;
+@font-face {
+  font-family: Poppins-Medium;
+  src: url('../fonts/poppins/Poppins-Medium.ttf'); 
 }
 
-.colum-img{
-    text-align: center;
-    font-family: 'Open Sans', sans-serif;
+@font-face {
+  font-family: Poppins-Bold;
+  src: url('../fonts/poppins/Poppins-Bold.ttf'); 
 }
 
-.img-celeri{
-    width: 210px;
+@font-face {
+  font-family: Poppins-SemiBold;
+  src: url('../fonts/poppins/Poppins-SemiBold.ttf'); 
+}
+
+
+
+
+/*//////////////////////////////////////////////////////////////////
+[ RESTYLE TAG ]*/
+
+* {
+	margin: 0px; 
+	padding: 0px; 
+	box-sizing: border-box;
+}
+
+body, html {
+	height: 100%;
+	font-family: Poppins-Regular, sans-serif;
 }
 
 /*---------------------------------------------*/
@@ -171,9 +197,8 @@ iframe {
 
 .login100-form-avatar {
   display: block;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
+  width: 180px;
+  height: 180px;
   overflow: hidden;
   margin: 0 auto;
 }
