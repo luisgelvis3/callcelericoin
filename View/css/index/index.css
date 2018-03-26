@@ -1,0 +1,53 @@
+
+body{
+    background-color: #f6f6f6;
+}
+
+/* Menu Costado */
+
+.img-menu{
+    margin-top: 2em;
+}
+
+.btn-disponible{
+    margin-top: 4em;
+}
+
+.btn-ausente{
+    margin-top: 4em;
+}
+
+.btn-finalizar{
+    margin-top: 4em;
+}
+
+.btn{
+    padding: 2em 6em;
+}
+
+/* Menu Principal */
+
+.title-comprador{
+    background-color: #007bff;
+    color: white;
+    height: 60px;
+    margin: auto;
+    text-align: center;
+    padding-bottom: 0.5em;
+}
+
+.h1{
+    font-size: 26px;
+    margin: auto;
+    margin-top: 1em;
+    padding-top: 0.5em;
+}
+
+/* Formulario Comprador */
+
+.nombre-comprador{
+    background-color: #d2deef;
+}
+
+
+
