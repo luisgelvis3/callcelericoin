@@ -11,7 +11,7 @@ app.on('ready', function(){
     win.setMenu(null);
     win.loadURL(
         url.format({
-            pathname: path.join(__dirname, 'View/html/index.html'),
+            pathname: path.join(__dirname, 'View/html/admi.html'),
             protocol: 'file',
             slashes: true
         })

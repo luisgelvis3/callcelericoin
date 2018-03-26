@@ -1,0 +1,53 @@
+
+/* Menu Asesores*/
+
+.title-menu{
+    background-color: orange;
+    color: white;
+    text-align: center;
+    font-size: 22px;
+}
+
+.img{
+    margin-top: .5em;
+}
+
+.asesor{
+    background-color: #f8d7cd;
+    border-bottom: 1px solid #fcece8;
+}
+
+.circular { 
+    width: 20px; 
+    height: 20px; 
+    border: 1px solid black;
+    border-radius: 100%;
+    border-color: black; 
+    -webkit-border-radius: 150px; 
+    -moz-border-radius: 150px; 
+    background-color: transparent;
+    margin-top: .5em;
+    margin-left: 1.5em;
+}
+
+/* Menu Principal */
+
+.title-principal{
+    background-color: #ffc000;
+    color: white;
+    text-align: center;
+    font-size: 22px;
+}
+
+.circulo-pricipal{
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
+    border-color: black; 
+    border-radius: 100%;
+    -webkit-border-radius: 150px; 
+    -moz-border-radius: 150px; 
+    background-color: transparent;
+    margin-left: 1.5em;
+    margin: auto;
+}
