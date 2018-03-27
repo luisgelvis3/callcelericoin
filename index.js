@@ -16,5 +16,5 @@ app.on('ready', function(){
             slashes: true
         })
     );
-    //win.webContents.openDevTools();
+    win.webContents.openDevTools();
 })

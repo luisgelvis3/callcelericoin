@@ -5,6 +5,16 @@ body{
 
 /* Menu Costado */
 
+.label{
+    width: 60%;
+    margin-top: 1em;
+    border: 1px solid #d2deef;
+    height: 38px;
+    border-radius: 6px;
+    font-size: 24px;
+    font-weight: 400;
+}
+
 .img-menu{
     margin-top: 2em;
 }

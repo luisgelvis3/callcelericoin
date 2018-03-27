@@ -13,12 +13,14 @@
 </head>
 
 <body>
+        
     <div class="container-fluid">
         <div class="row">
             <!-- Menu Costado -->
             <div class="col-sm-12 col-md-4" style="text-align: center;">
                 <div class="img-menu">
                     <img src="../img/CallCenter.jpg" width="140" alt="">
+                    <Label for="nombre" class="label" id="nameUsuario"></Label>
                 </div>
                 <div class="btn-disponible">
                     <button class="btn btn-primary">DISPONIBLE</button>
@@ -110,5 +112,16 @@
             </div>
         </div>
     </div>
+    <script>
+            function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+        
+        var prodId = getParameterByName('nombreusuario');
+        document.getElementById("nameUsuario").innerHTML = prodId;
+    </script>
 </body>
 </html>
