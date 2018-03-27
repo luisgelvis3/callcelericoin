@@ -48,6 +48,15 @@
     -webkit-border-radius: 150px; 
     -moz-border-radius: 150px; 
     background-color: transparent;
-    margin-left: 1.5em;
     margin: auto;
+    margin-top: -2.5em;
+}
+
+.label{
+    margin-top: 1em;
+}
+
+.colum{
+    background-color: #ffe8cb;
+    border-bottom: 1px solid #ffae99
 }
