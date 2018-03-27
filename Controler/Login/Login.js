@@ -16,13 +16,14 @@ function validacionLogin() {
                 if(result[0].nombre_usuario === var_nombre_usuario && result[0].contrasena_usuario === var_contrasena_usuario){
                     if(result[0].tipo_usuario === "usuario"){
                         var userName = result[0].nombre_usuario;
-                        location.href = "./View/html/index.html?nombreusuario="+userName;
+                        var lastName = result[0].apellido_usuario;
+                        location.href = "./View/html/index.html?nombreusuario="+userName + lastName;
                         
                         //'<%Session[userName] = "'+userName + '"; %>';
                         //alert('<%=Session["UserName"] %>');
                     }else if(result[0].tipo_usuario === "administrador"){
                         var userName = result[0].nombre_usuario;
-                        location.href = "./View/html/admin.html?nombreusuario="+userName;
+                        location.href = "./View/html/admin.html?nombreusuario="+ userName + "&apellidousuario = " + lastName;
                         
                         //'<%Session[userName] = "'+userName + '"; %>';
                         //alert('<%=Session["UserName"] %>');

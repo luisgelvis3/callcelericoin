@@ -117,11 +117,13 @@
             name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
             var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
             results = regex.exec(location.search);
-            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            return results === null ? " " : decodeURIComponent(results[1].replace(/\+/g, "    "));
         }
         
-        var prodId = getParameterByName('nombreusuario');
-        document.getElementById("nameUsuario").innerHTML = prodId;
+        var varnombreusuario = getParameterByName('nombreusuario');
+        var varapellidousuario = getParameterByName('apellidousuario');
+
+        document.getElementById("nameUsuario").innerHTML = varnombreusuario;
     </script>
 </body>
 </html>
