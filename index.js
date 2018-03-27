@@ -11,10 +11,10 @@ app.on('ready', function(){
     win.setMenu(null);
     win.loadURL(
         url.format({
-            pathname: path.join(__dirname, 'View/html/admi.html'),
+            pathname: path.join(__dirname, 'login.html'),
             protocol: 'file',
             slashes: true
         })
     );
-    win.webContents.openDevTools();
+    //win.webContents.openDevTools();
 })
