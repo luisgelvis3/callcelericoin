@@ -13,7 +13,7 @@
 </head>
 
 <body>
-
+        
     <div class="container-fluid">
         <div class="row">
             <!-- Menu Costado -->
@@ -39,8 +39,8 @@
                             "</div>" +
                             "<div class='col-4' style='text-align: center;'>" +
                             "En Línea" +
-                            "</div>"
-                        }
+                        "</div>"
+                    }
                     document.getElementById("container_asesor").innerHTML = text;
                 </script>
             </div>
@@ -62,15 +62,12 @@
                     var acu = 0;
                     var text = "";
                     for (var i = 1; i <= 60; i++) {
-
                         text += "<div class='col-sm-4 col-md-2' style='padding-bottom: .5em;'>" +
                             "<Label class='label'>" + i + ".</Label>" +
                             "<div id='id_circulo_" + i + "' class='circulo-pricipal'></div>" +
-                            "</div>";
-
+                        "</div>";
                     }
                     document.getElementById("container_tabla").innerHTML = text;
-
 
                     for (var i = 1; i <= 60; i++) {
                         document.getElementById("id_circulo_" + i).style.backgroundColor = "green";

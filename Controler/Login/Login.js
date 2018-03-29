@@ -1,4 +1,7 @@
+
 function validacionLogin() {
+
+    //import { Session } from "electron";
 
     // Leer los datos que se ingresaron al formulario y asignarlos a variables
     var var_nombre_usuario = document.getElementById('username').value;
@@ -12,9 +15,18 @@ function validacionLogin() {
             try{
                 if(result[0].nombre_usuario === var_nombre_usuario && result[0].contrasena_usuario === var_contrasena_usuario){
                     if(result[0].tipo_usuario === "usuario"){
-                        location.href = "./View/html/index.html";
+                        var userName = result[0].nombre_usuario;
+                        var lastName = result[0].apellido_usuario;
+                        location.href = "./View/html/index.html?nombreusuario="+userName + lastName;
+                        
+                        //'<%Session[userName] = "'+userName + '"; %>';
+                        //alert('<%=Session["UserName"] %>');
                     }else if(result[0].tipo_usuario === "administrador"){
-                        location.href = "./View/html/admin.html";
+                        var userName = result[0].nombre_usuario;
+                        location.href = "./View/html/admin.html?nombreusuario="+ userName + "&apellidousuario = " + lastName;
+                        
+                        //'<%Session[userName] = "'+userName + '"; %>';
+                        //alert('<%=Session["UserName"] %>');
                     }
                 }else{
                     alert('Usuario o Contraseñas Incorrectas');
