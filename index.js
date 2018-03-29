@@ -6,15 +6,17 @@ const url = require('url');
 let win = null
 
 app.on('ready', function(){
-    
-    win = new BrowserWindow({width:1200, height:800, icon: __dirname + '/images/icons/favicon.icoo'})
+    win = new BrowserWindow({icon: __dirname + '/images/icons/favicon.icoo'});
+    //({useContentSize: true,icon: __dirname + '/images/icons/favicon.icoo'})
     win.setMenu(null);
+    win.maximize();
     win.loadURL(
         url.format({
-            pathname: path.join(__dirname, 'login.html'),
+            pathname: path.join(__dirname, 'View/html/index.html'),
             protocol: 'file',
             slashes: true
         })
     );
+    
     //win.webContents.openDevTools();
 })

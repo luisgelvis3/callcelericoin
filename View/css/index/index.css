@@ -22,7 +22,7 @@ body{
 }
 
 .btn{
-    padding: 2em 6em;
+    padding: .5em 1em;
 }
 
 /* Menu Principal */
@@ -47,6 +47,23 @@ body{
 
 .nombre-comprador{
     background-color: #d2deef;
+}
+
+/* Menu de lista de espera */
+
+.title-espera{
+    background-color: #007bff;
+    color: white;
+    margin-top: auto;
+    text-align: center;
+    height: 60px;
+}
+
+.title-espera .h1{
+    margin: auto;
+    font-size: 26px;
+    margin-top: 1em;
+    padding-top: 0.5em;
 }
 
 
