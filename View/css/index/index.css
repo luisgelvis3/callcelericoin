@@ -15,6 +15,10 @@ body{
     margin: auto;
 }
 
+.label-nombre{
+    padding-bottom: 0em;
+}
+
 .img-menu{
     margin-top: 2em;
 }

@@ -18,15 +18,9 @@ function validacionLogin() {
                         var userName = result[0].nombre_usuario;
                         var lastName = result[0].apellido_usuario;
                         location.href = "./View/html/index.html?nombreusuario="+userName + lastName;
-                        
-                        //'<%Session[userName] = "'+userName + '"; %>';
-                        //alert('<%=Session["UserName"] %>');
                     }else if(result[0].tipo_usuario === "administrador"){
                         var userName = result[0].nombre_usuario;
                         location.href = "./View/html/admin.html?nombreusuario="+ userName + "&apellidousuario = " + lastName;
-                        
-                        //'<%Session[userName] = "'+userName + '"; %>';
-                        //alert('<%=Session["UserName"] %>');
                     }
                 }else{
                     alert('Usuario o Contraseñas Incorrectas');
