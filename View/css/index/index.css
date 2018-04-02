@@ -3,6 +3,36 @@ body{
     background-color: #f6f6f6;
 }
 
+.text-center{
+    text-align: center;
+    margin: auto;
+}
+
+.text-rigth{
+    text-align: right;
+    margin: auto;
+}
+
+.text-left{
+    text-align: left;
+    margin: auto;
+}
+
+.colum-center{
+    text-align: center;
+    margin: auto;
+}
+
+.colum-rigth{
+    text-align: right;
+    margin: auto;
+}
+
+.colum-left{
+    text-align: left;
+    margin: auto;
+}
+
 /* Menu Costado */
 
 .label{
@@ -32,6 +62,7 @@ body{
     background-color: transparent;
     border-color: #009688;
     color: #787879;
+    padding: .5em 1em;
 }
 
 .btn-disponible:hover{
@@ -43,6 +74,7 @@ body{
     background-color: transparent;
     border-color: #009688;
     color: #787879;
+    padding: .5em 1em;
 }
 
 .btn-ausente:hover{
@@ -50,9 +82,6 @@ body{
     border-color: #F57C00;
 }
 
-.btn{
-    padding: .5em 1em;
-}
 
 /* Menu Principal */
 
@@ -87,24 +116,10 @@ body{
 
 /* Botones */
 
-.colum-center{
-    text-align: center;
-    margin: auto;
-}
-
-.colum-rigth{
-    text-align: right;
-    margin: auto;
-}
-
-.colum-left{
-    text-align: left;
-    margin: auto;
-}
-
 .btn-espera{
     background-color: #FBC02D;
     border-color: #FBC02D;
+    padding: .5em 1em;
 }
 
 .btn-espera:hover{
@@ -115,6 +130,7 @@ body{
 .btn-cancelado{
     background-color: #C62828;
     border-color: #C62828;
+    padding: .5em 1em;
 }
 
 .btn-cancelado:hover{
@@ -125,11 +141,13 @@ body{
 .btn-finalizado{
     background-color: #388E3C;
     border-color: #388E3C;
+    padding: .5em 1em;
 }
 
 .btn-finalizado:hover{
     background-color: #43A047;
     border-color: #43A047;
+    padding: .5em 1em;
 }
 
 /* Menu de lista de espera */
@@ -154,8 +172,13 @@ body{
     background-color: transparent;
     border-color: #388E3C;
     animation-name: example;
-    animation-duration: 4s;
+    animation-duration: 6s;
     animation-iteration-count: infinite;
+    padding: .5em 1em;
+}
+
+.btn-reanudar:hover{
+    border-color: #388E3C; 
 }
 
 @keyframes example {
@@ -165,13 +188,3 @@ body{
     
     100% {background-color:transparent; color: #787879; top:0px;}
 }
-
-/*.btn-reanudar:hover{
-    background-color: transparent;
-    border-color: #43A047;
-}*/
-
-
-
-
-
