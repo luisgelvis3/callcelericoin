@@ -12,7 +12,7 @@ app.on('ready', function(){
     win.maximize();
     win.loadURL(
         url.format({
-            pathname: path.join(__dirname, 'login.html'),
+            pathname: path.join(__dirname, 'View/html/index.html'),
             protocol: 'file',
             slashes: true
         })
