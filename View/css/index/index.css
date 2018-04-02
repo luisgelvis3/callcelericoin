@@ -23,16 +23,22 @@ body{
     margin-top: 2em;
 }
 
-.btn-disponible{
+.contenedor-btn-Disponible{
     margin-top: 4em;
 }
 
-.btn-ausente{
+.contenedor-btn-Ausente{
     margin-top: 4em;
 }
 
-.btn-finalizar{
-    margin-top: 4em;
+.btn-disponible:hover{
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-ausente:hover{
+    background-color: #E65100;
+    border-color: #E65100;
 }
 
 .btn{
