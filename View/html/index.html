@@ -6,10 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
     <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="../css/index/index.css">
 
-    <title>Document</title>
+    <script src="../../Controler/db/connectionCallCenter.js"></script>
+    <script src="../../Controler/Login/Login.js"></script>
+    <script src="../../Controler/Login/CloseLogin.js"></script>
+    
 </head>
 
 <body>i
@@ -17,20 +22,24 @@
     <div class="container-fluid">
         <div class="row">
             <!-- Menu Costado -->
-            <div class="col-sm-12 col-md-4" style="text-align: center;">
+            <div class="col-sm-12 col-md-3" style="text-align: center;">
                 <div class="img-menu">
                     <img src="../img/CallCenter.jpg" width="140" alt="">
                     <Label for="nombre" class="label" id="nameUsuario"></Label>
+                    <input type="hidden" name="idUsuario" id="idUsuario">
                 </div>
                 <div class="contenedor-btn-Disponible">
                     <button class="btn btn-primary btn-disponible">DISPONIBLE</button>
                 </div>
                 <div class="contenedor-btn-Ausente">
-                    <button class="btn btn-primary btn-ausente" style="width: 7.5em;">AUSENTE</button>
+                    <button class="btn btn-primary btn-ausente" >AUSENTE</button>
+                </div>
+                <div class="contenedor-btn-cerrar-session">
+                    <button class="btn btn-primary btn-cerrar-session" onclick="cerrarSession();">CERRAR SESSION</button>
                 </div>
             </div>
             <!-- Menu Principal -->
-            <div class="col-sm-12 col-md-8">
+            <div class="col-sm-12 col-md-9">
                 <div class="containe-fluid">
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
@@ -39,42 +48,52 @@
                             </div>
                             <div class="comprador">
                                 <div class="row" style="padding-top: 1em;">
-                                    <div class="col-3" style="margin: auto;">
-                                        <Label>Nombre:</Label>
+                                    <div class="col-3" style="margin: auto; text-align: right;">
+                                        <Label class="labels">Nombre:</Label>
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="nombre">
+                                            <input type="text" class="form-control" name="nombre" disabled>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row" style="padding-top: 1em;">
-                                    <div class="col-3" style="margin: auto;">
-                                        <Label>Cedula:</Label>
+                                    <div class="col-3" style="margin: auto; text-align: right;">
+                                        <Label class="labels">Cedula:</Label>
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="cedula">
+                                            <input type="text" class="form-control" name="cedula" disabled>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row" style="padding-top: 1em;">
-                                    <div class="col-3" style="margin: auto;">
-                                        <Label>Telefono:</Label>
+                                    <div class="col-3" style="margin: auto; text-align: right;">
+                                        <Label class="labels">Telefono:</Label>
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="telefono">
+                                            <input type="text" class="form-control" name="telefono" disabled>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row" style="padding-top: 1em;">
-                                    <div class="col-3" style="margin: auto;">
-                                        <Label>Moneda:</Label>
+                                    <div class="col-3" style="margin: auto; text-align: right;">
+                                        <Label class="labels">Moneda:</Label>
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="moneda">
+                                            <input type="text" class="form-control" name="moneda" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-top: 1em;">
+                                    <div class="col-3" style="margin: auto; text-align: right;">
+                                        <Label class="labels">Monto:</Label>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="moneda" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -87,113 +106,108 @@
                             </div>
                             <div class="vendedor">
                                 <div class="row" style="padding-top: 1em;">
-                                    <div class="col-3" style="margin: auto;">
-                                        <Label>Nombre:</Label>
+                                    <div class="col-3" style="margin: auto; text-align: right;">
+                                        <Label class="labels">Nombre:</Label>
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="nombre">
+                                            <input type="text" class="form-control" name="nombre" disabled>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row" style="padding-top: 1em;">
-                                    <div class="col-3" style="margin: auto;">
-                                        <Label>Cedula:</Label>
+                                    <div class="col-3" style="margin: auto; text-align: right;">
+                                        <Label class="labels">Cedula:</Label>
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="cedula">
+                                            <input type="text" class="form-control" name="cedula" disabled>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row" style="padding-top: 1em;">
-                                    <div class="col-3" style="margin: auto;">
-                                        <Label>Telefono:</Label>
+                                    <div class="col-3" style="margin: auto; text-align: right;">
+                                        <Label class="labels">Telefono:</Label>
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="telefono">
+                                            <input type="text" class="form-control" name="telefono" disabled>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row" style="padding-top: 1em;">
-                                    <div class="col-3" style="margin: auto;">
-                                        <Label>Moneda:</Label>
+                                    <div class="col-3" style="margin: auto; text-align: right;">
+                                        <Label class="labels">Moneda:</Label>
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="moneda">
+                                            <input type="text" class="form-control" name="moneda" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-top: 1em;">
+                                    <div class="col-3" style="margin: auto; text-align: right;">
+                                        <Label class="labels">Monto:</Label>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="moneda" disabled>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- botones -->
+                    <div class="row" style="margin-top: 1em;">
+                        <div class="col-4 colum-rigth">
+                            <button class="btn btn-primary btn-cancelado">Cancelar</button>
+                        </div>
+                        <div class="col-4 colum-center">
+                            <button class="btn btn-primary btn-espera">En Espera</button>
+                        </div>
+                        <div class="col-4 colum-left">
+                            <button class="btn btn-primary btn-finalizado">Finalizar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- Lista de Espera -->
+        </div>
+        <div class="container">
+            <div class="row " style="margin-top: 1em;">
+                <!-- Tabla de llamadas en espera -->
+                <div class="col-12">
+                    <div class="title-espera">
+                        <h1 class="h1">TRANSACCIONES EN ESPERA</h1>
+                    </div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Vendedor</th>
+                                <th>Comprador</th>
+                                <th>Fecha y Hora</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>
+                                    <div class="cirle-estado"></div>
+                                </th>
+                                <th>David</th>
+                                <th>Luis</th>
+                                <th>2017-03-29 18:44</th>
+                                <th>
+                                    <button class="btn btn-primary btn-reanudar">Reanudar</button>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
-        </div>
-        <div class="row">
-            <!-- Tabla de llamadas en espera -->
-            <div class="col-sm-12 col-md-6">
-                <div class="title-espera">
-                    <h1 class="h1">TRANSACCIONES EN ESPERA</h1>
-                </div>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Vendedor</th>
-                            <th>Comprador</th>
-                            <th>Fecha y Hora</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th>
-                                <div class="cirle-estado"></div>
-                            </th>
-                            <th>David</th>
-                            <th>Luis</th>
-                            <th>2017-03-29 18:44</th>
-                            <th>
-                                <button class="btn btn-primary">Reaunudar</button>
-                            </th>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <!-- Tabla de llamadas en cola -->
-            <div class="col-sm-12 col-md-6">
-                <div class="title-espera">
-                    <h1 class="h1">LLAMADAS EN COLA</h1>
-                </div>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Vendedor</th>
-                            <th>Comprador</th>
-                            <th>Fecha y Hora</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th>
-                                <div class="cirle-estado"></div>
-                            </th>
-                            <th>David</th>
-                            <th>Luis</th>
-                            <th>2017-03-29 18:44</th>
-                            <th>
-                                <button class="btn btn-primary">TOMAR</button>
-                            </th>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
     </div>
     <script>
         function getParameterByName(name) {
@@ -205,8 +219,10 @@
 
         var varnombreusuario = getParameterByName('nombreusuario');
         var varapellidousuario = getParameterByName('apellidousuario');
-
-        document.getElementById("nameUsuario").innerHTML = varnombreusuario;
+        var id = getParameterByName('id_usuario');
+        alert(id);
+        document.getElementById("nameUsuario").innerHTML = varnombreusuario+" "+varapellidousuario;
+        document.getElementById("idUsuario").value = id;
     </script>
 </body>
 

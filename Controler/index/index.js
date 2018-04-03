@@ -1,5 +1,5 @@
 function cargaDatos(){
 
-    var sql = connectio
+    var sql = connection.sql("select * from ")
 
 }
