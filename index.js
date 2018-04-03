@@ -18,5 +18,5 @@ app.on('ready', function(){
         })
     );
     
-    win.webContents.openDevTools();
+    //win.webContents.openDevTools();
 })
