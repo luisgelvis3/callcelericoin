@@ -1,7 +1,7 @@
 function cerrarSession() {
 
     var var_id_usuario = document.getElementById('idUsuario').value;
-
+    alert(var_id_usuario);
     var query = connection.query("select * from usuarios where id_usuario = ?", [var_id_usuario], function (error, result){
         if (error) {
             console.log(error);
