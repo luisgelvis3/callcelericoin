@@ -14,7 +14,6 @@
     <script src="../../Controler/db/connectionCallCenter.js"></script>
     <script src="../../Controler/Login/Login.js"></script>
     <script src="../../Controler/Login/CloseLogin.js"></script>
-    
 </head>
 
 <body>
@@ -207,22 +206,7 @@
                 </div>
             </div>
         </div>
-
     </div>
-    <script>
-        function getParameterByName(name) {
-            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-                results = regex.exec(location.search);
-            return results === null ? " " : decodeURIComponent(results[1].replace(/\+/g, "    "));
-        }
-
-        var varnombreusuario = getParameterByName('nombreusuario');
-        var varapellidousuario = getParameterByName('apellidousuario');
-        var id = getParameterByName('id_usuario');
-        document.getElementById("nameUsuario").innerHTML = varnombreusuario+" "+varapellidousuario;
-        document.getElementById("idUsuario").value = id;
-    </script>
 </body>
-
+<script src="../js/Login/script.js"></script>
 </html>
