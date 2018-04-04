@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
@@ -20,6 +20,7 @@
     <script src="../../Controler/db/connectionCallCenter.js"></script>
     <script src="../../Controler/Login/Login.js"></script>
     <script src="../../Controler/Login/CloseLogin.js"></script>
+
 </head>
 
 <body>
@@ -51,7 +52,7 @@
                     <button class="btn btn-cerrar-session" onclick="cerrarSession();">CERRAR SESSION</button>
                 </div>
                 <div class="contenedor-btn-nuevo-registro">
-                    <button type="button" class="btn btn-nuevo-registro" data-toggle="modal" data-target="#modalRegistro">
+                    <button type="button" class="btn btn-nuevo-registro" data-toggle="modal" data-target="#modalRegistro" onclick="nuevoRegistro()">
                         NUEVO REGISTRO
                     </button>
                 </div>
@@ -71,7 +72,7 @@
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="nombre" disabled>
+                                            <input type="text" class="form-control" name="nombre_comprador" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -81,7 +82,7 @@
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="cedula" disabled>
+                                            <input type="text" class="form-control" name="cedula_comprador" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +92,7 @@
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="telefono" disabled>
+                                            <input type="text" class="form-control" name="telefono_comprador" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +102,7 @@
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="clave_usuario" disabled>
+                                            <input type="text" class="form-control" name="clave_usuario_comprador" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -111,7 +112,7 @@
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="clave_celeri" disabled>
+                                            <input type="text" class="form-control" name="clave_celeri_comprador" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -121,7 +122,7 @@
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="clave_celeri" disabled>
+                                            <input type="text" class="form-control" name="monto_compra_comprador" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -139,7 +140,7 @@
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="nombre" disabled>
+                                            <input type="text" class="form-control" name="nombre_vendedor" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -149,7 +150,7 @@
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="cedula" disabled>
+                                            <input type="text" class="form-control" name="cedula_vendedor" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -159,7 +160,7 @@
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="telefono" disabled>
+                                            <input type="text" class="form-control" name="telefono_vendedor" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -169,7 +170,7 @@
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="clave_usuario" disabled>
+                                            <input type="text" class="form-control" name="clave_usuario_vendedor" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -179,7 +180,7 @@
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="clave_celericoin" disabled>
+                                            <input type="text" class="form-control" name="clave_celericoin_vendedor" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -189,7 +190,7 @@
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="clave_celeri" disabled>
+                                            <input type="text" class="form-control" name="forma_pago_vendedor" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -265,7 +266,7 @@
                                 </div>
                                 <div class="col-9">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="nombre" disabled>
+                                        <input type="text" class="form-control" id="nombre" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -275,7 +276,7 @@
                                 </div>
                                 <div class="col-9">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="cedula" disabled>
+                                        <input type="text" class="form-control" id="cedula" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -285,7 +286,7 @@
                                 </div>
                                 <div class="col-9">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="telefono" disabled>
+                                        <input type="text" class="form-control" id="direccion" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -295,7 +296,7 @@
                                 </div>
                                 <div class="col-9">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="telefono" disabled>
+                                        <input type="text" class="form-control" id="telefono" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -305,7 +306,7 @@
                                 </div>
                                 <div class="col-9">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="correo" disabled>
+                                        <input type="text" class="form-control" id="correo" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -344,8 +345,59 @@
 
 </body>
 
-
-
 <script src="../js/Login/script.js"></script>
+<script src="../../Controler/IndesUser/consultaCompradorVendedor.js"></script>
+
+<script>
+    var id_usuario_celeri = "";
+    $(document).ready(function () {
+        function verifyCampos() {
+            var query = connection.query("select * from contrasenas where estado_confirmacion = 'Por Confirmar'", function (error, result) {
+                id_usuario_celeri = result[0].id_usuario_celeri;
+                if (error) {
+                    console.log(error);
+                    alert("error: " + error);
+                } else {
+                    try {
+                        if (result[0].estado_confirmacion === "Por Confirmar") {
+                            $(".btn-nuevo-registro").addClass("nuevo-registro");
+
+                        } else {
+                            $(".btn-nuevo-registro").removeClass("nuevo-registro");
+                        }
+                    } catch (error) {
+                        $(".btn-nuevo-registro").removeClass("nuevo-registro");
+                    }
+                }
+            });
+        }
+        setInterval(verifyCampos, 3000);
+    });
+
+    function nuevoRegistro() {
+        var query = connection.query("select * from celericoin.usuarios where id = ?", [id_usuario_celeri], function (error, result) {
+            if (error) {
+                alert("error en la consulta" + error);
+            } else {
+                try {
+                    document.getElementById('nombre').value = result[0].nombres;
+                    document.getElementById('cedula').value = result[0].dni;
+                    document.getElementById('direccion').value = result[0].direccion;
+                    document.getElementById('telefono').value = result[0].telefono;
+                    document.getElementById('correo').value = result[0].correo;
+                } catch (error) {
+                    alert("error en la consulta")
+                }
+            }
+        });
+
+    }
+
+    function asignarClaves(){
+        var clave_usuario = document.getElementById('clave_usuario').value;
+        var clave_celeri = document.getElementById('clave_celeri').value;
+    }
+
+</script>
 
 </html>
