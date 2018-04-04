@@ -5,11 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
     <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="../css/index/index.css">
+
+    <script src="../../vendor/bootstrap/js/jquery-3.2.1.min.js"></script>
+    <script src="./../../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <script>if (window.module) module = window.module;</script>
 
     <script src="../../Controler/db/connectionCallCenter.js"></script>
     <script src="../../Controler/Login/Login.js"></script>
@@ -36,13 +42,18 @@
                     </div>
                 </div>
                 <div class="contenedor-btn-Disponible">
-                    <button class="btn btn-primary btn-disponible">DISPONIBLE</button>
+                    <button class="btn btn-disponible">DISPONIBLE</button>
                 </div>
                 <div class="contenedor-btn-Ausente">
-                    <button class="btn btn-primary btn-ausente" >AUSENTE</button>
+                    <button class="btn btn-ausente">AUSENTE</button>
                 </div>
                 <div class="contenedor-btn-cerrar-session">
-                    <button class="btn btn-primary btn-cerrar-session" onclick="cerrarSession();">CERRAR SESSION</button>
+                    <button class="btn btn-cerrar-session" onclick="cerrarSession();">CERRAR SESSION</button>
+                </div>
+                <div class="contenedor-btn-nuevo-registro">
+                    <button type="button" class="btn btn-nuevo-registro" data-toggle="modal" data-target="#modalRegistro">
+                        NUEVO REGISTRO
+                    </button>
                 </div>
             </div>
             <!-- Menu Principal -->
@@ -234,7 +245,107 @@
                 </div>
             </div>
         </div>
+        <!-- The Modal -->
+        <div class="modal fade" id="modalRegistro">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title text-center">Nuevo Registro</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-3 text-rigth">
+                                    <Label class="labels">Nombres:</Label>
+                                </div>
+                                <div class="col-9">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="nombre" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3 text-rigth">
+                                    <Label class="labels">Cedula:</Label>
+                                </div>
+                                <div class="col-9">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="cedula" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3 text-rigth">
+                                    <Label class="labels">Direccion:</Label>
+                                </div>
+                                <div class="col-9">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="telefono" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3 text-rigth">
+                                    <Label class="labels">Telefono:</Label>
+                                </div>
+                                <div class="col-9">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="telefono" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3 text-rigth">
+                                    <Label class="labels">Correo:</Label>
+                                </div>
+                                <div class="col-9">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="correo" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3 text-rigth">
+                                    <Label class="labels">Clave Usuario:</Label>
+                                </div>
+                                <div class="col-9">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="clave_usuario">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3 text-rigth">
+                                    <Label class="labels">Clave CeleriCoin:</Label>
+                                </div>
+                                <div class="col-9">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="clave_celericoin">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btn-guardar" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
+
 </body>
+
+
+
 <script src="../js/Login/script.js"></script>
+
 </html>
