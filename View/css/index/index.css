@@ -68,6 +68,7 @@ body{
 .btn-disponible:hover{
     background-color: #28a745;
     border-color: #28a745;
+    color: white;
 }
 
 .btn-ausente{
@@ -80,6 +81,7 @@ body{
 .btn-ausente:hover{
     background-color: #F57C00;
     border-color: #F57C00;
+    color: white;
 }
 
 .btn-cerrar-session{
@@ -92,6 +94,7 @@ body{
 .btn-cerrar-session:hover{
     background-color: #E53935;
     border-color: #E53935;
+    color: white;
 }
 
 .btn-nuevo-registro{
@@ -99,6 +102,18 @@ body{
     border-color: #009688;
     color: #787878;
     padding: 0.5em 1.5em;
+}
+
+.btn-nuevo-registro{
+    animation-name: example;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes example {
+    0%   {background-color:transparent; color: #787879;  top:0px;}
+    50%  {background-color: #388E3C; color: white; top:0px;}
+    100% {background-color:transparent; color: #787879; top:0px;}
 }
 
 /* Menu Principal */
@@ -222,12 +237,14 @@ body{
 }
 
 
-.bbtn-guardar{
+.btn-guardar{
     background-color: transparent;
     border-color: #009688;
+    padding: 0.5em 2em;
 }
 
-.bbtn-guardar:hover{
+.btn-guardar:hover{
     background-color: #388E3C;
     border-color: #43A047;
+    color: white;
 }
