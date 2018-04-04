@@ -60,11 +60,9 @@ function consulta_datos_transacciones(){
                                                     datosFormulario[11] = result[0].telefono_vendedor;
                                                     datosFormulario[12] = result[0].contrasena_1_vendedor;
                                                     datosFormulario[13] = result[0].contrasena_2_vendedor;
-                                                    alert("asas");
-                                                    alert(datosFormulario[1]);
                                                     
-                                                }else{
-                                                 alert("asdasd");
+                                                    $("#nombre_comprador").val(datosFormulario[1]);
+                                                    
                                                 }
                                         }
                                     });
