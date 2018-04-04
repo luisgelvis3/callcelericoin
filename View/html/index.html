@@ -14,7 +14,6 @@
     <script src="../../Controler/db/connectionCallCenter.js"></script>
     <script src="../../Controler/Login/Login.js"></script>
     <script src="../../Controler/Login/CloseLogin.js"></script>
-    
 </head>
 
 <body>
@@ -27,6 +26,14 @@
                     <img src="../img/inbound-call-center.png" width="220" alt="">
                     <Label for="nombre" class="label" id="nameUsuario"></Label>
                     <input type="hidden" name="idUsuario" id="idUsuario">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="estado-circle"></div>
+                        </div>
+                        <div class="col-6">
+                            <Label class="estado" id="estado"></Label>
+                        </div>
+                    </div>
                 </div>
                 <div class="contenedor-btn-Disponible">
                     <button class="btn btn-primary btn-disponible">DISPONIBLE</button>
@@ -79,21 +86,21 @@
                                 </div>
                                 <div class="row" style="padding-top: 1em;">
                                     <div class="col-3 text-rigth">
-                                        <Label class="labels">Moneda:</Label>
+                                        <Label class="labels">Clave Usuario:</Label>
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="moneda" disabled>
+                                            <input type="text" class="form-control" name="clave_usuario" disabled>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row" style="padding-top: 1em;">
                                     <div class="col-3 text-rigth">
-                                        <Label class="labels">Monto:</Label>
+                                        <Label class="labels">Clave CeleriCoin:</Label>
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="moneda" disabled>
+                                            <input type="text" class="form-control" name="clave_celeri" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -137,21 +144,21 @@
                                 </div>
                                 <div class="row" style="padding-top: 1em;">
                                     <div class="col-3 text-rigth">
-                                        <Label class="labels">Moneda:</Label>
+                                        <Label class="labels">Clave Usuario:</Label>
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="moneda" disabled>
+                                            <input type="text" class="form-control" name="clave_usuario" disabled>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row" style="padding-top: 1em;">
                                     <div class="col-3 text-rigth">
-                                        <Label class="labels">Monto:</Label>
+                                        <Label class="labels">Clave CeleriCoin:</Label>
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="moneda" disabled>
+                                            <input type="text" class="form-control" name="clave_celericoin" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -207,22 +214,7 @@
                 </div>
             </div>
         </div>
-
     </div>
-    <script>
-        function getParameterByName(name) {
-            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-                results = regex.exec(location.search);
-            return results === null ? " " : decodeURIComponent(results[1].replace(/\+/g, "    "));
-        }
-
-        var varnombreusuario = getParameterByName('nombreusuario');
-        var varapellidousuario = getParameterByName('apellidousuario');
-        var id = getParameterByName('id_usuario');
-        document.getElementById("nameUsuario").innerHTML = varnombreusuario+" "+varapellidousuario;
-        document.getElementById("idUsuario").value = id;
-    </script>
 </body>
-
+<script src="../js/Login/script.js"></script>
 </html>

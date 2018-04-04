@@ -7,7 +7,12 @@ function validacionLogin() {
     var var_nombre_usuario = document.getElementById('username').value;
     var var_contrasena_usuario = document.getElementById('pass').value;
 
-    var query = connection.query("select id_usuario, nombre_usuario, tipo_usuario, convert(AES_DECRYPT(contrasena_usuario, UNHEX(SHA2('bc12jD=U\d7MrPr',512))), char(100)) as contrasena_usuario, estado_usuario from usuarios where nombre_usuario = ? and contrasena_usuario = AES_ENCRYPT( ? , UNHEX(SHA2('bc12jD=U\d7MrPr',512)))", [var_nombre_usuario, var_contrasena_usuario], function (error, result) {
+    var query = connection.query("SELECT usu.id_usuario, usu.nombre_usuario, usu.tipo_usuario, "+
+    "CONVERT(AES_DECRYPT(usu.contrasena_usuario, UNHEX(SHA2('bc12jD=U\d7MrPr',512))), char(100)) AS contrasena_usuario, "+
+    "usu.estado_usuario, ase.nombre_asesor, ase.apellido_asesor, ase.extension_asesor "+
+    "FROM usuarios usu JOIN asesores ase "+
+    "ON usu.id_asesor = ase.id_asesor "+
+    "WHERE nombre_usuario = ? AND contrasena_usuario = AES_ENCRYPT( ? , UNHEX(SHA2('bc12jD=U\d7MrPr',512)))", [var_nombre_usuario, var_contrasena_usuario], function (error, result) {
         if (error) {
             console.log(error);
             alert("error: " + error);
@@ -15,8 +20,8 @@ function validacionLogin() {
             try {
                 if (result[0].nombre_usuario === var_nombre_usuario && result[0].contrasena_usuario === var_contrasena_usuario) {
                     if (result[0].tipo_usuario === "Usuario") {
-                        var userName = result[0].nombre_usuario;
-                        var lastName = result[0].apellido_usuario;
+                        var userName = result[0].nombre_asesor;
+                        var lastName = result[0].apellido_asesor;
                         var id = result[0].id_usuario
                         var query = connection.query("UPDATE usuarios SET estado_usuario = 'Disponible', ultima_vez_usuario = NOW() WHERE id_usuario = ? ", [id], function (error, result) {
                             if (error) {
@@ -47,7 +52,7 @@ function validacionLogin() {
                     alert('Usuario o Contraseñas Incorrectas');
                 }
             } catch (error) {
-                alert('Usuario o Contraseñas Incorrectas: ' + error);
+                alert('Usuario o Contraseñas Incorrectas');
             }
         }
 

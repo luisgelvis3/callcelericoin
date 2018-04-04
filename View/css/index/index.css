@@ -201,8 +201,6 @@ body{
 
 @keyframes example {
     0%   {background-color:transparent; color: #787879;  top:0px;}
-    
     50%  {background-color: #388E3C; color: white; top:0px;}
-    
     100% {background-color:transparent; color: #787879; top:0px;}
 }
