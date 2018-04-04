@@ -50,19 +50,11 @@ body{
     padding-bottom: 0em;
 }
 
-.img-menu{
-    margin-top: 2em;
-}
-
-.contenedor-btn-Disponible{
-    margin-top: 2em;
-}
-
-.contenedor-btn-Ausente{
-    margin-top: 2em;
-}
-
-.contenedor-btn-cerrar-session{
+.img-menu,
+.contenedor-btn-Disponible,
+.contenedor-btn-Ausente,
+.contenedor-btn-cerrar-session,
+.contenedor-btn-nuevo-registro{
     margin-top: 2em;
 }
 
@@ -70,7 +62,7 @@ body{
     background-color: transparent;
     border-color: #009688;
     color: #787879;
-    padding: .5em 2em;
+    padding: .5em 3em;
 }
 
 .btn-disponible:hover{
@@ -82,7 +74,7 @@ body{
     background-color: transparent;
     border-color: #009688;
     color: #787879;
-    padding: 0.5em 2.5em;
+    padding: 0.5em 3.5em;
 }
 
 .btn-ausente:hover{
@@ -94,11 +86,19 @@ body{
     background-color: transparent;
     border-color: #009688;
     color: #787879;
+    padding: 0.5em 1.8em;
 }
 
 .btn-cerrar-session:hover{
     background-color: #E53935;
     border-color: #E53935;
+}
+
+.btn-nuevo-registro{
+    background-color: transparent;
+    border-color: #009688;
+    color: #787878;
+    padding: 0.5em 1.5em;
 }
 
 /* Menu Principal */
@@ -132,7 +132,7 @@ body{
     background-color: #d2deef;
 }
 
-/* Botones */
+/* Botones Formulario */
 
 .btn-espera{
     background-color: #FBC02D;
@@ -199,8 +199,35 @@ body{
     border-color: #388E3C; 
 }
 
+.bbtn-guardar{
+    background-color: transparent;
+    border-color: #009688;
+}
+
 @keyframes example {
     0%   {background-color:transparent; color: #787879;  top:0px;}
     50%  {background-color: #388E3C; color: white; top:0px;}
     100% {background-color:transparent; color: #787879; top:0px;}
+}
+
+/* Modal de nuevo registro */
+
+.modal-header{
+    background-color: #009688;
+    color: #d7eee4;
+}
+
+.modal-body, .modal-footer{
+    background-color: #f6f6f6;
+}
+
+
+.bbtn-guardar{
+    background-color: transparent;
+    border-color: #009688;
+}
+
+.bbtn-guardar:hover{
+    background-color: #388E3C;
+    border-color: #43A047;
 }
