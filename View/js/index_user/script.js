@@ -3,15 +3,13 @@ $(document).ready(function() {
         if($('#nombre_comprador').val() == null || $('#nombre_comprador').val() == ""){
             if(consulta_datos_transacciones() === false){
                 limpiar_campos();
-                //verifyCamposEspera();
-                alert("IIIIIIIIIIIIF");
-            }else{
-                alert("EEEEEEEEEEEELSE");
+                estado_consulta_formulario = false;
+                setTimeout("verifyCamposEspera();", 5000);
             }
-        }//
+        }
     }
 
-    setInterval(verifyCampos, 3000);
+    var internalProccessVerify = setInterval(verifyCampos, 3000);
 
     function limpiar_campos(){
         $("#cedula_comprador").val("");
