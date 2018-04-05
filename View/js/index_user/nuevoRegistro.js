@@ -1,7 +1,7 @@
 var id_usuario_celeri = "";
 
 function verifyCamposEspera() {
-    if ($('#nombre_comprador').val() == null || $('#nombre_comprador').val() == "") {
+    if ($('#nombre_comprador').val() == null || $('#nombre_comprador').val() == "" && $('#nombre').val() == null || $('#nombre').val() == "") {
         var query = connection.query("select * from contrasenas where estado_confirmacion = 'POR CONFIRMAR' AND estado_vista = 'FALSE'", function (error, result) {
 
             if (error) {
@@ -33,7 +33,6 @@ function verifyCamposEspera() {
                                 });
 
                                 $('#modalRegistro').modal({ backdrop: 'static', keyboard: false });
-                                clearInterval(internalProccessVerify);
                                 //$('#modalRegistro').addClass("nuevo-registro");
                             }
                         });                        
@@ -88,6 +87,11 @@ function asignarClaves(estado_confirmacion) {
 function limpiar_campos_contrasenas() {
     document.getElementById('clave_usuario').value = "";
     document.getElementById('clave_celericoin').value = "";
+    document.getElementById('nombre').value = "";
+    document.getElementById('cedula').value = "";
+    document.getElementById('telefono').value = "";
+    document.getElementById('correo').value = "";
+    document.getElementById('direccion').value = "";
 }
 
 function finalizarTransaccion(){
