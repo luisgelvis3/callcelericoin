@@ -10,6 +10,7 @@ function consulta_datos_en_espera() {
         } else {
             try {
                 if (result[0].id_intercambio != null || result[0].id_intercambio != "") {
+                    
                     id_intercambio_result = result[0].id_intercambio;
                     datosEspera[0] = id_anuncio_result;
                     var query = connection.query(

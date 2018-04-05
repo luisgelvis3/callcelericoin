@@ -105,14 +105,14 @@ body{
 }
 
 .nuevo-registro{
-    animation-name: example;
+    animation-name: modal_back;
     animation-duration: 0.5s;
     animation-iteration-count: infinite;
 }
 
-@keyframes example {
+@keyframes modal_back {
     0%   {background-color:transparent; color: #787879;  top:0px;}
-    50%  {background-color: #388E3C; color: white; top:0px;}
+    50%  {background-color: rgba(255, 0, 0, 0.062); color: white; top:0px;}
     100% {background-color:transparent; color: #787879; top:0px;}
 }
 
@@ -214,7 +214,7 @@ body{
     border-color: #388E3C; 
 }
 
-.bbtn-guardar{
+.btn-guardar{
     background-color: transparent;
     border-color: #009688;
 }
@@ -246,5 +246,17 @@ body{
 .btn-guardar:hover{
     background-color: #388E3C;
     border-color: #43A047;
+    color: white;
+}
+
+.btn-posponer{
+    background-color: transparent;
+    border-color: #ff0000;
+    padding: 0.5em 2em;
+}
+
+.btn-posponer:hover{
+    background-color: #ff0000;
+    border-color: #c00707e3;
     color: white;
 }

@@ -1,11 +1,15 @@
 $(document).ready(function() {    
     function verifyCampos(){
         if($('#nombre_comprador').val() == null || $('#nombre_comprador').val() == ""){
-            if(consulta_datos_transacciones() == false){
+            if(consulta_datos_transacciones() === false){
                 limpiar_campos();
+                estado_consulta_formulario = false;
+                setTimeout("verifyCamposEspera();", 5000);
             }
         }
     }
+
+    var internalProccessVerify = setInterval(verifyCampos, 3000);
 
     function limpiar_campos(){
         $("#cedula_comprador").val("");
@@ -21,10 +25,4 @@ $(document).ready(function() {
         $("#contrasena2_vendedor").val("");
         $("#forma_pago").val("");
     }
-
-    verifyCampos();
-
-    setInterval(verifyCampos, 3000);
-
-    
 });

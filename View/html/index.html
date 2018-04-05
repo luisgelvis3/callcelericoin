@@ -51,11 +51,6 @@
                 <div class="contenedor-btn-cerrar-session">
                     <button class="btn btn-cerrar-session" onclick="cerrarSession();">CERRAR SESSION</button>
                 </div>
-                <div class="contenedor-btn-nuevo-registro">
-                    <button type="button" class="btn btn-nuevo-registro" data-toggle="modal" data-target="#modalRegistro" onclick="nuevoRegistro()">
-                        NUEVO REGISTRO
-                    </button>
-                </div>
             </div>
             <!-- Menu Principal -->
             <div class="col-sm-12 col-md-9">
@@ -252,9 +247,8 @@
                 <div class="modal-content">
 
                     <!-- Modal Header -->
-                    <div class="modal-header">
+                    <div class="modal-header" id="head_modal">
                         <h4 class="modal-title text-center">Nuevo Registro</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 
                     <!-- Modal body -->
@@ -316,7 +310,7 @@
                                 </div>
                                 <div class="col-9">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="clave_usuario">
+                                        <input type="text" class="form-control" name="clave_usuario" id="clave_usuario">
                                     </div>
                                 </div>
                             </div>
@@ -326,7 +320,7 @@
                                 </div>
                                 <div class="col-9">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="clave_celericoin">
+                                        <input type="text" class="form-control" name="clave_celericoin" id="clave_celericoin">
                                     </div>
                                 </div>
                             </div>
@@ -335,7 +329,8 @@
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-guardar" data-dismiss="modal">GUARDAR</button>
+                            <button type="button" class="btn btn-posponer" data-dismiss="modal" onclick="asignarClaves('POSPUESTO')">POSPONER</button>
+                        <button type="button" class="btn btn-guardar" data-dismiss="modal" onclick="asignarClaves('CONFIRMADO')">GUARDAR</button>
                     </div>
 
                 </div>
@@ -348,57 +343,6 @@
 <script src="../js/Login/script.js"></script>
 <script src="../js/index_user/script.js"></script>
 <script src="../../Controler/IndesUser/consultaCompradorVendedor.js"></script>
-
-<script>
-    var id_usuario_celeri = "";
-    $(document).ready(function () {
-        function verifyCampos() {
-            var query = connection.query("select * from contrasenas where estado_confirmacion = 'Por Confirmar'", function (error, result) {
-                id_usuario_celeri = result[0].id_usuario_celeri;
-                if (error) {
-                    console.log(error);
-                    alert("error: " + error);
-                } else {
-                    try {
-                        if (result[0].estado_confirmacion === "Por Confirmar") {
-                            $(".btn-nuevo-registro").addClass("nuevo-registro");
-
-                        } else {
-                            $(".btn-nuevo-registro").removeClass("nuevo-registro");
-                        }
-                    } catch (error) {
-                        $(".btn-nuevo-registro").removeClass("nuevo-registro");
-                    }
-                }
-            });
-        }
-        setInterval(verifyCampos, 3000);
-    });
-
-    function nuevoRegistro() {
-        var query = connection.query("select * from celericoin.usuarios where id = ?", [id_usuario_celeri], function (error, result) {
-            if (error) {
-                alert("error en la consulta" + error);
-            } else {
-                try {
-                    document.getElementById('nombre').value = result[0].nombres;
-                    document.getElementById('cedula').value = result[0].dni;
-                    document.getElementById('direccion').value = result[0].direccion;
-                    document.getElementById('telefono').value = result[0].telefono;
-                    document.getElementById('correo').value = result[0].correo;
-                } catch (error) {
-                    alert("error en la consulta")
-                }
-            }
-        });
-
-    }
-
-    function asignarClaves(){
-        var clave_usuario = document.getElementById('clave_usuario').value;
-        var clave_celeri = document.getElementById('clave_celeri').value;
-    }
-
-</script>
+<script src="../js/index_user/nuevoRegistro.js"></script>
 
 </html>
