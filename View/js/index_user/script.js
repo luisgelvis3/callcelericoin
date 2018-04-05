@@ -7,8 +7,6 @@ $(document).ready(function() {
         }
     }
 
-    setInterval(verifyCampos, 3000);
-
     function limpiar_campos(){
         $("#cedula_comprador").val("");
         $("#nombre_comprador").val("");
@@ -23,4 +21,10 @@ $(document).ready(function() {
         $("#contrasena2_vendedor").val("");
         $("#forma_pago").val("");
     }
+
+    verifyCampos();
+
+    setInterval(verifyCampos, 3000);
+
+    
 });

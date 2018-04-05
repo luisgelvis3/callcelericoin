@@ -10,6 +10,7 @@ app.on('ready', function(){
     //({useContentSize: true,icon: __dirname + '/images/icons/favicon.icoo'})
     win.setMenu(null);
     win.maximize();
+    //win.setFullScreen(true);
     win.loadURL(
         url.format({
             pathname: path.join(__dirname, 'login.html'),
