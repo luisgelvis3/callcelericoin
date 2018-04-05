@@ -12,7 +12,10 @@
     "mysql": "^2.15.0"
   },
   "devDependencies": {
-    "electron-prebuilt": "^1.4.13"
+    "electron-prebuilt": "^1.4.13",
+    "grunt": "^1.0.2",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-execute": "^0.2.2"
   },
   "description": ""
 }
