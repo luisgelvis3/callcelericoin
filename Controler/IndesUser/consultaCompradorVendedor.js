@@ -3,9 +3,11 @@ function consulta_datos_transacciones(){
     var id_intercambio_result = "";
     var id_anuncio_result = "";
     var datosFormulario = [];
+    var estado_function = false;
     try{
         var query = connection.query("SELECT id_intercambio FROM asignaciones_llamadas where id_usuario = ? and estado_asignacion = 'Asignado' order by id_asignacion asc limit 1", [var_id_usuario], function (err, result) {
             if (err) {
+                estado_function = false;
                 console.log(err);
             } else {
                 try{
@@ -30,6 +32,7 @@ function consulta_datos_transacciones(){
                             "WHERE trans.id = ? ", [id_intercambio_result], function (err, result) {
                             if (err) {
                                 console.log(err);
+                                estado_function = false;
                             } else {
                                     if(result[0].id_anuncio != null && result[0].id_anuncio != ""){
                                         datosFormulario[1] = result[0].cedula_comprador;
@@ -54,6 +57,7 @@ function consulta_datos_transacciones(){
                                             "WHERE anun.id = ?", [id_anuncio_result], function (err, result) {
                                             if (err) {
                                                 console.log(err);
+                                                estado_function = false;
                                             } else {
                                                     if(result[0].cedula_vendedor != null && result[0].cedula_vendedor != ""){
                                                         datosFormulario[9] = result[0].cedula_vendedor;
@@ -74,21 +78,24 @@ function consulta_datos_transacciones(){
                                                         $("#contrasena1_vendedor").val(datosFormulario[12]);
                                                         $("#contrasena2_vendedor").val(datosFormulario[13]);
                                                         $("#forma_pago").val(datosFormulario[6]);
-                                                        return true;
+                                                        alert("TRUE RESULT");
+                                                        estado_function = true;
                                                     }
                                             }
                                         });
                                     }
                             }
                         });
+                    }else{
+                        estado_function = false;
                     }
                 }catch(error){
-                    return false;
+                    estado_function = false;
                 }
             }
         });
     }catch(error){
-        return false;
+        estado_function = false;
     }
-    return false;
+    return estado_function;
 }
