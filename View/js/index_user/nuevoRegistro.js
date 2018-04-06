@@ -133,6 +133,7 @@ function btnAusente(){
         if(error){
             alert("Error "+ error + "Por favor pongase en contacto con el area de desarrollo");
         }else{
+            $('.estado-circle').removeClass("color-estado-disponible");
             $('.estado-circle').addClass("color-estado-ausente");
             $('.btn-ausente').attr('disabled', 'disabled');
             $('.btn-disponible').removeAttr('disabled');
@@ -147,9 +148,10 @@ function btnDisponible(){
         if(error){
             alert("Error "+ error + "Pongase en contacto con el area de desarrollo");
         }else{
+            $('.estado-circle').removeClass("color-estado-ausente");
             $('.estado-circle').addClass("color-estado-disponible");
             $('.btn-disponible').attr('disabled', 'disabled');
-            $('.btn-ausente').removeAttr('disabled');
+            $('.btn-ausente').removeAttr('disabled');            
         }
     });
 }
