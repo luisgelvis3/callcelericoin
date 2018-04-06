@@ -31,22 +31,21 @@
             <div class="col-sm-12 col-md-3 text-center">
                 <div class="img-menu">
                     <img src="../img/inbound-call-center.png" width="220" alt="">
-                    <Label for="nombre" class="label" id="nameUsuario"></Label>
-                    <input type="hidden" name="idUsuario" id="idUsuario">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-2 colum-rigth">
                             <div class="estado-circle"></div>
                         </div>
-                        <div class="col-6">
-                            <Label class="estado" id="estado"></Label>
+                        <div class="col-10">
+                            <Label for="nombre" class="label" id="nameUsuario"></Label>
+                            <input type="hidden" name="idUsuario" id="idUsuario">  
                         </div>
                     </div>
                 </div>
                 <div class="contenedor-btn-Disponible">
-                    <button class="btn btn-disponible">DISPONIBLE</button>
+                    <button class="btn btn-disponible" onclick="btnDisponible()">DISPONIBLE</button>
                 </div>
                 <div class="contenedor-btn-Ausente">
-                    <button class="btn btn-ausente">AUSENTE</button>
+                    <button class="btn btn-ausente" onclick="btnAusente()">AUSENTE</button>
                 </div>
                 <div class="contenedor-btn-cerrar-session">
                     <button class="btn btn-cerrar-session" onclick="cerrarSession();">CERRAR SESSION</button>

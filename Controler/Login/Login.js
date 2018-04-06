@@ -28,9 +28,8 @@ function validacionLogin() {
                                 throw error;
                                 alert(error);
                                 return false;
-                            } else {
+                            } else {                                
                                 return true;
-
                             }
                         });
                         location.href = "./View/html/index.html?nombreusuario="+userName+"&apellidousuario="+ lastName+"&id_usuario=" + id;

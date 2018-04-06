@@ -29,7 +29,6 @@ body{
 }
 
 .colum-left{
-    text-align: left;
     margin: auto;
 }
 
@@ -42,12 +41,33 @@ body{
     border-radius: 6px;
     font-size: 24px;
     font-weight: 400;
-    margin: auto;
     margin-top: 1em;
+    margin-right: 2em;
 }
 
 .label-nombre{
     padding-bottom: 0em;
+}
+
+.estado-circle{
+    width: 22px;
+    height: 22px;
+    border-radius: 100%;
+    background-color: #43A047;
+    border: 1px solid #43A047;
+    margin: auto;
+    margin-top: 1em;
+    margin-left: 1.5em;
+}
+
+.color-estado-ausente{
+    background-color: rgb(245, 0, 0);
+    border: 1px solid rgb(245, 0, 0);
+}
+
+.color-estado-disponible{
+    background-color: #43A047;
+    border: 1px solid #43A047;
 }
 
 .img-menu,
