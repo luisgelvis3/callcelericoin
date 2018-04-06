@@ -8,11 +8,12 @@ function consulta_datos_en_espera() {
     var datosEsperaNombresVendedores = [];
     var datosEsperaFechasAsignaciones = [];
     var datosEsperaEstadoBaucher = [];
+    var datosEsperaIdAsignacionLlamada = [];
 
     var id_asignacion_llamadas_consulta = "";
     var ids_intercambios_where = "";
 
-    var query = connection.query("SELECT id_intercambio, fecha_hora_inicio_asignacion as fecha_asignacion FROM asignaciones_llamadas WHERE id_usuario = ? and estado_asignacion = 'EN ESPERA' order by id_asignacion asc", [id_usuario_call], function (error, result){
+    var query = connection.query("SELECT id_asignacion, id_intercambio, fecha_hora_inicio_asignacion as fecha_asignacion FROM asignaciones_llamadas WHERE id_usuario = ? and estado_asignacion = 'EN ESPERA' order by id_asignacion asc", [id_usuario_call], function (error, result){
         if (error) {
             alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
         } else {
@@ -21,11 +22,13 @@ function consulta_datos_en_espera() {
                     ids_intercambios_where = " WHERE trans.id = "+result[0].id_intercambio;
                     datosEsperaIdIntercambio[0] = result[0].id_intercambio;
                     datosEsperaFechasAsignaciones[0] = result[0].fecha_asignacion;
-                    console.log(result);
+                    datosEsperaIdAsignacionLlamada[0] = result[0].id_asignacion;
+
                     for(i = 1; i < result.length; i++){
                         ids_intercambios_where += " XOR trans.id = "+result[i].id_intercambio;
                         datosEsperaIdIntercambio[i] = result[i].id_intercambio;
                         datosEsperaFechasAsignaciones[i] = result[i].fecha_asignacion;
+                        datosEsperaIdAsignacionLlamada[i] = result[i].id_asignacion;
                     }
 
                     var query = connection.query(
@@ -50,24 +53,11 @@ function consulta_datos_en_espera() {
                                     datosEsperaIdAnuncio[0] = result[0].id_anuncio;
                                     datosEsperaNombresCompradores[0] = result[0].nombres_comprador;
 
-                                    console.log(result);
                                     for(i = 1; i < result.length; i++){
                                         ids_anuncios_where += " OR anun.id = "+result[i].id_anuncio;
                                         datosEsperaIdAnuncio[i] = result[i].id_anuncio;
                                         datosEsperaNombresCompradores[i] = result[i].nombres_comprador;
                                     }
-
-                                    console.log("SELECT CONCAT(celeriusu.nombres,' ',celeriusu.apellidos) as nombres_vendedor "+
-                                    "FROM celericoin.usuarios celeriusu "+
-                                    "JOIN celericoin.transferencias trans "+
-                                    "JOIN celericoin.anuncios anun "+
-                                    "JOIN callcenter.asignaciones_llamadas asigllama "+
-                                    "JOIN callcenter.usuarios callusu "+
-                                    "ON anun.usuarios_id_vendedor = celeriusu.id "+
-                                    "AND anun.id = trans.anuncios_id "+
-                                    "AND asigllama.id_intercambio = trans.id "+
-                                    "AND asigllama.id_usuario = callusu.id_usuario "+
-                                    ids_anuncios_where);
 
                                     var query = connection.query(
                                         "SELECT CONCAT(celeriusu.nombres,' ',celeriusu.apellidos) as nombres_vendedor "+
@@ -88,7 +78,7 @@ function consulta_datos_en_espera() {
                                                 if (result[0].nombres_vendedor != null && result[0].nombres_vendedor != "") {                                                    
                                                     
                                                     datosEsperaNombresVendedores[0] = result[0].nombres_vendedor;
-                                                    console.log(result);
+                                  
                                                     for(i = 1; i < result.length; i++){
                                                         datosEsperaNombresVendedores[i] = result[i].nombres_vendedor;
                                                     }                                              
@@ -106,6 +96,7 @@ function consulta_datos_en_espera() {
                                                         "<tbody id = 'tbody_transacciones_espera'>";
                                                         
                                                     for(i = 0; i < datosEsperaIdIntercambio.length; i++){
+                                                        
                                                         contenido_tabla += "<tr>"+
                                                             "<th>"+
                                                                 "<div class='cirle-estado'></div>"+
@@ -114,7 +105,7 @@ function consulta_datos_en_espera() {
                                                             "<th>"+datosEsperaNombresVendedores[i]+"</th>"+
                                                             "<th>"+datosEsperaFechasAsignaciones[i]+"</th>"+
                                                             "<th>"+
-                                                            "<button class='btn btn-primary btn-reanudar'>Reanudar</button>"+
+                                                            "<button class='btn btn-primary btn-reanudar' onclick='asignadoEstadoTransaccion("+datosEsperaIdAsignacionLlamada[i]+");'>Reanudar</button>"+
                                                             "</th>"+
                                                             "</tr>";
                                                     }
@@ -132,6 +123,7 @@ function consulta_datos_en_espera() {
                     );
                 }
             } catch (error) {
+                document.getElementById("outputDivTransacciones").innerHTML = "";
                 console.log(error);
             }
         }

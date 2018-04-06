@@ -94,13 +94,33 @@ function limpiar_campos_contrasenas() {
     document.getElementById('direccion').value = "";
 }
 
+function limpiar_campos_transaccion(){
+    /* Datos Comprador */
+    document.getElementById('nombre_comprador').value = "";
+    document.getElementById('cedula_comprador').value = "";
+    document.getElementById('telefono_comprador').value = "";
+    document.getElementById('contrasena1_comprador').value = "";
+    document.getElementById('contrasena2_comprador').value = "";
+    document.getElementById('monto').value = "";
+
+    /* Datos Vendedor */
+    document.getElementById('nombre_vendedor').value = "";
+    document.getElementById('cedula_vendedor').value = "";
+    document.getElementById('telefono_vendedor').value = "";
+    document.getElementById('contrasena1_vendedor').value = "";
+    document.getElementById('contrasena2_vendedor').value = "";
+    document.getElementById('forma_pago').value = "";
+    document.getElementById('id_asignacion_transaccion').value = "";
+}
+
 function finalizarTransaccion(){
     var id_asignacion_llamadas_consulta = document.getElementById('id_asignacion_transaccion').value;
     if (id_asignacion_llamadas_consulta == ""){
         alert("No se ha encontrado ninguna transacción");
         return;
     }
-    if(confirm('¿Realmente deseas finalizar la transacción?')){
+    if(confirm('¿Realmente deseas finalizar la transacción?'))
+    if(confirm('Si lo haces no podrás volver a retomarla\n¿Estás seguro?')){
         
         var query = connection.query("UPDATE asignaciones_llamadas set estado_asignacion = 'FINALIZADO' WHERE id_asignacion = ?", [id_asignacion_llamadas_consulta], function(error,result){
             if(error){
@@ -108,22 +128,10 @@ function finalizarTransaccion(){
             }else{
                 try {
                     alert("Transacción Finalizada");
-
-                    /* Datos Comprador */
-                    document.getElementById('nombre_comprador').value = "";
-                    document.getElementById('cedula_comprador').value = "";
-                    document.getElementById('telefono_comprador').value = "";
-                    document.getElementById('contrasena1_comprador').value = "";
-                    document.getElementById('contrasena2_comprador').value = "";
-                    document.getElementById('monto').value;
-
-                    /* Datos Vendedor */
-                    document.getElementById('nombre_vendedor').value = "";
-                    document.getElementById('cedula_vendedor').value = "";
-                    document.getElementById('telefono_vendedor').value = "";
-                    document.getElementById('contrasena1_vendedor').value = "";
-                    document.getElementById('contrasena2_vendedor').value = "";
-                    document.getElementById('forma_pago').value = "";
+                    limpiar_campos_transaccion();
+                    consulta_datos_transacciones();
+                    consulta_datos_en_espera();
+                    
                 } catch (error) {
                     alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
                 }
@@ -139,36 +147,20 @@ function enEsperaTransaccion(){
         alert("No se ha encontrado ninguna transacción");
         return;
     }
-    if(confirm('¿Realmente deseas colocar en espera la transacción?')){
 
         var query = connection.query("UPDATE asignaciones_llamadas set estado_asignacion = 'EN ESPERA' WHERE id_asignacion = ?", [id_asignacion_llamadas_consulta], function(error,result){
             if(error){
                 alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
             }else{
                 try {
-                    alert("Transacción En Espera");
-
-                    /* Datos Comprador */
-                    document.getElementById('nombre_comprador').value = "";
-                    document.getElementById('cedula_comprador').value = "";
-                    document.getElementById('telefono_comprador').value = "";
-                    document.getElementById('contrasena1_comprador').value = "";
-                    document.getElementById('contrasena2_comprador').value = "";
-                    document.getElementById('monto').value;
-
-                    /* Datos Vendedor */
-                    document.getElementById('nombre_vendedor').value = "";
-                    document.getElementById('cedula_vendedor').value = "";
-                    document.getElementById('telefono_vendedor').value = "";
-                    document.getElementById('contrasena1_vendedor').value = "";
-                    document.getElementById('contrasena2_vendedor').value = "";
-                    document.getElementById('forma_pago').value = "";
+                    limpiar_campos_transaccion();
+                    consulta_datos_transacciones();
+                    consulta_datos_en_espera();
                 } catch (error) {
                     alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
                 }
             }
         });
-    }
 }
 
 
@@ -178,7 +170,9 @@ function cancelarTransaccion(){
         alert("No se ha encontrado ninguna transacción");
         return;
     }
-    if(confirm('¿Realmente deseas cancelar la transacción?')){
+
+    if(confirm('¿Realmente deseas cancelar la transacción?'))
+    if(confirm('Si lo haces no podrás volver a retomarla\n¿Estás seguro?')){
         
         var query = connection.query("UPDATE asignaciones_llamadas set estado_asignacion = 'CANCELADO' WHERE id_asignacion = ?", [id_asignacion_llamadas_consulta], function(error,result){
             if(error){
@@ -187,22 +181,9 @@ function cancelarTransaccion(){
                 try {
                     alert("Transacción Cancelada");
 
-                    /* Datos Comprador */
-                    document.getElementById('nombre_comprador').value = "";
-                    document.getElementById('cedula_comprador').value = "";
-                    document.getElementById('telefono_comprador').value = "";
-                    document.getElementById('contrasena1_comprador').value = "";
-                    document.getElementById('contrasena2_comprador').value = "";
-                    document.getElementById('monto').value = "";
-
-                    /* Datos Vendedor */
-                    document.getElementById('nombre_vendedor').value = "";
-                    document.getElementById('cedula_vendedor').value = "";
-                    document.getElementById('telefono_vendedor').value = "";
-                    document.getElementById('contrasena1_vendedor').value = "";
-                    document.getElementById('contrasena2_vendedor').value = "";
-                    document.getElementById('forma_pago').value = "";
-                    document.getElementById('id_asignacion_transaccion').value = "";
+                    limpiar_campos_transaccion();
+                    consulta_datos_transacciones();
+                    consulta_datos_en_espera();
                 } catch (error) {
                     alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
                 }
@@ -210,6 +191,31 @@ function cancelarTransaccion(){
         });
     }
 }
+
+function asignadoEstadoTransaccion(id_tran_espera){
+
+    if (id_tran_espera == ""){
+        alert("No se ha encontrado ninguna transacción");
+        return;
+    }
+
+    var id_asignacion_llamadas_consulta = document.getElementById('id_asignacion_transaccion').value;
+    if (id_asignacion_llamadas_consulta != "" && id_asignacion_llamadas_consulta != null){
+        enEsperaTransaccion();
+    }
+        
+        var query = connection.query("UPDATE asignaciones_llamadas set estado_asignacion = 'Asignado' WHERE id_asignacion = ?", [id_tran_espera], function(error,result){
+            if(error){
+                alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
+            }else{
+                limpiar_campos_transaccion();
+                consulta_datos_transacciones();
+                consulta_datos_en_espera();
+            }
+        });
+    
+}
+
 function btnAusente(){
     var id_asesor = document.getElementById('idUsuario').value;
 
