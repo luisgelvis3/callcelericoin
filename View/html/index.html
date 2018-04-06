@@ -32,22 +32,21 @@
             <div class="col-sm-12 col-md-3 text-center">
                 <div class="img-menu">
                     <img src="../img/inbound-call-center.png" width="220" alt="">
-                    <Label for="nombre" class="label" id="nameUsuario"></Label>
-                    <input type="hidden" name="idUsuario" id="idUsuario">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-2 colum-rigth">
                             <div class="estado-circle"></div>
                         </div>
-                        <div class="col-6">
-                            <Label class="estado" id="estado"></Label>
+                        <div class="col-10">
+                            <Label for="nombre" class="label" id="nameUsuario"></Label>
+                            <input type="hidden" name="idUsuario" id="idUsuario">  
                         </div>
                     </div>
                 </div>
                 <div class="contenedor-btn-Disponible">
-                    <button class="btn btn-disponible">DISPONIBLE</button>
+                    <button class="btn btn-disponible" onclick="btnDisponible()">DISPONIBLE</button>
                 </div>
                 <div class="contenedor-btn-Ausente">
-                    <button class="btn btn-ausente">AUSENTE</button>
+                    <button class="btn btn-ausente" onclick="btnAusente()">AUSENTE</button>
                 </div>
                 <div class="contenedor-btn-cerrar-session">
                     <button class="btn btn-cerrar-session" onclick="cerrarSession();">CERRAR SESSION</button>
@@ -217,29 +216,10 @@
                     <div class="title-espera">
                         <h1 class="h1">TRANSACCIONES EN ESPERA</h1>
                     </div>
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Vendedor</th>
-                                <th>Comprador</th>
-                                <th>Fecha y Hora</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th>
-                                    <div class="cirle-estado"></div>
-                                </th>
-                                <th>Luis David Casadiegos Luna Casadiegos Luna Casadiegos Luna Casadiegos Luna</th>
-                                <th>Luis Gelvis Luis Gelvis Luis Gelvis Luis Gelvis Luis Gelvis Luis Gelvis</th>
-                                <th>2017-03-29 18:44</th>
-                                <th>
-                                    <button class="btn btn-primary btn-reanudar">Reanudar</button>
-                                </th>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div id="outputDivTransacciones">
+
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -312,7 +292,7 @@
                                 </div>
                                 <div class="col-9">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="clave_usuario" id="clave_usuario">
+                                        <input type="text" UPPER class="form-control" name="clave_usuario" id="clave_usuario">
                                     </div>
                                 </div>
                             </div>
@@ -322,7 +302,7 @@
                                 </div>
                                 <div class="col-9">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="clave_celericoin" id="clave_celericoin">
+                                        <input type="text" UPEER class="form-control" name="clave_celericoin" id="clave_celericoin">
                                     </div>
                                 </div>
                             </div>

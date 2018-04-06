@@ -2,31 +2,34 @@ function consulta_datos_en_espera() {
     var id_usuario_call = document.getElementById('idUsuario').value;
     var id_intercambio_result = "";
     var id_anuncio_result = "";
-    var datosEspera = [];
+    var datosEsperaIdIntercambio = [];
+    var datosEsperaIdAnuncio = [];
+    var datosEsperaNombresCompradores = [];
+    var datosEsperaNombresVendedores = [];
+    var datosEsperaFechasAsignaciones = [];
+    var datosEsperaEstadoBaucher = [];
+
     var id_asignacion_llamadas_consulta = "";
     var ids_intercambios_where = "";
 
-    var query = connection.query("SELECT id_intercambio FROM asignaciones_llamadas WHERE id_usuario = ? and estado_asignacion = 'EN ESPERA' order by id_asignacion asc", [id_usuario_call], function (error, result){
+    var query = connection.query("SELECT id_intercambio, fecha_hora_inicio_asignacion as fecha_asignacion FROM asignaciones_llamadas WHERE id_usuario = ? and estado_asignacion = 'EN ESPERA' order by id_asignacion asc", [id_usuario_call], function (error, result){
         if (error) {
-            alert("Error 1 pongase en contacto con el area de desarrollo");
+            alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
         } else {
             try {
                 if (result[0].id_intercambio != null || result[0].id_intercambio != "") {
-                    ids_intercambios_where = " WHERE id_intercambio = "+result[0].id_intercambio;
-
-                    result.forEach( function(valor, indice, array) {
-                        console.log("En el índice " + indice + " hay este valor: " + array[indice]);
-                    });
-
-                    for(var iter = 1; iter <= result.length; iter+=1){
-                        ids_intercambios_where += " XOR id_intercambio = "+result[iter].id_intercambio;
+                    ids_intercambios_where = " WHERE trans.id = "+result[0].id_intercambio;
+                    datosEsperaIdIntercambio[0] = result[0].id_intercambio;
+                    datosEsperaFechasAsignaciones[0] = result[0].fecha_asignacion;
+                    console.log(result);
+                    for(i = 1; i < result.length; i++){
+                        ids_intercambios_where += " XOR trans.id = "+result[i].id_intercambio;
+                        datosEsperaIdIntercambio[i] = result[i].id_intercambio;
+                        datosEsperaFechasAsignaciones[i] = result[i].fecha_asignacion;
                     }
 
-                    alert(ids_intercambios_where);
-                    id_asignacion_llamadas_consulta = result[0].id_asignacion;
-                    datosEspera[0] = id_anuncio_result;
                     var query = connection.query(
-                        "SELECT CONCAT(usu.nombres,' ',usu.apellidos) As nombres_comprador, trans.anuncios_id As id_anuncio" +
+                        "SELECT CONCAT(usu.nombres,' ',usu.apellidos) As nombres_comprador, trans.anuncios_id As id_anuncio " +
                         "FROM celericoin.usuarios usu " +
                         "JOIN celericoin.transferencias trans " +
                         "JOIN celericoin.formas_pago forpago " +
@@ -36,43 +39,88 @@ function consulta_datos_en_espera() {
                         "AND usu.id = con.id_usuario_celeri " +
                         "AND trans.formas_pago_id = forpago.id " +
                         "AND trans.monedas_id_compra = mon.id " +
-                        "WHERE trans.id = ? ", [id_intercambio_result], function (error, result) {
+                        ids_intercambios_where, function (error, result) {
 
                             if (error) {
-                                alert("Error 2 pongase en contacto con el area de desarrollo");
+                                alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ");
                             } else {
                                 if (result[0].id_anuncio != null && result[0].id_anuncio != "") {
-                                    datosEspera[1] = result[0].nombres_comprador;
-                                    id_anuncio_result = result[0].id_anuncio;
+
+                                    ids_anuncios_where = " WHERE asigllama.estado_asignacion = 'EN ESPERA' AND callusu.id_usuario = "+id_usuario_call+" AND  anun.id = "+result[0].id_anuncio;
+                                    datosEsperaIdAnuncio[0] = result[0].id_anuncio;
+                                    datosEsperaNombresCompradores[0] = result[0].nombres_comprador;
+
+                                    console.log(result);
+                                    for(i = 1; i < result.length; i++){
+                                        ids_anuncios_where += " OR anun.id = "+result[i].id_anuncio;
+                                        datosEsperaIdAnuncio[i] = result[i].id_anuncio;
+                                        datosEsperaNombresCompradores[i] = result[i].nombres_comprador;
+                                    }
+
+                                    console.log("SELECT CONCAT(celeriusu.nombres,' ',celeriusu.apellidos) as nombres_vendedor "+
+                                    "FROM celericoin.usuarios celeriusu "+
+                                    "JOIN celericoin.transferencias trans "+
+                                    "JOIN celericoin.anuncios anun "+
+                                    "JOIN callcenter.asignaciones_llamadas asigllama "+
+                                    "JOIN callcenter.usuarios callusu "+
+                                    "ON anun.usuarios_id_vendedor = celeriusu.id "+
+                                    "AND anun.id = trans.anuncios_id "+
+                                    "AND asigllama.id_intercambio = trans.id "+
+                                    "AND asigllama.id_usuario = callusu.id_usuario "+
+                                    ids_anuncios_where);
 
                                     var query = connection.query(
-                                        "SELECT CONCAT(usu.nombres,' ',usu.apellidos) as nombres_vendedor " +
-                                        "FROM celericoin.usuarios usu " +
-                                        "JOIN callcenter.contrasenas con " +
-                                        "JOIN celericoin.anuncios anun " +
-                                        "ON usu.id = con.id_usuario_celeri " +
-                                        "AND anun.usuarios_id_vendedor = usu.id " +
-                                        "WHERE anun.id = ?", [id_anuncio_result], function (error, result) {
+                                        "SELECT CONCAT(celeriusu.nombres,' ',celeriusu.apellidos) as nombres_vendedor "+
+                                        "FROM celericoin.usuarios celeriusu "+
+                                        "JOIN celericoin.transferencias trans "+
+                                        "JOIN celericoin.anuncios anun "+
+                                        "JOIN callcenter.asignaciones_llamadas asigllama "+
+                                        "JOIN callcenter.usuarios callusu "+
+                                        "ON anun.usuarios_id_vendedor = celeriusu.id "+
+                                        "AND anun.id = trans.anuncios_id "+
+                                        "AND asigllama.id_intercambio = trans.id "+
+                                        "AND asigllama.id_usuario = callusu.id_usuario "+
+                                        ids_anuncios_where, function (error, result) {
 
                                             if (error) {
-                                                alert("Error 3 consulte el area de desarrollo");
+                                                alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ");
                                             } else {
-                                                if (result[0].cedula_vendedor != null && result[0].cedula_vendedor != "") {                                                    
-                                                    datosFormulario[2] = result[0].nombres_vendedor;                                                 
-
-                                                    $("#cedula_comprador").val(datosFormulario[1]);
-                                                    $("#nombre_comprador").val(datosFormulario[2]);
-                                                    $("#telefono_comprador").val(datosFormulario[3]);
-                                                    $("#contrasena1_comprador").val(datosFormulario[4]);
-                                                    $("#contrasena2_comprador").val(datosFormulario[5]);
-                                                    $("#monto").val(datosFormulario[7]);
-                                                    $("#nombre_vendedor").val(datosFormulario[10]);
-                                                    $("#cedula_vendedor").val(datosFormulario[9]);
-                                                    $("#telefono_vendedor").val(datosFormulario[11]);
-                                                    $("#contrasena1_vendedor").val(datosFormulario[12]);
-                                                    $("#contrasena2_vendedor").val(datosFormulario[13]);
-                                                    $("#forma_pago").val(datosFormulario[6]);
-                                                    $("#id_asignacion_transaccion").val(id_asignacion_llamadas_consulta);
+                                                if (result[0].nombres_vendedor != null && result[0].nombres_vendedor != "") {                                                    
+                                                    
+                                                    datosEsperaNombresVendedores[0] = result[0].nombres_vendedor;
+                                                    console.log(result);
+                                                    for(i = 1; i < result.length; i++){
+                                                        datosEsperaNombresVendedores[i] = result[i].nombres_vendedor;
+                                                    }                                              
+                                                    var contenido_tabla = 
+                                                    "<table class='table table-hover'>"+
+                                                        "<thead>"+
+                                                            "<tr>"+
+                                                                "<th></th>"+
+                                                                "<th>Vendedor</th>"+
+                                                                "<th>Comprador</th>"+
+                                                                "<th>Fecha y Hora</th>"+
+                                                                "<th></th>"+
+                                                            "</tr>"+
+                                                        "</thead>"+
+                                                        "<tbody id = 'tbody_transacciones_espera'>";
+                                                        
+                                                    for(i = 0; i < datosEsperaIdIntercambio.length; i++){
+                                                        contenido_tabla += "<tr>"+
+                                                            "<th>"+
+                                                                "<div class='cirle-estado'></div>"+
+                                                            "</th>"+
+                                                            "<th>"+datosEsperaNombresCompradores[i]+"</th>"+
+                                                            "<th>"+datosEsperaNombresVendedores[i]+"</th>"+
+                                                            "<th>"+datosEsperaFechasAsignaciones[i]+"</th>"+
+                                                            "<th>"+
+                                                            "<button class='btn btn-primary btn-reanudar'>Reanudar</button>"+
+                                                            "</th>"+
+                                                            "</tr>";
+                                                    }
+                                                    contenido_tabla += "</tbody></table>";
+                                                    document.getElementById("outputDivTransacciones").innerHTML = contenido_tabla;
+                                                    //document.getElementById("outputDiv").innerHTML = newTable;
                                                     return true;
                                                 }
                                             }
