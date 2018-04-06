@@ -44,7 +44,7 @@ function consulta_datos_transacciones(){
                                         datosFormulario[8] = result[0].id_anuncio;
                                         id_anuncio_result = result[0].id_anuncio;
                                         var query = connection.query(
-                                            "SELECT usu.dni as cedula_vendedor, CONCAT(usu.nombres,' ',usu.apellidos) as nombres_vendedor, "+
+                                            "SELECT usu.dni as cedula_vendedor, CONCAT(usu.nombres,' ',usu.apellidos) as nombres_vendedor, anun.precio, "+
                                             "usu.telefono as telefono_vendedor,"+
                                             "CONVERT(AES_DECRYPT(con.contrasena_1, UNHEX(SHA2('bc12jD=U\d7MrPr',512))), char(100)) as contrasena_1_vendedor, "+
                                             "CONVERT(AES_DECRYPT(con.contrasena_2, UNHEX(SHA2('bc12jD=U\d7MrPr',512))), char(100)) as contrasena_2_vendedor "+
@@ -63,7 +63,9 @@ function consulta_datos_transacciones(){
                                                         datosFormulario[11] = result[0].telefono_vendedor;
                                                         datosFormulario[12] = result[0].contrasena_1_vendedor;
                                                         datosFormulario[13] = result[0].contrasena_2_vendedor;
-                                                        
+                                                        datosFormulario[14] = result[0].precio;
+                                                        var convertPrecioBitcoin = parseFloat(datosFormulario[14]) * parseFloat(datosFormulario[7]);
+                                                                                                                
                                                         $("#id_asignacion_transaccion").val(id_asignacion_transaccion); 
                                                         $("#cedula_comprador").val(datosFormulario[1]);
                                                         $("#nombre_comprador").val(datosFormulario[2]);
@@ -77,6 +79,7 @@ function consulta_datos_transacciones(){
                                                         $("#contrasena1_vendedor").val(datosFormulario[12]);
                                                         $("#contrasena2_vendedor").val(datosFormulario[13]);
                                                         $("#forma_pago").val(datosFormulario[6]);
+                                                        $("#cantBitcoin").val(convertPrecioBitcoin);
                                                         estado_function = true;
                                                     }
                                             }

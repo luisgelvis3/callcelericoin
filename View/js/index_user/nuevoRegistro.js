@@ -111,6 +111,8 @@ function limpiar_campos_transaccion(){
     document.getElementById('contrasena2_vendedor').value = "";
     document.getElementById('forma_pago').value = "";
     document.getElementById('id_asignacion_transaccion').value = "";
+    document.getElementById('cantBitcoin').value = "";
+    
 }
 
 function finalizarTransaccion(){
