@@ -6,7 +6,7 @@ const url = require('url');
 let win = null
 
 app.on('ready', function(){
-    win = new BrowserWindow({icon: __dirname + '/images/icons/favicon.icoo'});
+    win = new BrowserWindow({icon: __dirname + '/images/icons/icon.ico'});
     //({useContentSize: true,icon: __dirname + '/images/icons/favicon.icoo'})
     win.setMenu(null);
     win.maximize();
@@ -19,5 +19,5 @@ app.on('ready', function(){
         })
     );
     win.setFullScreen(true);
-    win.webContents.openDevTools();
+    //win.webContents.openDevTools();
 })

@@ -13,7 +13,7 @@ function consulta_datos_en_espera() {
     var id_asignacion_llamadas_consulta = "";
     var ids_intercambios_where = "";
 
-    var query = connection.query("SELECT id_asignacion, id_intercambio, fecha_hora_inicio_asignacion as fecha_asignacion FROM asignaciones_llamadas WHERE id_usuario = ? and estado_asignacion = 'EN ESPERA' order by id_asignacion asc", [id_usuario_call], function (error, result){
+    var query = connection.query("SELECT id_asignacion, id_intercambio,  DATE_FORMAT(fecha_hora_inicio_asignacion, '%d/%l/%Y %H:%i:%s') as fecha_asignacion FROM asignaciones_llamadas WHERE id_usuario = ? and estado_asignacion = 'EN ESPERA' order by id_asignacion asc", [id_usuario_call], function (error, result){
         if (error) {
             alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
         } else {
