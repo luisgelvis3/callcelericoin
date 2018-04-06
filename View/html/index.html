@@ -10,11 +10,12 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
     <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/index/index.css">
+    
 
     <script src="../../vendor/bootstrap/js/jquery-3.2.1.min.js"></script>
     <script src="./../../vendor/bootstrap/js/bootstrap.min.js"></script>
-
+    <link rel="stylesheet" href="../css/index/index.css">
+    
     <script>if (window.module) module = window.module;</script>
 
     <script src="../../Controler/db/connectionCallCenter.js"></script>
@@ -61,6 +62,7 @@
                                 <h1 class="h1">COMPRADOR</h1>
                             </div>
                             <div class="comprador">
+                                <input type="hidden" name="id_asignacion_transaccion" id="id_asignacion_transaccion" value=""/>
                                 <div class="row" style="padding-top: 1em;">
                                     <div class="col-3 text-rigth">
                                         <Label class="labels">Nombre:</Label>
@@ -195,13 +197,13 @@
                     <!-- botones -->
                     <div class="row" style="margin-top: 1em;">
                         <div class="col-4 colum-rigth">
-                            <button class="btn btn-primary btn-cancelado">Cancelar</button>
+                            <button class="btn btn-primary btn-cancelado" onclick="cancelarTransaccion();">Cancelar</button>
                         </div>
                         <div class="col-4 colum-center">
-                            <button class="btn btn-primary btn-espera">En Espera</button>
+                            <button class="btn btn-primary btn-espera" onclick="enEsperaTransaccion();">En Espera</button>
                         </div>
                         <div class="col-4 colum-left">
-                            <button class="btn btn-primary btn-finalizado">Finalizar</button>
+                            <button class="btn btn-primary btn-finalizado" onclick="finalizarTransaccion()">Finalizar</button>
                         </div>
                     </div>
                 </div>
@@ -343,6 +345,9 @@
 <script src="../js/Login/script.js"></script>
 <script src="../js/index_user/script.js"></script>
 <script src="../../Controler/IndesUser/consultaCompradorVendedor.js"></script>
+<script src="../../Controler/IndesUser/consultaTransaccionesEspera.js"></script>
 <script src="../js/index_user/nuevoRegistro.js"></script>
-
+<script>
+    consulta_datos_en_espera();
+</script>
 </html>

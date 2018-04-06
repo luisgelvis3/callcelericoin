@@ -19,5 +19,5 @@ app.on('ready', function(){
         })
     );
     //win.setFullScreen(true);
-    //win.webContents.openDevTools();
+    win.webContents.openDevTools();
 })

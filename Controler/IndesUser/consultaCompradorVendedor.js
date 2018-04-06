@@ -5,7 +5,7 @@ function consulta_datos_transacciones(){
     var datosFormulario = [];
     var estado_function = false;
     try{
-        var query = connection.query("SELECT id_intercambio FROM asignaciones_llamadas where id_usuario = ? and estado_asignacion = 'Asignado' order by id_asignacion asc limit 1", [var_id_usuario], function (err, result) {
+        var query = connection.query("SELECT id_asignacion, id_intercambio FROM asignaciones_llamadas where id_usuario = ? and estado_asignacion = 'Asignado' order by id_asignacion asc limit 1", [var_id_usuario], function (err, result) {
             if (err) {
                 console.log(err);
             } else {
@@ -13,6 +13,7 @@ function consulta_datos_transacciones(){
                     if(result[0].id_intercambio != null && result[0].id_intercambio != ""){
                         id_intercambio_result = result[0].id_intercambio;
                         datosFormulario[0] = id_intercambio_result;
+                        id_asignacion_transaccion = result[0].id_asignacion;
                         var query = connection.query(
                             "SELECT usu.dni as cedula_comprador, CONCAT(usu.nombres,' ',usu.apellidos) as nombres_comprador, "+
                             "usu.telefono as telefono_comprador, "+
@@ -63,6 +64,7 @@ function consulta_datos_transacciones(){
                                                         datosFormulario[12] = result[0].contrasena_1_vendedor;
                                                         datosFormulario[13] = result[0].contrasena_2_vendedor;
                                                         
+                                                        $("#id_asignacion_transaccion").val(id_asignacion_transaccion); 
                                                         $("#cedula_comprador").val(datosFormulario[1]);
                                                         $("#nombre_comprador").val(datosFormulario[2]);
                                                         $("#telefono_comprador").val(datosFormulario[3]);

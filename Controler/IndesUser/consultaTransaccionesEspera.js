@@ -3,15 +3,27 @@ function consulta_datos_en_espera() {
     var id_intercambio_result = "";
     var id_anuncio_result = "";
     var datosEspera = [];
+    var id_asignacion_llamadas_consulta = "";
+    var ids_intercambios_where = "";
 
-    var query = connection.query("SELECT id_intercambio, fecha_hora_inicio_asignacion FROM asignaciones_llamadas where id_usuario = ? and estado_asignacion = 'Asignado' order by id_asignacion asc limit 1", [id_usuario_call], (errro, result){
+    var query = connection.query("SELECT id_intercambio FROM asignaciones_llamadas WHERE id_usuario = ? and estado_asignacion = 'EN ESPERA' order by id_asignacion asc", [id_usuario_call], function (error, result){
         if (error) {
             alert("Error 1 pongase en contacto con el area de desarrollo");
         } else {
             try {
                 if (result[0].id_intercambio != null || result[0].id_intercambio != "") {
-                    
-                    id_intercambio_result = result[0].id_intercambio;
+                    ids_intercambios_where = " WHERE id_intercambio = "+result[0].id_intercambio;
+
+                    result.forEach( function(valor, indice, array) {
+                        console.log("En el índice " + indice + " hay este valor: " + array[indice]);
+                    });
+
+                    for(var iter = 1; iter <= result.length; iter+=1){
+                        ids_intercambios_where += " XOR id_intercambio = "+result[iter].id_intercambio;
+                    }
+
+                    alert(ids_intercambios_where);
+                    id_asignacion_llamadas_consulta = result[0].id_asignacion;
                     datosEspera[0] = id_anuncio_result;
                     var query = connection.query(
                         "SELECT CONCAT(usu.nombres,' ',usu.apellidos) As nombres_comprador, trans.anuncios_id As id_anuncio" +
@@ -60,6 +72,7 @@ function consulta_datos_en_espera() {
                                                     $("#contrasena1_vendedor").val(datosFormulario[12]);
                                                     $("#contrasena2_vendedor").val(datosFormulario[13]);
                                                     $("#forma_pago").val(datosFormulario[6]);
+                                                    $("#id_asignacion_transaccion").val(id_asignacion_llamadas_consulta);
                                                     return true;
                                                 }
                                             }
@@ -71,9 +84,10 @@ function consulta_datos_en_espera() {
                     );
                 }
             } catch (error) {
-
+                console.log(error);
             }
         }
+    
     });
 
 }
