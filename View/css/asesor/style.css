@@ -1,0 +1,108 @@
+
+.menu{
+    background-color: #2a3f54;
+    color: white;
+}
+
+.h3{
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+}
+
+.title-primary{
+    color: #BDBDBD;
+    margin-bottom: 0em;
+}
+
+.label{
+    padding-top: 0em;
+    margin-top: 0em;
+}
+
+/* Menu */
+
+#accordion .card{
+    border: 0px none;
+    box-shadow: none;
+    border: 1px solid #2a3f54;
+    color: white;
+}
+
+#accordion .card-header{
+    padding: 0;
+    background: #2a3f54;
+    color: white;
+    border-bottom: none;
+}
+
+#accordion .card-header a{
+    display: block;
+    position: relative;
+    background: transparent;
+    color:white;
+    font-size: 14px;
+    font-weight: bolder;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    padding: 15px 50px;
+    border-bottom: 1px solid #BDBDBD;
+    border-radius: 0 15px 0 15px;
+    transition: all 0.10s linear 0s;
+    text-decoration: none;
+}
+
+#accordion .card-header a.collapsed{
+    color:#BDBDBD;
+    border-bottom:1px solid #BDBDBD;
+    margin: 0;
+}
+
+#accordion .card-header a i{
+    color: #fff;
+    position: absolute;
+    top: 14px;
+    left: 25px;
+}
+
+#accordion .card-header a:before,
+#accordion .card-header a.collapsed:before{
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    left: 36px;
+    border: 7px solid transparent;
+    border-top: 7px solid #2a3f54;
+}
+
+#accordion .card-header a.collapsed:before{
+    content: "";
+    border: 0px none;
+}
+
+#accordion .card-header a.collapsed:hover{
+    color: white;
+}
+
+#accordion .card-header a:after,
+#accordion .card-header a.collapsed:after{
+    content: "\f106";
+    font-family: FontAwesome;
+    color: white;
+    font-size: 20px;
+    line-height: 20px;
+    position: absolute;
+    top: 14px;
+    right:25px;
+}
+
+#accordion .card-header a.collapsed:after{
+    content: "\f107";
+    color:#fff
+}
+
+#accordion .card-body{
+    border-top:0 none;
+    color:#BDBDBD;
+    background: #2a3f54;
+}

@@ -13,16 +13,11 @@ app.on('ready', function(){
     //win.setFullScreen(true);
     win.loadURL(
         url.format({
-            pathname: path.join(__dirname, 'login.html'),
+            pathname: path.join(__dirname, 'View/asesor/index.html'),
             protocol: 'file',
             slashes: true
         })
     );
-<<<<<<< HEAD
     //win.setFullScreen(true);
     win.webContents.openDevTools();
-=======
-    win.setFullScreen(true);
-    //win.webContents.openDevTools();
->>>>>>> 8e35ed6cd882803967829e6ec291c2c8c107105d
 })
