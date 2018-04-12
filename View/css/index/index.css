@@ -70,11 +70,14 @@ body{
     border: 1px solid #43A047;
 }
 
-.img-menu,
+.img-menu{
+    margin-top: 0.5em;
+}
 .contenedor-btn-Disponible,
 .contenedor-btn-Ausente,
 .contenedor-btn-cerrar-session,
-.contenedor-btn-nuevo-registro{
+.contenedor-btn-nuevo-registro,
+.contenedor-btn-anuncios{
     margin-top: 2em;
 }
 
@@ -115,6 +118,13 @@ body{
     background-color: #E53935;
     border-color: #E53935;
     color: white;
+}
+
+.btn-anuncion{
+    background-color: transparent;
+    border-color: #009688;
+    color: #787879;
+    padding: 0.5em 3em;
 }
 
 .btn-nuevo-registro{
@@ -245,7 +255,7 @@ body{
     100% {background-color:transparent; color: #787879; top:0px;}
 }
 
-/* Modal de nuevo registro */
+/* Modal de anuncion */
 
 .modal-header{
     background-color: #009688;

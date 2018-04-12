@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Estilos css -->
+
+    <link rel="stylesheet" href="../css/admin/style.css">
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
+
+    <!-- Archivos Js -->
+
+    <script src="../../vendor/bootstrap/js/jquery-3.2.1.min.js"></script>
+    <script src="./../../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <title>Administrador</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3">
+                <div class="container-fluid">
+                    <!-- Perfil de adminitrador -->
+                    <div class="row" style="margin-top: 1em;">
+                        <div class="col-4">
+                            <img src="../img/admin/admin.jpg" class="img-fluid rounded-circle" alt="">
+                        </div>
+                        
+                        <div class="col-8">
+                            <Label>Wilmar Roa</Label>
+                            <br>
+                            <Label>Administrador</Label>
+                        </div>
+                    </div>
+                    <!-- Fin del perfil -->
+
+                    <!-- Lista de asesores -->
+
+                    <div class="row lista-asesores" id="container_asesor"></div>
+
+                    <!-- Scrip Asesores -->
+
+                    <script>
+                        var acu = 0;
+                        var text = "";
+                        for (var i = 1; i <= 20; i++) {
+                            text += "<div class='col-4'>" +
+                                "<img src='../img/usuario.png' class='img' alt=''> " + i +
+                                "</div>" +
+                                "<div class='col-4'>" +
+                                "<div class='estado-asesor'></div>" +
+                                "</div>" +
+                                "<div class='col-4' style='text-align: center;'>" +
+                                "En Línea" +
+                                "</div>"
+                        }
+                        document.getElementById("container_asesor").innerHTML = text;
+                    </script>
+                </div>
+            </div>
+
+            <!-- Menu Principal -->
+
+            <div class="col-9" style="margin-top: 1em;">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#datos-asesor">Asesores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#menu1">Menu 1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#menu2">Menu 2</a>
+                    </li>
+                </ul>
+
+                <!-- Tab Panes -->
+
+                <div class="form-group div" id="datos-asesor">
+                    <Label>Documento:</Label>
+                    <input type="text" class="form-control input">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

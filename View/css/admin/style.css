@@ -1,0 +1,30 @@
+.text-center{
+    text-align: center;
+    margin: auto;
+}
+
+.text-left{
+    text-align: left;
+}
+
+.text-right{
+    text-align: right;
+}
+
+/* Lista de asesores */
+
+.lista-asesores{
+    margin-top: 2em;
+}
+
+.estado-asesor{
+    border: 1px solid black;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+}
+
+.div{
+    width: 20%;
+    margin-top: 2em;
+}

@@ -18,6 +18,6 @@ app.on('ready', function(){
             slashes: true
         })
     );
-    win.setFullScreen(true);
+    //win.setFullScreen(true);
     win.webContents.openDevTools();
 })

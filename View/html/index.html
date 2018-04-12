@@ -10,12 +10,12 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
     <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
-    
+
 
     <script src="../../vendor/bootstrap/js/jquery-3.2.1.min.js"></script>
     <script src="./../../vendor/bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../css/index/index.css">
-    
+
     <script>if (window.module) module = window.module;</script>
 
     <script src="../../Controler/db/connectionCallCenter.js"></script>
@@ -38,7 +38,7 @@
                         </div>
                         <div class="col-10">
                             <Label for="nombre" class="label" id="nameUsuario"></Label>
-                            <input type="hidden" name="idUsuario" id="idUsuario">  
+                            <input type="hidden" name="idUsuario" id="idUsuario">
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                     <button class="btn btn-ausente" onclick="btnAusente()">AUSENTE</button>
                 </div>
                 <div class="contenedor-btn-cerrar-session">
-                    <button class="btn btn-cerrar-session" onclick="cerrarSession();">CERRAR SESSION</button>
+                    <button class="btn btn-cerrar-session" onclick="cerrarSession();">CERRAR SESION</button>
                 </div>
             </div>
             <!-- Menu Principal -->
@@ -61,7 +61,7 @@
                                 <h1 class="h1">COMPRADOR</h1>
                             </div>
                             <div class="comprador">
-                                <input type="hidden" name="id_asignacion_transaccion" id="id_asignacion_transaccion" value=""/>
+                                <input type="hidden" name="id_asignacion_transaccion" id="id_asignacion_transaccion" value="" />
                                 <div class="row" style="padding-top: 1em;">
                                     <div class="col-3 text-rigth">
                                         <Label class="labels">Nombre:</Label>
@@ -229,7 +229,7 @@
                     <div id="outputDivTransacciones">
 
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -240,12 +240,22 @@
 
                     <!-- Modal Header -->
                     <div class="modal-header" id="head_modal">
-                        <h4 class="modal-title text-center">Nuevo Registro</h4>
+                        <h4 class="modal-title text-center">Anuncios</h4>
                     </div>
 
                     <!-- Modal body -->
                     <div class="modal-body">
                         <div class="container">
+                            <div class="row">
+                                <div class="col-3 text-rigth">
+                                    <Label class="labels">Usuario:</Label>
+                                </div>
+                                <div class="col-9">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="nombre" disabled>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-3 text-rigth">
                                     <Label class="labels">Nombres:</Label>
@@ -321,7 +331,7 @@
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                            <button type="button" class="btn btn-posponer text-left" data-dismiss="modal" onclick="asignarClaves('POSPUESTO')">POSPONER</button>
+                        <button type="button" class="btn btn-posponer text-left" data-dismiss="modal" onclick="asignarClaves('POSPUESTO')">POSPONER</button>
                         <button type="button" class="btn btn-guardar" data-dismiss="modal" onclick="asignarClaves('CONFIRMADO')">GUARDAR</button>
                     </div>
 
@@ -340,4 +350,5 @@
 <script>
     consulta_datos_en_espera();
 </script>
+
 </html>
