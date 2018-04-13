@@ -1,4 +1,4 @@
-function consulta_datos_transacciones(){
+function consulta_datos_transacciones(tipo){
     var var_id_usuario = $("#idUsuario").val();
     var id_intercambio_result = "";
     var id_anuncio_result = "";
@@ -81,6 +81,10 @@ function consulta_datos_transacciones(){
                                                         $("#forma_pago").val(datosFormulario[6]);
                                                         $("#cantBitcoin").val(convertPrecioBitcoin);
                                                         estado_function = true;
+                                                        if(tipo){
+                                                            var audio = document.getElementById("audio");
+                                                            audio.play();
+                                                        }
                                                     }
                                             }
                                         });

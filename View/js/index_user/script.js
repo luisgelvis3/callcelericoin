@@ -1,8 +1,8 @@
 $(document).ready(function() {    
-    consulta_datos_transacciones();
+    consulta_datos_transacciones(true);
     function verifyCampos(){
         if($('#nombre_comprador').val() == null || $('#nombre_comprador').val() == ""){
-            if(consulta_datos_transacciones() === false){
+            if(consulta_datos_transacciones(true) === false){
                 limpiar_campos();
                 estado_consulta_formulario = false;
                 setTimeout("verifyCamposEspera();", 5000);

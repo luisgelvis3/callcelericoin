@@ -18,11 +18,6 @@ app.on('ready', function(){
             slashes: true
         })
     );
-<<<<<<< HEAD
-    //win.setFullScreen(true);
-    win.webContents.openDevTools();
-=======
     win.setFullScreen(true);
     //win.webContents.openDevTools();
->>>>>>> 8e35ed6cd882803967829e6ec291c2c8c107105d
 })

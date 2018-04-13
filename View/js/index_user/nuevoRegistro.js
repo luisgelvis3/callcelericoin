@@ -131,7 +131,7 @@ function finalizarTransaccion(){
                 try {
                     alert("Transacción Finalizada");
                     limpiar_campos_transaccion();
-                    consulta_datos_transacciones();
+                    consulta_datos_transacciones(false);
                     consulta_datos_en_espera();
                     
                 } catch (error) {
@@ -156,7 +156,7 @@ function enEsperaTransaccion(){
             }else{
                 try {
                     limpiar_campos_transaccion();
-                    consulta_datos_transacciones();
+                    consulta_datos_transacciones(false);
                     consulta_datos_en_espera();
                 } catch (error) {
                     alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
@@ -184,7 +184,7 @@ function cancelarTransaccion(){
                     alert("Transacción Cancelada");
 
                     limpiar_campos_transaccion();
-                    consulta_datos_transacciones();
+                    consulta_datos_transacciones(false);
                     consulta_datos_en_espera();
                 } catch (error) {
                     alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
@@ -211,7 +211,7 @@ function asignadoEstadoTransaccion(id_tran_espera){
                 alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
             }else{
                 limpiar_campos_transaccion();
-                consulta_datos_transacciones();
+                consulta_datos_transacciones(false);
                 consulta_datos_en_espera();
             }
         });
