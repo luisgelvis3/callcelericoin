@@ -5,7 +5,7 @@ body{
 
 .text-center{
     text-align: center;
-    margin: auto;
+    margin-top: 1em;
 }
 
 .text-rigth{
@@ -125,6 +125,12 @@ body{
     border-color: #009688;
     color: #787879;
     padding: 0.5em 3em;
+}
+
+.btn-anuncion:hover{
+    background-color: #00796B;
+    border-color: #00796B;
+    color: white;
 }
 
 .btn-nuevo-registro{

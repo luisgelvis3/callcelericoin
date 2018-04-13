@@ -51,6 +51,9 @@
                 <div class="contenedor-btn-cerrar-session">
                     <button class="btn btn-cerrar-session" onclick="cerrarSession();">CERRAR SESION</button>
                 </div>
+                <div class="contenedor-btn-anuncios">
+                    <button class="btn btn-anuncion" onclick="">ANUNCIOS</button>
+                </div>
             </div>
             <!-- Menu Principal -->
             <div class="col-sm-12 col-md-9">
@@ -233,7 +236,7 @@
                 </div>
             </div>
         </div>
-        <!-- The Modal -->
+        <!-- The Modal Nuevo Registro -->
         <div class="modal fade" id="modalRegistro">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -253,6 +256,25 @@
                                 <div class="col-9">
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="usuarioCeleri">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3 text-rigth">
+                                    <Label class="labels">Telefono:</Label>
+                                </div>
+                                <div class="col-9">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="indicativo" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-9">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="telefono" disabled>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -286,16 +308,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-3 text-rigth">
-                                    <Label class="labels">Telefono:</Label>
-                                </div>
-                                <div class="col-9">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="telefono" disabled>
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="row">
                                 <div class="col-3 text-rigth">
                                     <Label class="labels">Correo:</Label>
@@ -338,6 +351,9 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal de anuncios -->
+        
     </div>
 
 </body>
