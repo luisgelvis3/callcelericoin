@@ -15,15 +15,24 @@ function verifyCamposEspera() {
                             if (error) {
                                 alert("Error 2:" + error);
                             } else {
-                                var query = connection.query("select * from celericoin.usuarios where id = ?", [id_usuario_celeri], function (error, result) {
+                                var query = connection.query("SELECT usuarios.dni, CONCAT( usuarios.nombres, ' ', usuarios.apellidos) As nombre, "+
+                                "usuarios.direccion, paises.cod_tel,concat( MID(usuarios.telefono,1,3), ' ', MID(usuarios.telefono,4,3), ' ', MID(usuarios.telefono,7,4) ) as telefono, "+
+                                "usuarios.correo "+
+                                "FROM celericoin.usuarios "+
+                                "INNER JOIN celericoin.paises ON usuarios.paises_id = paises.id "+
+                                "WHERE usuarios.id = ? AND usuarios.paises_id IN ( "+
+                                "SELECT paises.id FROM celericoin.paises "+
+                                "INNER JOIN celericoin.usuarios ON usuarios.paises_id = paises.id "+
+                                "WHERE usuarios.id = ?)", [id_usuario_celeri, id_usuario_celeri] , function (error, result) {
                                     if (error) {
                                         alert("error en la consulta" + error);
                                     } else {
                                         try {
                                             var query
-                                            document.getElementById('nombre').value = result[0].nombres;
+                                            document.getElementById('nombre').value = result[0].nombre;
                                             document.getElementById('cedula').value = result[0].dni;
                                             document.getElementById('direccion').value = result[0].direccion;
+                                            document.getElementById('indicativo').value = result[0].cod_telefono
                                             document.getElementById('telefono').value = result[0].telefono;
                                             document.getElementById('correo').value = result[0].correo;
                                         } catch (error) {
