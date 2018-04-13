@@ -6,22 +6,22 @@
 [ FONT ]*/
 
 @font-face {
-  font-family: Poppins-Regular;
+  font-family: 'Open Sans Condensed', sans-serif;
   src: url('../fonts/poppins/Poppins-Regular.ttf'); 
 }
 
 @font-face {
-  font-family: Poppins-Medium;
+  font-family: 'Open Sans Condensed', sans-serif;
   src: url('../fonts/poppins/Poppins-Medium.ttf'); 
 }
 
 @font-face {
-  font-family: Poppins-Bold;
+  font-family: 'Open Sans Condensed', sans-serif;
   src: url('../fonts/poppins/Poppins-Bold.ttf'); 
 }
 
 @font-face {
-  font-family: Poppins-SemiBold;
+  font-family: 'Open Sans Condensed', sans-serif;
   src: url('../fonts/poppins/Poppins-SemiBold.ttf'); 
 }
 
@@ -38,7 +38,7 @@
 }
 
 .body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans Condensed', sans-serif;
   background: url("./../../img/imagen-fondo.jpg") fixed;
   background-repeat: no-repeat;
   background-position: center;
@@ -61,7 +61,7 @@
 
 /*---------------------------------------------*/
 a {
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Open Sans Condensed', sans-serif;
 	font-size: 14px;
 	line-height: 1.7;
 	color: #666666;
@@ -87,7 +87,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 p {
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Open Sans Condensed', sans-serif;
 	font-size: 14px;
 	line-height: 1.7;
 	color: #666666;
@@ -154,14 +154,14 @@ iframe {
 /*//////////////////////////////////////////////////////////////////
 [ Utility ]*/
 .txt1 {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans Condensed', sans-serif;
   font-size: 15px;
   color: #999999;
   line-height: 1.5;
 }
 
 .txt2 {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans Condensed', sans-serif;
   font-size: 15px;
   color: #57b846;
   line-height: 1.5;

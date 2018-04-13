@@ -310,3 +310,82 @@ body{
     border-color: #a0a0a0;
     background-color: #a0a0a0;
 }
+
+/* Modal de anuncios */
+
+@media (min-width: 576px){
+    .modal-anuncios{
+        max-width: 1200px;
+        margin: 1.75em auto;
+    }
+}
+
+/* Contenedor de filtros */
+
+.titulo-filtro{
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    color: #787879;
+    padding-top: .5em;
+    padding-bottom: .5em;
+}
+
+.btn-buscar{
+    background-color: transparent;
+    border: 1px solid #009688;
+    color: #787878;
+}
+
+.btn-buscar:hover{
+    background-color: #388E3C;
+    border: 1px solid #388E3C;
+    color: white;
+}
+
+/* Tabla de anuncios */
+
+.table-anuncios{
+    width: 80%;
+    margin: auto;
+}
+
+.btn-detalle{
+    background-color: transparent;
+    border: 1px solid #009688;
+    color: #787878;
+}
+
+.btn-detalle:hover{
+    background-color: #E64A19;
+    border: 1px solid #E64A19;
+    color: white;
+}
+
+/* Slider */
+
+.carousel{
+    height: 300px;
+}
+
+.carousel-control-prev,
+.carousel-control-next{
+    background: #009688;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    margin: auto;
+}
+
+/* Modal de detalle del anuncio */
+
+.btn-asignar{
+    background-color: transparent;
+    border: 1px solid #009688;
+    color: #787878;
+}
+
+.btn-asignar:hover{
+    background-color: #28a745;
+    border: 1px solid #28a745;
+    color: white;
+}
