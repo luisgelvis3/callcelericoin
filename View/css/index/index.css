@@ -389,3 +389,17 @@ body{
     border: 1px solid #28a745;
     color: white;
 }
+
+/* Modal de comentarios de transacciones */
+
+.btn-comentario{
+    background-color: transparent;
+    border: 1px solid #009688;
+    color: #787878;
+}
+
+.btn-comentario:hover{
+    background-color: #28a745;
+    border: 1px solid #28a745;
+    color: white;
+}

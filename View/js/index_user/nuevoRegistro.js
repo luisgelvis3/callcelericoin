@@ -124,6 +124,10 @@ function limpiar_campos_transaccion(){
     
 }
 
+function openModal(){
+    $('#modalComentarios').modal('show');
+}
+
 function finalizarTransaccion(){
     var id_asignacion_llamadas_consulta = document.getElementById('id_asignacion_transaccion').value;
     if (id_asignacion_llamadas_consulta == ""){
@@ -133,7 +137,7 @@ function finalizarTransaccion(){
     if(confirm('¿Realmente deseas finalizar la transacción?'))
     if(confirm('Si lo haces no podrás volver a retomarla\n¿Estás seguro?')){
         
-        var query = connection.query("UPDATE asignaciones_llamadas set estado_asignacion = 'FINALIZADO' WHERE id_asignacion = ?", [id_asignacion_llamadas_consulta], function(error,result){
+        var query = connection.query("UPDATE asignaciones_llamadas set estado_asignacion = 'FINALIZADO', fecha_hora_fin_asignacion = Now() WHERE id_asignacion = ?", [id_asignacion_llamadas_consulta], function(error,result){
             if(error){
                 alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
             }else{
