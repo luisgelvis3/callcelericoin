@@ -24,12 +24,33 @@
     height: 20px;
 }
 
-.div{
-    width: 20%;
-    margin-top: 2em;
-}
 
 /* Tabla de datos de lo sasesores */
+
+.btn-nuevo{
+    background-color: transparent;
+    border: 1px solid #0288D1;
+    color: #787878;
+}
+
+.btn-nuevo:hover{
+    background-color: #0288D1;
+    border: 1px solid #0288D1;
+    color: white;
+}
+
+.btn-buscar{
+    background-color: transparent;
+    border: 1px solid #388E3C;
+    color: #787878;
+}
+
+.btn-buscar:hover{
+    background-color: #388E3C;
+    border: 1px solid #388E3C;
+    color: white;
+}
+
 
 .btn-eliminar{
     background-color: transparent;
@@ -43,3 +64,30 @@
     color: white;
 }
 
+.btn-editar{
+    background-color: transparent;
+    border: 1px solid #388E3C;
+    color: #787878;
+}
+
+.btn-editar:hover{
+    background-color: #388E3C;
+    border: 1px solid #388E3C;
+    color: white;
+}
+
+/* Modal de nuevo registro */
+
+.modal-dialog{
+    border-radius: 8px;
+}
+
+.modal-header{
+    background-color: #009688;
+    color: white;
+}
+
+.modal-footer{
+    background-color: #FAFAFA;
+
+}

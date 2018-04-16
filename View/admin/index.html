@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+
+    <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+
     <!-- Estilos css -->
 
     <link rel="stylesheet" href="../css/admin/style.css">
@@ -16,6 +19,8 @@
 
     <script src="../../vendor/bootstrap/js/jquery-3.2.1.min.js"></script>
     <script src="./../../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <script>if (window.module) module = window.module;</script>
 
     <title>Administrador</title>
 </head>
@@ -30,7 +35,7 @@
                         <div class="col-4">
                             <img src="../img/admin/admin.jpg" class="img-fluid rounded-circle" alt="">
                         </div>
-                        
+
                         <div class="col-8">
                             <Label>Wilmar Roa</Label>
                             <br>
@@ -73,58 +78,128 @@
                         <a class="nav-link active" data-toggle="tab" href="#datos-asesor">Asesores</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#menu1">Historial de llamadas</a>
+                        <a class="nav-link" data-toggle="tab" href="#historialLlamadas">Historial de llamadas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#menu2">Menu 2</a>
+                        <a class="nav-link" data-toggle="tab" href="#menu2">Opciones</a>
                     </li>
                 </ul>
 
                 <!-- Tab Panes -->
 
-                <!-- informacion de asesores -->
-
-                <div class="container">
-                    <div class="form-group div" id="datos-asesor">
-                        <Label>Documento:</Label>
-                        <input type="text" class="form-control input">
+                <div class="tab-content">
+                    <!-- Datos de asesores-->
+                    <div class="container tab-pane active" id="datos-asesor">
+                        <div class="row" style="margin-top: 4em;">
+                            <div class="col-6">
+                                <div class="row" style="margin-top: 1em;">
+                                    <div class="col-4" style="text-align: center; margin-top: 0.5em;">
+                                        <Label>Documento:</Label>
+                                    </div>
+                                    <div class="col-8" style="margin: auto;">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control input">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3" style="margin: auto;">
+                                <button class="btn btn-buscar">
+                                    <i class="fa fa-search"></i> Buscar</button>
+                            </div>
+                            <div class="col-3" style="margin: auto;">
+                                <button class="btn btn-nuevo" data-toggle="modal" data-target="#modalRegistroAsesor">
+                                    <i class="fa fa-address-card-o"></i>
+                                    Nuevo Asesor
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Tabla de informacion de los asesores -->
+                        <table class="table table-hover" style="margin-top: 1em;">
+                            <thead>
+                                <tr>
+                                    <th>Cedula</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Telefono</th>
+                                    <th>Extension</th>
+                                    <th>
+                                        <input type="hidden">
+                                    </th>
+                                    <th>
+                                        <input type="hidden">
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>1.090.495.147</th>
+                                    <th>Luis Enrique</th>
+                                    <th>Gelvis Cuellar</th>
+                                    <th>3132277661</th>
+                                    <th>7425</th>
+                                    <th>
+                                        <button class="btn btn-editar">
+                                            <i class="fa fa-pencil-square-o"></i> Editar</button>
+                                    </th>
+                                    <th>
+                                        <button class="btn btn-eliminar">
+                                            <i class="fa fa-trash-o"></i> Eliminar</button>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <!-- Table de datos asesores -->
-                    <table class="table table-hover" id="datos-asesor">
-                        <thead>
-                            <tr>
-                                <th>Cedula</th>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Telefono</th>
-                                <th>Extension</th>
-                                <th><input type="hidden"></th>
-                                <th><input type="hidden"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th>1.090.495.147</th>
-                                <th>Luis Enrique</th>
-                                <th>Gelvis Cuellar</th>
-                                <th>3132277661</th>
-                                <th>7425</th>
-                                <th>
-                                    <button class="btn btn-editar"><i class="fa fa-pencil-square-o"></i> Editar</button>
-                                </th>
-                                <th>
-                                    <button class="btn btn-eliminar"><i class="fa fa-trash-o"></i> Eliminar</button>
-                                </th>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <!-- Historiales de llamadas por asesor -->
+                    <div class="container tab-pane fade" id="historialLlamadas">
+                        <div class="container">
+                            
+                        </div>
+                    </div>
                 </div>
-                
-
-                <!-- Historiales de llamadas por asesor -->
+            </div>
+        </div>
+        <!-- Modal de registro de nuevo asesor -->
+        <div class="modal fade" id="modalRegistroAsesor">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Nuevo Registro</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <Label>Cedula:</Label>
+                            <input type="text" class="form-control" name="cedula" id="cedula">
+                        </div>
+                        <div class="form-group">
+                            <Label>Nombres:</Label>
+                            <input type="text" class="form-control" name="nombre" id="nombre">
+                        </div>
+                        <div class="form-group">
+                            <Label>Apellidos:</Label>
+                            <input type="text" class="form-control" name="apellido" id="apellido">
+                        </div>
+                        <div class="form-group">
+                            <Label>Celular:</Label>
+                            <input type="text" class="form-control" name="celular" id="celular">
+                        </div>
+                        <div class="form-group">
+                            <Label>Extension:</Label>
+                            <input type="text" class="form-control" name="extension" id="extension">
+                        </div>
+                    </div>
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-regiistro" data-dismiss="modal">Registrar</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
 </body>
 
 </html>
