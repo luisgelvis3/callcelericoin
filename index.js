@@ -13,7 +13,7 @@ app.on('ready', function(){
     //win.setFullScreen(true);
     win.loadURL(
         url.format({
-            pathname: path.join(__dirname, 'login.html'),
+            pathname: path.join(__dirname, 'View/admin/index.html'),
             protocol: 'file',
             slashes: true
         })

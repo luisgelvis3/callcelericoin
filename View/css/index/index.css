@@ -403,3 +403,17 @@ body{
     border: 1px solid #28a745;
     color: white;
 }
+
+/* Modal de mensaje d pospuesto */
+
+.btn-mensaje_pospueto{
+    background-color: transparent;
+    border: 1px solid #009688;
+    color: #787878;
+}
+
+.btn-comentario_pospuesto:hover{
+    background-color: #43A047;
+    border: 1px solid #43a047;
+    color: white;
+}

@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="../css/admin/style.css">
     <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 
     <!-- Archivos Js -->
 
@@ -72,7 +73,7 @@
                         <a class="nav-link active" data-toggle="tab" href="#datos-asesor">Asesores</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#menu1">Menu 1</a>
+                        <a class="nav-link" data-toggle="tab" href="#menu1">Historial de llamadas</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#menu2">Menu 2</a>
@@ -81,10 +82,46 @@
 
                 <!-- Tab Panes -->
 
-                <div class="form-group div" id="datos-asesor">
-                    <Label>Documento:</Label>
-                    <input type="text" class="form-control input">
+                <!-- informacion de asesores -->
+
+                <div class="container">
+                    <div class="form-group div" id="datos-asesor">
+                        <Label>Documento:</Label>
+                        <input type="text" class="form-control input">
+                    </div>
+                    <!-- Table de datos asesores -->
+                    <table class="table table-hover" id="datos-asesor">
+                        <thead>
+                            <tr>
+                                <th>Cedula</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Telefono</th>
+                                <th>Extension</th>
+                                <th><input type="hidden"></th>
+                                <th><input type="hidden"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>1.090.495.147</th>
+                                <th>Luis Enrique</th>
+                                <th>Gelvis Cuellar</th>
+                                <th>3132277661</th>
+                                <th>7425</th>
+                                <th>
+                                    <button class="btn btn-editar"><i class="fa fa-pencil-square-o"></i> Editar</button>
+                                </th>
+                                <th>
+                                    <button class="btn btn-eliminar"><i class="fa fa-trash-o"></i> Eliminar</button>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+                
+
+                <!-- Historiales de llamadas por asesor -->
             </div>
         </div>
     </div>
