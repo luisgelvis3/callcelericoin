@@ -15,8 +15,8 @@ function verifyCamposEspera() {
                             if (error) {
                                 alert("Error 2:" + error);
                             } else {
-                                var query = connection.query("SELECT usuarios.dni, CONCAT( usuarios.nombres, ' ', usuarios.apellidos) As nombre, "+
-                                "usuarios.direccion, paises.cod_tel as cod_telefono,concat( MID(usuarios.telefono,1,3), ' ', MID(usuarios.telefono,4,3), ' ', MID(usuarios.telefono,7,4) ) as telefono, "+
+                                var query = connection.query("SELECT usuarios.pseudonimo, usuarios.dni, CONCAT( usuarios.nombres, ' ', usuarios.apellidos) As nombre, "+
+                                "usuarios.direccion, paises.cod_tel,concat( MID(usuarios.telefono,1,3), '-', MID(usuarios.telefono,4,3), '-', MID(usuarios.telefono,7,4) ) as telefono, "+
                                 "usuarios.correo "+
                                 "FROM celericoin.usuarios "+
                                 "INNER JOIN celericoin.paises ON usuarios.paises_id = paises.id "+
@@ -28,11 +28,11 @@ function verifyCamposEspera() {
                                         alert("error en la consulta" + error);
                                     } else {
                                         try {
-                                            var query
+                                            document.getElementById('usuarioCeleri').value = result[0].pseudonimo;
                                             document.getElementById('nombre').value = result[0].nombre;
                                             document.getElementById('cedula').value = result[0].dni;
                                             document.getElementById('direccion').value = result[0].direccion;
-                                            document.getElementById('indicativo').value = result[0].cod_telefono
+                                            document.getElementById('indicativo').value = result[0].cod_tel;
                                             document.getElementById('telefono').value = result[0].telefono;
                                             document.getElementById('correo').value = result[0].correo;
                                         } catch (error) {
@@ -60,6 +60,8 @@ function asignarClaves(estado_confirmacion) {
 
     var clave_usuario = document.getElementById('clave_usuario').value;
     var clave_celeri = document.getElementById('clave_celericoin').value;
+    var pseudonimo = document.getElementById('usuarioCeleri').value;
+
 
     if (estado_confirmacion === "CONFIRMADO") {
         var query = connection.query("update contrasenas set contrasena_1 = AES_ENCRYPT( ? , UNHEX(SHA2('bc12jD=U\d7MrPr',512))), contrasena_2 = AES_ENCRYPT( ? , UNHEX(SHA2('bc12jD=U\d7MrPr',512))) where id_usuario_celeri = ?", [clave_usuario, clave_celeri, id_usuario_celeri], function (error, result) {
@@ -71,8 +73,18 @@ function asignarClaves(estado_confirmacion) {
                         if (error) {
                             alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
                         } else {
-                            alert("Se ha realizado el registro correctamente");
-                            limpiar_campos_contrasenas();
+                            var query = connection.query("update celericoin.usuarios set pseudonimo = ? where id = ?", [pseudonimo, id_usuario_celeri], function (error, result) {
+                                if (error) {
+                                    alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
+                                } else {
+                                    try {
+                                        alert("Se ha realizado el registro correctamente");
+                                        limpiar_campos_contrasenas();
+                                    } catch (error) {
+                                        alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
+                                    }
+                                }
+                            });
                         }
                     });
                 } catch (error) {
