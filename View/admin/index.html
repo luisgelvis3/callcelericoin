@@ -104,51 +104,57 @@
                                 </div>
                             </div>
                             <div class="col-3" style="margin: auto;">
-                                <button class="btn btn-buscar">
+                                <button class="btn btn-outline-secondary">
                                     <i class="fa fa-search"></i> Buscar</button>
                             </div>
                             <div class="col-3" style="margin: auto;">
-                                <button class="btn btn-nuevo" data-toggle="modal" data-target="#modalRegistroAsesor">
+                                <button class="btn btn-outline-success" data-toggle="modal" data-target="#modalRegistroAsesor">
                                     <i class="fa fa-address-card-o"></i>
                                     Nuevo Asesor
                                 </button>
                             </div>
                         </div>
                         <!-- Tabla de informacion de los asesores -->
-                        <table class="table table-hover" style="margin-top: 1em;">
-                            <thead>
-                                <tr>
-                                    <th>Cedula</th>
-                                    <th>Nombre</th>
-                                    <th>Apellido</th>
-                                    <th>Telefono</th>
-                                    <th>Extension</th>
-                                    <th>
-                                        <input type="hidden">
-                                    </th>
-                                    <th>
-                                        <input type="hidden">
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>1.090.495.147</th>
-                                    <th>Luis Enrique</th>
-                                    <th>Gelvis Cuellar</th>
-                                    <th>3132277661</th>
-                                    <th>7425</th>
-                                    <th>
-                                        <button class="btn btn-editar">
-                                            <i class="fa fa-pencil-square-o"></i> Editar</button>
-                                    </th>
-                                    <th>
-                                        <button class="btn btn-eliminar">
-                                            <i class="fa fa-trash-o"></i> Eliminar</button>
-                                    </th>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table table-hover" style="margin-top: 1em;">
+                                <thead>
+                                    <tr>
+                                        <th>Cedula</th>
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Telefono</th>
+                                        <th>Extension</th>
+                                        <th>Usuario</th>
+                                        <th>Contraseña</th>
+                                        <th>
+                                            <input type="hidden">
+                                        </th>
+                                        <th>
+                                            <input type="hidden">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>1.090.495.147</th>
+                                        <th>Luis Enrique</th>
+                                        <th>Gelvis Cuellar</th>
+                                        <th>3132277661</th>
+                                        <th>7425</th>
+                                        <th>luisgelvis</th>
+                                        <th>1234</th>
+                                        <th>
+                                            <button class="btn btn-outline-info" data-toggle="modal" data-target="#ModalEditar">
+                                                <i class="fa fa-pencil-square-o"></i> Editar</button>
+                                        </th>
+                                        <th>
+                                            <button class="btn btn-outline-danger">
+                                                <i class="fa fa-trash-o"></i> Eliminar</button>
+                                        </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <!-- Historiales de llamadas por asesor -->
                     <div class="container tab-pane fade" id="historialLlamadas">
@@ -171,7 +177,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12" style="margin: auto; text-align: center; margin-top: 1em;">
-                                    <button class="btn btn-buscar_historial"><i class="fa fa-file-text-o"></i> Generar Reporte</button>
+                                    <button class="btn btn-outline-success"><i class="fa fa-file-text-o"></i> Generar Reporte</button>
                                 </div>
                             </div>
                             <!-- Tabla de reportes -->
@@ -209,14 +215,14 @@
                             </div>
                             <div class="row" style="margin-top: 1em;">
                                 <div class="col-12" style="text-align: center;">
-                                    <button class="btn btn-imprimir" ><i class="fa fa-floppy-o"></i> Guardar</button>
+                                    <button class="btn btn-outline-primary" ><i class="fa fa-floppy-o"></i> Guardar</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- Inicio -->
 
-                    
+
                 </div>
             </div>
         </div>
@@ -254,7 +260,56 @@
                     </div>
                     <!-- Modal Footer -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-regiistro" data-dismiss="modal">Registrar</button>
+                        <button type="button" class="btn btn-outline-success" data-dismiss="modal">Registrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal de editacion del asesor -->
+        <div class="modal fade" id="ModalEditar">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h3 class="modal-title">Informacion</h3>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal Body-->
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="form-group">
+                                <Label>Cedula</Label>
+                                <input type="text" class="form-control" name="cedula" id="cedula" disabled>
+                            </div>
+                            <div class="form-group">
+                                <Label>Nombres</Label>
+                                <input type="text" class="form-control" name="nombre" id="nombre" disabled>
+                            </div>
+                            <div class="form-group">
+                                <Label>Apellidos</Label>
+                                <input type="text" class="form-control" name="apellido" id="apellido" disabled>
+                            </div>
+                            <div class="form-group">
+                                <Label>Telefono</Label>
+                                <input type="text" class="form-control" name="telefono" id="telefono">
+                            </div>
+                            <div class="form-group">
+                                <Label>Extension</Label>
+                                <input type="text" class="form-control" name="extension" id="extension">
+                            </div>
+                            <div class="form-group">
+                                <Label>Usuario</Label>
+                                <input type="text" class="form-control" name="usuario" id="usuario" disabled>
+                            </div>
+                            <div class="form-group">
+                                <Label>Contrasena</Label>
+                                <input type="text" class="form-control" name="contrasena" id="contrase">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-success" data-dismiss="modal"><i class="fa fa-refresh"></i> Guardar Cambios</button>
                     </div>
                 </div>
             </div>

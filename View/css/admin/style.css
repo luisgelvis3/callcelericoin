@@ -24,63 +24,7 @@
     height: 20px;
 }
 
-
-/* Tabla de datos de lo sasesores */
-
-.btn-nuevo{
-    background-color: transparent;
-    border: 1px solid #0288D1;
-    color: #787878;
-}
-
-.btn-nuevo:hover{
-    background-color: #0288D1;
-    border: 1px solid #0288D1;
-    color: white;
-}
-
-.btn-buscar{
-    background-color: transparent;
-    border: 1px solid #388E3C;
-    color: #787878;
-}
-
-.btn-buscar:hover{
-    background-color: #388E3C;
-    border: 1px solid #388E3C;
-    color: white;
-}
-
-
-.btn-eliminar{
-    background-color: transparent;
-    border: 1px solid #D32F2F;
-    color: #787878;
-}
-
-.btn-eliminar:hover{
-    background-color: #D32F2F;
-    border: 1px solid #D32F2F;
-    color: white;
-}
-
-.btn-editar{
-    background-color: transparent;
-    border: 1px solid #388E3C;
-    color: #787878;
-}
-
-.btn-editar:hover{
-    background-color: #388E3C;
-    border: 1px solid #388E3C;
-    color: white;
-}
-
 /* Modal de nuevo registro */
-
-.modal-dialog{
-    border-radius: 8px;
-}
 
 .modal-header{
     background-color: #009688;
@@ -90,32 +34,4 @@
 .modal-footer{
     background-color: #FAFAFA;
 
-}
-
-/* conteneor de historial de llamdas */
-
-.btn-buscar_historial{
-    background-color: transparent;
-    border: 1px solid #388E3C;
-    color: #787878;
-}
-
-.btn-buscar_historial:hover{
-    background-color: #388E3C;
-    border: 1px solid #388E3C;
-    color: white;
-}
-
-/* Tabla de reporte de llamadas */
-
-.btn-imprimir{
-    background-color: transparent;
-    border: 1px solid #388E3C;
-    color: #787878;
-}
-
-.btn-imprimir:hover{
-    background-color: #388E3C;
-    border: 1px solid #388E3C;
-    color: white;   
 }
