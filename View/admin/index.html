@@ -75,13 +75,13 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#datos-asesor">Asesores</a>
+                        <a class="nav-link" data-toggle="tab" href="#datos-asesor">Asesores</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#historialLlamadas">Historial de llamadas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#menu2">Opciones</a>
+                        <a class="nav-link active" data-toggle="tab" href="#menu2">Inicio</a>
                     </li>
                 </ul>
 
@@ -152,10 +152,71 @@
                     </div>
                     <!-- Historiales de llamadas por asesor -->
                     <div class="container tab-pane fade" id="historialLlamadas">
-                        <div class="container">
-                            
+                        <div class="container-fluid">
+                            <div class="row" style="margin-top: 4em;">
+                                <div class="col-2" style="margin: auto; text-align: center;">
+                                    <Label>Docuemnto</Label>
+                                </div>
+                                <div class="col-4" >
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="cedula_historial" id="cedula_historial">
+                                    </div>
+                                </div>
+                                <div class="col-2" style="margin: auto; text-align: center;">
+                                    <Label>Fecha</Label>
+                                </div>
+                                <div class="col-4">
+                                    <input type="date" class="form-control" name="fecha_historial" id="fecha_historial">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12" style="margin: auto; text-align: center; margin-top: 1em;">
+                                    <button class="btn btn-buscar_historial"><i class="fa fa-file-text-o"></i> Generar Reporte</button>
+                                </div>
+                            </div>
+                            <!-- Tabla de reportes -->
+                            <div class="table-responsive" style="margin-top: 3em;">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Duracion</th>
+                                            <th>Destino</th>
+                                            <th>Ventas Efectivas</th>
+                                            <th>Monto Transacciones</th>
+                                            <th>Hora Inicio</th>
+                                            <th>Hora Final</th>
+                                            <th>Total Tiempo</th>
+                                            <th>Comprador</th>
+                                            <th>Vendedor</th>
+                                            <th>Asesor</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>10 Min</th>
+                                            <th>Peru</th>
+                                            <th>4</th>
+                                            <th>1.200.000 COP</th>
+                                            <th>17/04/2018 11:20 AM</th>
+                                            <th>17/04/2018 12:10 AM</th>
+                                            <th>50 Min</th>
+                                            <th>David Casadiego</th>
+                                            <th>Luis Gelvis</th>
+                                            <th>Wilmar Roa</th>
+                                        </tr>
+                                    </tbody>
+                                </table>                                
+                            </div>
+                            <div class="row" style="margin-top: 1em;">
+                                <div class="col-12" style="text-align: center;">
+                                    <button class="btn btn-imprimir" ><i class="fa fa-floppy-o"></i> Guardar</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <!-- Inicio -->
+
+                    
                 </div>
             </div>
         </div>

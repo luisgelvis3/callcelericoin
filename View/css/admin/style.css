@@ -91,3 +91,31 @@
     background-color: #FAFAFA;
 
 }
+
+/* conteneor de historial de llamdas */
+
+.btn-buscar_historial{
+    background-color: transparent;
+    border: 1px solid #388E3C;
+    color: #787878;
+}
+
+.btn-buscar_historial:hover{
+    background-color: #388E3C;
+    border: 1px solid #388E3C;
+    color: white;
+}
+
+/* Tabla de reporte de llamadas */
+
+.btn-imprimir{
+    background-color: transparent;
+    border: 1px solid #388E3C;
+    color: #787878;
+}
+
+.btn-imprimir:hover{
+    background-color: #388E3C;
+    border: 1px solid #388E3C;
+    color: white;   
+}
