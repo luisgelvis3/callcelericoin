@@ -12,7 +12,7 @@ function validacionLogin() {
     "usu.estado_usuario, ase.nombre_asesor, ase.apellido_asesor, ase.extension_asesor "+
     "FROM usuarios usu JOIN asesores ase "+
     "ON usu.id_asesor = ase.id_asesor "+
-    "WHERE nombre_usuario = ? AND contrasena_usuario = AES_ENCRYPT( ? , UNHEX(SHA2('bc12jD=U\d7MrPr',512)))", [var_nombre_usuario, var_contrasena_usuario], function (error, result) {
+    "WHERE usu.nombre_usuario = ? AND usu.contrasena_usuario = AES_ENCRYPT( ? , UNHEX(SHA2('bc12jD=U\d7MrPr',512)))", [var_nombre_usuario, var_contrasena_usuario], function (error, result) {
         if (error) {
             console.log(error);
             alert("error: " + error);
@@ -34,7 +34,8 @@ function validacionLogin() {
                         });
                         location.href = "./View/html/index.html?nombreusuario="+userName+"&apellidousuario="+ lastName+"&id_usuario=" + id;
                     } else if (result[0].tipo_usuario === "Administrador") {
-                        var userName = results[0].nombre_usuario;
+                        var userName = result[0].nombre_usuario;
+                        var lastName = result[0].apellido_asesor;
                         var id = result[0].id_usuario;
                         var query = connection.query("UPDATE usuarios SET estado_usuario = 'Disponible', ultima_vez_usuario = NOW() WHERE id_usuario = ? ", [id], function (error, result) {
                             if (error) {
@@ -45,13 +46,14 @@ function validacionLogin() {
                                 return true;
                             }
                         });
-                        location.href = "./View/html/admin.html?nombreusuario="+userName+"&apellidousuario="+ lastName+"&id_usuario=" + id;
+                        location.href = "./View/admin/index.html?nombreusuario="+userName+"&apellidousuario="+ lastName+"&id_usuario=" + id;
                     }
                 } else {
-                    alert('Usuario o Contraseñas Incorrectas');
+                    alert('Usuario o Contraseñas Incorrectas 1');
                 }
             } catch (error) {
-                alert('Usuario o Contraseñas Incorrectas');
+                console.log(error);
+                alert('Usuario o Contraseñas Incorrectas 2');
             }
         }
 

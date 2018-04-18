@@ -11,6 +11,16 @@
     text-align: right;
 }
 
+/* Estado Circle */
+
+.estado-circle{
+    border: 1px solid #000000;
+    background-color: transparent;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+}
+
 /* Lista de asesores */
 
 .lista-asesores{
