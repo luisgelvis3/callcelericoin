@@ -34,7 +34,7 @@ function validacionLogin() {
                         });
                         location.href = "./View/html/index.html?nombreusuario="+userName+"&apellidousuario="+ lastName+"&id_usuario=" + id;
                     } else if (result[0].tipo_usuario === "Administrador") {
-                        var userName = results[0].nombre_usuario;
+                        var userName = result[0].nombre_usuario;
                         var id = result[0].id_usuario;
                         var query = connection.query("UPDATE usuarios SET estado_usuario = 'Disponible', ultima_vez_usuario = NOW() WHERE id_usuario = ? ", [id], function (error, result) {
                             if (error) {
