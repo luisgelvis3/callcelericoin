@@ -8,6 +8,7 @@
     <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
 
     <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
 
@@ -19,6 +20,7 @@
     <script>if (window.module) module = window.module;</script>
 
     <script src="../../Controler/db/connectionCallCenter.js"></script>
+    <script src="../../Controler/db/connectionCeleriCoin.js"></script>
     <script src="../../Controler/Login/Login.js"></script>
     <script src="../../Controler/Login/CloseLogin.js"></script>
 
@@ -55,13 +57,14 @@
                     <source type="audio/wav" src="./../../fonts/audio/audio.wav">
                 </audio>
                 <div class="contenedor-btn-anuncios">
-                    <button class="btn btn-anuncion" onclick="">ANUNCIOS</button>
+                    <button class="btn btn-anuncion" data-toggle="modal" data-target="#modalAnuncios" onclick="listarAnuncios(' ');">ANUNCIOS</button>
                 </div>
             </div>
             <!-- Menu Principal -->
             <div class="col-sm-12 col-md-9">
                 <div class="containe-fluid">
                     <div class="row">
+                        <!-- Menu del comprador-->
                         <div class="col-sm-12 col-md-6">
                             <div class="title-comprador">
                                 <h1 class="h1">COMPRADOR</h1>
@@ -218,7 +221,7 @@
                             <button class="btn btn-primary btn-espera" onclick="enEsperaTransaccion();">En Espera</button>
                         </div>
                         <div class="col-4 colum-left">
-                            <button class="btn btn-primary btn-finalizado" onclick="finalizarTransaccion()">Finalizar</button>
+                            <button class="btn btn-primary btn-finalizado" onclick="openModal()">Finalizar</button>
                         </div>
                     </div>
                 </div>
@@ -256,7 +259,7 @@
                                 <div class="col-3 text-rigth">
                                     <Label class="labels">Usuario:</Label>
                                 </div>
-                                <div class="col-9">
+                                <div class="col-9"> 
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="usuarioCeleri">
                                     </div>
@@ -338,7 +341,7 @@
                                 </div>
                                 <div class="col-9">
                                     <div class="form-group">
-                                        <input type="text" UPEER class="form-control" name="clave_celericoin" id="clave_celericoin">
+                                        <input type="text" class="form-control" name="clave_celericoin" id="clave_celericoin">
                                     </div>
                                 </div>
                             </div>
@@ -347,7 +350,7 @@
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-posponer text-left" data-dismiss="modal" onclick="asignarClaves('POSPUESTO')">POSPONER</button>
+                        <button type="button" class="btn btn-posponer text-left" data-toggle="modal" data-target="#modalPospuesto">POSPONER</button>
                         <button type="button" class="btn btn-guardar" data-dismiss="modal" onclick="asignarClaves('CONFIRMADO')">GUARDAR</button>
                     </div>
 
@@ -356,7 +359,320 @@
         </div>
 
         <!-- Modal de anuncios -->
-        
+        <div class="modal fade" id="modalAnuncios">
+            <div class="modal-dialog modal-anuncios">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header" id="head_modal">
+                        <h1 style="text-align: center;">ANUNCIOS</h1>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal Body -->
+                    <div class="modal-body" style="padding-bottom: 6em;">
+                        <!-- Contenedor Filtros -->
+                        <div class="container">
+                            <h2 class="titulo-filtro">Filtro de Busqueda</h2>
+                            <div class="row" style="padding-bottom: 1em;">
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="monto" placeholder="Monto">
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <select name="moneda" id="moneda" class="form-control">
+                                            <option value="">COP</option>
+                                            <option value="">CNY</option>
+                                            <option value="">BRL</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <select name="pais" id="pais" class="form-control">
+                                            <option value="">COLOMBIA</option>
+                                            <option value="">PERU</option>
+                                            <option value="">BRASIL</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <select name="ofertas" id="ofertas" class="form-control">
+                                            <option value="">Todas las ofertas</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <button type="button" class="btn btn-buscar">BUSCAR</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slider de anucios -->
+                        <div class="carousel slide" id="anuncios" data-ride="carousel">
+                            <!-- Indicadores -->
+                            <ul class="carousel-indicators">
+                                <li data-target="#anuncios" class="active"></li>
+                                <li data-target="#anuncios"></li>
+                                <li data-target="#anuncios"></li>
+                            </ul>
+                            <!-- Anucions -->
+                            <div class="carousel-inner" id="cont_anuncios_celeri">
+                                <div class="carousel-item active">
+                                    <table class="table table-hover table-anuncios">
+                                        <thead>
+                                            <tr>
+                                                <th>Proveedor</th>
+                                                <th>Precio</th>
+                                                <th>Min-Max</th>
+                                                <th>Metodo de Pago</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Luis</th>
+                                                <th>24.000.000</th>
+                                                <th>2.000.000 - 8.000.000</th>
+                                                <th>Wester Unios</th>
+                                                <th>
+                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
+                                                </th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="carousel-item">
+                                    <table class="table table-hover table-anuncios">
+                                        <thead>
+                                            <tr>
+                                                <th>Proveedor</th>
+                                                <th>Precio</th>
+                                                <th>Min-Max</th>
+                                                <th>Metodo de Pago</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Luis</th>
+                                                <th>24.000.000</th>
+                                                <th>2.000.000 - 8.000.000</th>
+                                                <th>Wester Unios</th>
+                                                <th>
+                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>Luis</th>
+                                                <th>24.000.000</th>
+                                                <th>2.000.000 - 8.000.000</th>
+                                                <th>Wester Unios</th>
+                                                <th>
+                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>Luis</th>
+                                                <th>24.000.000</th>
+                                                <th>2.000.000 - 8.000.000</th>
+                                                <th>Wester Unios</th>
+                                                <th>
+                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>Luis</th>
+                                                <th>24.000.000</th>
+                                                <th>2.000.000 - 8.000.000</th>
+                                                <th>Wester Unios</th>
+                                                <th>
+                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
+                                                </th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="carousel-item">
+                                    <table class="table table-hover table-anuncios">
+                                        <thead>
+                                            <tr>
+                                                <th>Proveedor</th>
+                                                <th>Precio</th>
+                                                <th>Min-Max</th>
+                                                <th>Metodo de Pago</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Luis</th>
+                                                <th>24.000.000</th>
+                                                <th>2.000.000 - 8.000.000</th>
+                                                <th>Wester Unios</th>
+                                                <th>
+                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>Luis</th>
+                                                <th>24.000.000</th>
+                                                <th>2.000.000 - 8.000.000</th>
+                                                <th>Wester Unios</th>
+                                                <th>
+                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>Luis</th>
+                                                <th>24.000.000</th>
+                                                <th>2.000.000 - 8.000.000</th>
+                                                <th>Wester Unios</th>
+                                                <th>
+                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th>Luis</th>
+                                                <th>24.000.000</th>
+                                                <th>2.000.000 - 8.000.000</th>
+                                                <th>Wester Unios</th>
+                                                <th>
+                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
+                                                </th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- Controles de derecha y izquierda -->
+                            <a class="carousel-control-prev" href="#anuncios" data-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </a>
+                            <a class="carousel-control-next" href="#anuncios" data-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Detalle del anuncio -->
+        <div class="modal fade" id="modalDetalles">
+            <div class="modal-dialog modal-detalles" style="margin-top: 12em;">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header" id="head_modal">
+                        <h3>Detalle del Anuncio</h3>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-3">
+                                    <Label>Precio</Label>
+                                </div>
+                                <div class="col-9">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="precio">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <Label>Usuario</Label>
+                                </div>
+                                <div class="col-9">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="usuario">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <Label>Limite transacción</Label>
+                                </div>
+                                <div class="col-9">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="limite-transaccion">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <Label>Ubicacion</Label>
+                                </div>
+                                <div class="col-9">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="ubicacion">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-asignar" onclick="">Asignar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de comentarios -->
+        <div class="modal fade" id="modalComentarios">
+            <div class="modal-dialog modal-comentarios">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header" id="head_modal">                       
+                        <h3>Comentario</h3>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="form-group">
+                                <Label>Comentario Comprador:</Label>
+                                <textarea class="form-control" name="comentario_comprador" id="comentario_comprador" cols="10" rows="5"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <Label>Comentario Vendedor:</Label>
+                                <textarea class="form-control" name="comentario_vendedor" id="comentario_vendedor" cols="10" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button class="btn btn-comentario" onclick="finalizarTransaccion()">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal de mesaje de pospuesto -->
+        <div class="modal fade" id="modalPospuesto">
+            <div class="modal-dialog modal-pospuesto">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header" id="head_modal">
+                        <h3>Mensaje</h3>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modalm Body -->
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="form-group">
+                                <Label>Comentario:</Label>
+                                <textarea class="form-control" name="comentario_pospuesto" id="comentario_pospuesto" cols="10" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-mensaje_pospuesto" onclick="asignarClaves('POSPUESTO')">FINALIZAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>
@@ -365,6 +681,7 @@
 <script src="../js/index_user/script.js"></script>
 <script src="../../Controler/IndesUser/consultaCompradorVendedor.js"></script>
 <script src="../../Controler/IndesUser/consultaTransaccionesEspera.js"></script>
+<script src="../../Controler/IndesUser/consultaAnuncios.js"></script>
 <script src="../js/index_user/nuevoRegistro.js"></script>
 <script>
     consulta_datos_en_espera();

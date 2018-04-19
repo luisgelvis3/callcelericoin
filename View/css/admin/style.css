@@ -28,3 +28,18 @@
     width: 20%;
     margin-top: 2em;
 }
+
+/* Tabla de datos de lo sasesores */
+
+.btn-eliminar{
+    background-color: transparent;
+    border: 1px solid #D32F2F;
+    color: #787878;
+}
+
+.btn-eliminar:hover{
+    background-color: #D32F2F;
+    border: 1px solid #D32F2F;
+    color: white;
+}
+

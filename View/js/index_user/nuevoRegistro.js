@@ -66,36 +66,36 @@ function asignarClaves(estado_confirmacion) {
     if (estado_confirmacion === "CONFIRMADO") {
         var query = connection.query("update contrasenas set contrasena_1 = AES_ENCRYPT( ? , UNHEX(SHA2('bc12jD=U\d7MrPr',512))), contrasena_2 = AES_ENCRYPT( ? , UNHEX(SHA2('bc12jD=U\d7MrPr',512))) where id_usuario_celeri = ?", [clave_usuario, clave_celeri, id_usuario_celeri], function (error, result) {
             if (error) {
-                alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
+                alert("Error Desconocido\n" + error + "\nPor favor comuníquese con el área de programación ")
             } else {
                 try {
                     var query = connection.query("update contrasenas set estado_confirmacion = ? where id_usuario_celeri = ?", [estado_confirmacion, id_usuario_celeri], function (error, result) {
                         if (error) {
-                            alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
+                            alert("Error Desconocido\n" + error + "\nPor favor comuníquese con el área de programación ")
                         } else {
                             var query = connection.query("update celericoin.usuarios set pseudonimo = ? where id = ?", [pseudonimo, id_usuario_celeri], function (error, result) {
                                 if (error) {
-                                    alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
+                                    alert("Error Desconocido\n" + error + "\nPor favor comuníquese con el área de programación ")
                                 } else {
                                     try {
                                         alert("Se ha realizado el registro correctamente");
                                         limpiar_campos_contrasenas();
                                     } catch (error) {
-                                        alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
+                                        alert("Error Desconocido\n" + error + "\nPor favor comuníquese con el área de programación ")
                                     }
                                 }
                             });
                         }
                     });
                 } catch (error) {
-                    alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
+                    alert("Error Desconocido\n" + error + "\nPor favor comuníquese con el área de programación ")
                 }
             }
         });
     } else if (estado_confirmacion === "POSPUESTO") {
         var query = connection.query("update contrasenas set estado_confirmacion = ? where id_usuario_celeri = ?", [estado_confirmacion, id_usuario_celeri], function (error, result) {
             if (error) {
-                alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
+                alert("Error Desconocido\n" + error + "\nPor favor comuníquese con el área de programación ")
             } else {
                 alert("Se ha pospuesto el registro correctamente");
                 limpiar_campos_contrasenas();
@@ -133,30 +133,64 @@ function limpiar_campos_transaccion(){
     document.getElementById('forma_pago').value = "";
     document.getElementById('id_asignacion_transaccion').value = "";
     document.getElementById('cantBitcoin').value = "";
+
+    /* Comentarios Transacción */
+    document.getElementById('comentario_comprador').value = "";
+    document.getElementById('comentario_vendedor').value = "";
     
+    
+}
+
+function openModal(){
+    $('#modalComentarios').modal('show');
 }
 
 function finalizarTransaccion(){
     var id_asignacion_llamadas_consulta = document.getElementById('id_asignacion_transaccion').value;
+    var texto_observacion_comprador = document.getElementById('comentario_comprador').value;
+    var texto_observacion_vendedor = document.getElementById('comentario_vendedor').value;
+
     if (id_asignacion_llamadas_consulta == ""){
         alert("No se ha encontrado ninguna transacción");
         return;
     }
+
+    if (texto_observacion_comprador == ""){
+        alert("Debes digitar una observación para el comprador");
+        return;
+    }
+
+    if (texto_observacion_vendedor == ""){
+        alert("Debes digitar una observación para el vendedor");
+        return;
+    }
+
     if(confirm('¿Realmente deseas finalizar la transacción?'))
     if(confirm('Si lo haces no podrás volver a retomarla\n¿Estás seguro?')){
         
-        var query = connection.query("UPDATE asignaciones_llamadas set estado_asignacion = 'FINALIZADO' WHERE id_asignacion = ?", [id_asignacion_llamadas_consulta], function(error,result){
+        var query = connection.query("UPDATE asignaciones_llamadas set estado_asignacion = 'FINALIZADO', fecha_hora_fin_asignacion = Now() WHERE id_asignacion = ?", [id_asignacion_llamadas_consulta], function(error,result){
             if(error){
-                alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
+                alert("Error Desconocido\n" + error + "\nPor favor comuníquese con el área de programación ")
             }else{
                 try {
-                    alert("Transacción Finalizada");
-                    limpiar_campos_transaccion();
-                    consulta_datos_transacciones(false);
-                    consulta_datos_en_espera();
-                    
+                    var query = connection.query("insert into observaciones_llamadas_transacciones (id_asignacion_llamada, texto_observacion_llamada_transaccion_comprador, texto_observacion_llamada_transaccion_vendedor) values (?, ?, ?)", [id_asignacion_llamadas_consulta, texto_observacion_comprador, texto_observacion_vendedor], function(error,result){
+                        if(error){
+                            alert("Error Desconocido\n" + error + "\nPor favor comuníquese con el área de programación ")
+                        }else{
+                            try {
+                                alert("Transacción Finalizada");
+                                limpiar_campos_transaccion();
+                                consulta_datos_transacciones(false);
+                                consulta_datos_en_espera();
+                                $('#modalComentarios').modal('hide');
+                                
+                            }catch(error){
+                                alert("Error Desconocido\n" + error + "\nPor favor comuníquese con el área de programación ")
+                            }
+                        }
+                    });                    
                 } catch (error) {
-                    alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
+                    alert("Error Desconocido\n" + error + "\nPor favor comuníquese con el área de programación ")
                 }
             }
         });
@@ -173,14 +207,14 @@ function enEsperaTransaccion(){
 
         var query = connection.query("UPDATE asignaciones_llamadas set estado_asignacion = 'EN ESPERA' WHERE id_asignacion = ?", [id_asignacion_llamadas_consulta], function(error,result){
             if(error){
-                alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
+                alert("Error Desconocido\n" + error + "\nPor favor comuníquese con el área de programación ")
             }else{
                 try {
                     limpiar_campos_transaccion();
                     consulta_datos_transacciones(false);
                     consulta_datos_en_espera();
                 } catch (error) {
-                    alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
+                    alert("Error Desconocido\n" + error + "\nPor favor comuníquese con el área de programación ")
                 }
             }
         });
@@ -199,7 +233,7 @@ function cancelarTransaccion(){
         
         var query = connection.query("UPDATE asignaciones_llamadas set estado_asignacion = 'CANCELADO' WHERE id_asignacion = ?", [id_asignacion_llamadas_consulta], function(error,result){
             if(error){
-                alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
+                alert("Error Desconocido\n" + error + "\nPor favor comuníquese con el área de programación ")
             }else{
                 try {
                     alert("Transacción Cancelada");
@@ -208,7 +242,7 @@ function cancelarTransaccion(){
                     consulta_datos_transacciones(false);
                     consulta_datos_en_espera();
                 } catch (error) {
-                    alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
+                    alert("Error Desconocido\n" + error + "\nPor favor comuníquese con el área de programación ")
                 }
             }
         });
@@ -229,7 +263,7 @@ function asignadoEstadoTransaccion(id_tran_espera){
         
         var query = connection.query("UPDATE asignaciones_llamadas set estado_asignacion = 'Asignado' WHERE id_asignacion = ?", [id_tran_espera], function(error,result){
             if(error){
-                alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ")
+                alert("Error Desconocido\n" + error + "\nPor favor comuníquese con el área de programación ")
             }else{
                 limpiar_campos_transaccion();
                 consulta_datos_transacciones(false);

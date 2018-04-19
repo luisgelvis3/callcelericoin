@@ -9,8 +9,8 @@ var connection = mysql.createConnection({
     password: '1qaz18++',
     database : 'callcenter',
     port: 3306
-    
-    /* host: 'localhost',
+    /*
+    host: 'localhost',
     user: 'root',
     password: '',
     database : 'callcenter',
