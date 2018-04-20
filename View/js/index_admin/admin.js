@@ -100,11 +100,11 @@ function buscarAsesor(){
                                 "<th>"+ usuario + "</th>"+
                                 "<th>"+ contrasena + "</th>"+
                                 "<th>"+
-                                    "<button class='btn btn-outline-info' data-toggle='modal' data-target='#ModalEditar'>"+
+                                    "<button class='btn btn-outline-info' onclick='cargarDatos("+id+");' data-toggle='modal' data-target='#ModalEditar'>"+
                                         "<i class='fa fa-pencil-square-o' ></i> Editar</button>"+
                                 "</th>"+
                                 "<th>"+
-                                    "<button class='btn btn-outline-danger'>"+
+                                    "<button class='btn btn-outline-danger' onclick='eliminarAsesor("+id+")'>"+
                                         "<i class='fa fa-trash-o'></i> Eliminar</button>"+
                                 "</th>"+
                             "</tr>"+
@@ -119,5 +119,76 @@ function buscarAsesor(){
             }
         }
     });
-
 }
+
+function cargarDatos(id){
+
+    var query = connection.query("SELECT cedula_asesor, nombre_asesor, apellido_asesor, celular_asesor, extension_asesor, usuarios.nombre_usuario, CONVERT(AES_DECRYPT(usuarios.contrasena_usuario, UNHEX(SHA2('bc12jD=U\d7MrPr',512))), char(100)) As contrasena_usuario "+
+    "FROM asesores JOIN usuarios ON asesores.id_asesor = usuarios.id_asesor WHERE asesores.id_asesor = ? ", [id], function (error,result){
+        if(error){
+            alert("Error 1"+ error + "Por favor comuniquese con el area de programacion");
+        }else{
+            try {
+                var cedula_asesor = result[0].cedula_asesor;
+                var nombre_asesor = result[0].nombre_asesor;
+                var apellido_asesor  = result[0].apellido_asesor;
+                var celular_asesor = result[0].celular_asesor;
+                var extension_asesor = result[0].extension_asesor;
+                var nombre_usuario = result[0].nombre_usuario;
+                var contrasena_usuario = result[0].contrasena_usuario;
+
+                document.getElementById('cedula_editar').value = cedula_asesor;
+                document.getElementById('nombre_editar').value = nombre_asesor;
+                document.getElementById('apellido_editar').value = apellido_asesor;
+                document.getElementById('telefono_editar').value = celular_asesor;
+                document.getElementById('extension_editar').value = extension_asesor;
+                document.getElementById('usuario_editar').value = nombre_usuario;
+                document.getElementById('contrasena_editar').value = contrasena_usuario;
+            } catch (error) {
+                alert("Error 2"+ error + "Por favor comuniquese con el area de programcion");
+            }
+        }
+    });
+}
+
+function editarAsesor(){
+    var cedula_asesor = document.getElementById('cedula_editar').value;
+    var telefono_asesor = document.getElementById('telefono_editar').value;
+    var extension_asesor = document.getElementById('extension_editar').value;
+    var contasena_usuario = document.getElementById('contrasena_editar').value;
+
+    var query = connection.query("UPDATE usuarios JOIN asesores ON usuarios.id_asesor = asesores.id_asesor "+
+    "SET celular_asesor = ?, extension_asesor = ?, usuarios.contrasena_usuario = AES_ENCRYPT(?, UNHEX(SHA2('bc12jD=U\d7MrPr',512))) "+
+    "WHERE usuarios.id_asesor = asesores.id_asesor AND cedula_asesor = ?", [telefono_asesor, extension_asesor, contasena_usuario, cedula_asesor], function(error,result){
+        if(error){
+            alert("Error 1 "+ error + "Por favor comuniquese con el area de programcion");
+        }else{
+            try {
+                alert("Cambios realizados");
+            } catch (error) {
+                alert("Error 2 "+ error + "Por favor comuniquese con el area de desarrollo");
+            }
+        }
+    });
+}
+
+function eliminarAsesor(id){
+    var query = connection.query("DELETE FROM usuarios WHERE id_asesor = ?", [id], function(error,result){
+        if(error){
+            alert("Error 1 "+ error +"Por favor comuniquese con el area de programacion");
+        }else{
+            var query = connection.query("DELETE FROM asesores WHERE id_asesor = ?", [id], function(error,result){
+                if(error){
+                    alert("Error 2 "+ error +"Por favor comuniqeuse con el area de programcion");
+                }else{
+                    try { 
+                        alert("Registro eliminado exitosamente");
+                    } catch (error) {
+                        alert("Error 3 "+ error +"Por favor comuniquese con el area de programacion");
+                    }
+                }
+            });
+        }
+    });
+}
+
