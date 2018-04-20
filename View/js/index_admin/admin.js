@@ -54,7 +54,7 @@ function buscarAsesor(){
 
     var cedula_asesor = document.getElementById('cedula_buscar').value;
 
-    var query = connection.query("SELECT asesores.id_asesor, cedula_asesor, nombre_asesor, apellido_asesor, celular_asesor, extension_asesor, usuarios.nombre_usuario, CONVERT(AES_DECRYPT(usuarios.contrasena_usuario, UNHEX(SHA2('bc12jD=U\d7MrPr',512))), char(100)) As contrasena_usuario "+
+    var query = connection.query("SELECT asesores.id_asesor, cedula_asesor, nombre_asesor, apellido_asesor, celular_asesor, extension_asesor, usuarios.nombre_usuario, CONVERT(AES_DECRYPT(usuarios.contrasena_usuario, UNHEX(SHA2('bc12jD=U\d7MrPr',512))), char(100)) As contrasena_usuario, usuarios.permiso_usuario "+
     "FROM asesores JOIN usuarios ON asesores.id_asesor = usuarios.id_asesor WHERE cedula_asesor = ? ", [cedula_asesor], function(error,result){
         if(error){
             alert("Error 1 "+ error + "Por favor pongase en contacto con el area de programacion");
@@ -69,9 +69,10 @@ function buscarAsesor(){
                 var extension = result[0].extension_asesor;
                 var usuario = result[0].nombre_usuario;
                 var contrasena = result[0].contrasena_usuario;
+                var permiso = result[0].permiso_usuario;
                 
                 var tabla = 
-                "<div table-responsive>"+
+                "<div class='table-responsive'>"+
                     "<table class='table table-hover'>"+
                         "<thead>"+
                             "<tr>"+
@@ -82,6 +83,7 @@ function buscarAsesor(){
                                 "<th>Extension</th>"+
                                 "<th>Usuario</th>"+
                                 "<th>Contraseña</th>"+
+                                "<th>Estado</th>"+
                                 "<th>"+
                                     "<input type='hidden' id='id_asesor'>"+
                                 "</th>"+
@@ -99,6 +101,7 @@ function buscarAsesor(){
                                 "<th>"+ extension + "</th>"+
                                 "<th>"+ usuario + "</th>"+
                                 "<th>"+ contrasena + "</th>"+
+                                "<th>"+ permiso +"</th>"+
                                 "<th>"+
                                     "<button class='btn btn-outline-info' onclick='cargarDatos("+id+");' data-toggle='modal' data-target='#ModalEditar'>"+
                                         "<i class='fa fa-pencil-square-o' ></i> Editar</button>"+
@@ -168,26 +171,22 @@ function editarAsesor(){
             } catch (error) {
                 alert("Error 2 "+ error + "Por favor comuniquese con el area de desarrollo");
             }
+            buscarAsesor();
         }
     });
 }
 
 function eliminarAsesor(id){
-    var query = connection.query("DELETE FROM usuarios WHERE id_asesor = ?", [id], function(error,result){
+    var query = connection.query("UPDATE usuarios SET permiso_usuario = 'Inhabilitado' WHERE id_asesor = ?", [id], function(error,result){
         if(error){
             alert("Error 1 "+ error +"Por favor comuniquese con el area de programacion");
         }else{
-            var query = connection.query("DELETE FROM asesores WHERE id_asesor = ?", [id], function(error,result){
-                if(error){
-                    alert("Error 2 "+ error +"Por favor comuniqeuse con el area de programcion");
-                }else{
-                    try { 
-                        alert("Registro eliminado exitosamente");
-                    } catch (error) {
-                        alert("Error 3 "+ error +"Por favor comuniquese con el area de programacion");
-                    }
-                }
-            });
+            try {
+                alert("Registro Eliminado")
+            } catch (error) {
+                alert("Error 2 "+ error +"Por favor comuniquese con el area de programacion");
+            }
+            buscarAsesor();
         }
     });
 }
