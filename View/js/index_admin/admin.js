@@ -1,4 +1,9 @@
 /** Asesores */
+$(document).ready(function(){
+    internalProccessVerify = setInterval(listarAsesores, 1000);
+});
+
+
 var id_asesor = "";
 
 function registroNuevo() {
@@ -40,9 +45,15 @@ function nuevoUsuario() {
             if (error) {
                 alert("Error al registar el usuario pongase en contacto con el area de desarrollo" + error);
             } else {
-                try {
-                    alert("Registro Exitoso");
-                    $('#modalUsuario').modal('hide');
+                try {                    
+                    var query = connection.query("UPDATE usuarios SET permiso_usuario = 'Habilitado' WHERE id_asesor = ?",[id_asesor], function(error,result){
+                        if(error){
+                            alert("Error desconocido "+ error + "Pongase en contacto con el area de programacion");
+                        }else{
+                            alert("Registro Exitoso");
+                            $('#modalUsuario').modal('hide');
+                        }
+                    })
                 } catch (error) {
                     alert("Error pongase en contacto con el area de programacion" + error);
                 }
@@ -73,46 +84,46 @@ function buscarAsesor() {
 
                     var tabla =
                         "<div class='table-responsive'>" +
-                        "<table class='table table-hover'>" +
-                        "<thead>" +
-                        "<tr>" +
-                        "<th>Cedula</th>" +
-                        "<th>Nombre</th>" +
-                        "<th>Apellido</th>" +
-                        "<th>Telefono</th>" +
-                        "<th>Extension</th>" +
-                        "<th>Usuario</th>" +
-                        "<th>Contraseña</th>" +
-                        "<th>Estado</th>" +
-                        "<th>" +
-                        "<input type='hidden' id='id_asesor'>" +
-                        "</th>" +
-                        "<th>" +
-                        "<input type='hidden'>" +
-                        "</th>" +
-                        "</tr>" +
-                        "</thead>" +
-                        "<tbody>" +
-                        "<tr>" +
-                        "<th>" + cedula + "</th>" +
-                        "<th>" + nombre + "</th>" +
-                        "<th>" + apellido + "</th>" +
-                        "<th>" + celular + "</th>" +
-                        "<th>" + extension + "</th>" +
-                        "<th>" + usuario + "</th>" +
-                        "<th>" + contrasena + "</th>" +
-                        "<th>" + permiso + "</th>" +
-                        "<th>" +
-                        "<button class='btn btn-outline-info' onclick='cargarDatos(" + id + ");' data-toggle='modal' data-target='#ModalEditar'>" +
-                        "<i class='fa fa-pencil-square-o' ></i> Editar</button>" +
-                        "</th>" +
-                        "<th>" +
-                        "<button class='btn btn-outline-danger' onclick='eliminarAsesor(" + id + ")'>" +
-                        "<i class='fa fa-trash-o'></i> Eliminar</button>" +
-                        "</th>" +
-                        "</tr>" +
-                        "</tbody>" +
-                        "</table>" +
+                            "<table class='table table-hover'>" +
+                                "<thead>" +
+                                    "<tr>" +
+                                        "<th>Cedula</th>" +
+                                        "<th>Nombre</th>" +
+                                        "<th>Apellido</th>" +
+                                        "<th>Telefono</th>" +
+                                        "<th>Extension</th>" +
+                                        "<th>Usuario</th>" +
+                                        "<th>Contraseña</th>" +
+                                        "<th>Estado</th>" +
+                                        "<th>" +
+                                            "<input type='hidden' id='id_asesor'>" +
+                                        "</th>" +
+                                        "<th>" +
+                                            "<input type='hidden'>" +
+                                        "</th>" +
+                                    "</tr>" +
+                                "</thead>" +
+                                "<tbody>" +
+                                    "<tr>" +
+                                        "<th>" + cedula + "</th>" +
+                                        "<th>" + nombre + "</th>" +
+                                        "<th>" + apellido + "</th>" +
+                                        "<th>" + celular + "</th>" +
+                                        "<th>" + extension + "</th>" +
+                                        "<th>" + usuario + "</th>" +
+                                        "<th>" + contrasena + "</th>" +
+                                        "<th>" + permiso + "</th>" +
+                                        "<th>" +
+                                            "<button class='btn btn-outline-info' onclick='cargarDatos(" + id + ");' data-toggle='modal' data-target='#ModalEditar'>" +
+                                                "<i class='fa fa-pencil-square-o' ></i> Editar</button>" +
+                                        "</th>" +
+                                        "<th>" +
+                                            "<button class='btn btn-outline-danger' onclick='eliminarAsesor(" + id + ")'>" +
+                                            "<i class='fa fa-trash-o'></i> Eliminar</button>" +
+                                        "</th>" +
+                                    "</tr>" +
+                                "</tbody>" +
+                            "</table>" +
                         "</div>"
 
                     document.getElementById('id_asesor').value = id;
@@ -239,9 +250,8 @@ function listarAsesores() {
                     alert(error);
             }
             document.getElementById("container_asesor").innerHTML = text;
-        }
-    });
-    internalProccessVerify = setInterval(listarAsesores, 2000);
+        }        
+    });    
 }
 
 /** Estado de los asesores  */
