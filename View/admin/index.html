@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+
+    <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+
     <!-- Estilos css -->
 
     <link rel="stylesheet" href="../css/admin/style.css">
@@ -16,6 +19,12 @@
 
     <script src="../../vendor/bootstrap/js/jquery-3.2.1.min.js"></script>
     <script src="./../../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <script>if (window.module) module = window.module;</script>
+
+    <script src="../../Controler/db/connectionCallCenter.js"></script>
+    <script src="../../Controler/Login/Login.js"></script>
+    <script src="../../Controler/Login/CloseLogin.js"></script>
 
     <title>Administrador</title>
 </head>
@@ -30,11 +39,17 @@
                         <div class="col-4">
                             <img src="../img/admin/admin.jpg" class="img-fluid rounded-circle" alt="">
                         </div>
-                        
+
                         <div class="col-8">
-                            <Label>Wilmar Roa</Label>
-                            <br>
-                            <Label>Administrador</Label>
+                            <div class="row">
+                                <div class="col-3" style="margin-top: 0.5em;">
+                                    <label class="estado-circle"></label>
+                                </div>
+                                <div class="col-9" style="margin-top: 0.3em;">
+                                    <Label for="nombre" id="nameUsuario"></Label>
+                                    <input type="hidden" name="idUsuario" id="idUsuario">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- Fin del perfil -->
@@ -73,58 +88,236 @@
                         <a class="nav-link active" data-toggle="tab" href="#datos-asesor">Asesores</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#menu1">Historial de llamadas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#menu2">Menu 2</a>
+                        <a class="nav-link" data-toggle="tab" href="#historialLlamadas">Historial de llamadas</a>
                     </li>
                 </ul>
 
                 <!-- Tab Panes -->
 
-                <!-- informacion de asesores -->
-
-                <div class="container">
-                    <div class="form-group div" id="datos-asesor">
-                        <Label>Documento:</Label>
-                        <input type="text" class="form-control input">
+                <div class="tab-content">
+                    <!-- Datos de asesores-->
+                    <div class="container tab-pane active" id="datos-asesor">
+                        <div class="row" style="margin-top: 4em;">
+                            <div class="col-6">
+                                <div class="row" style="margin-top: 1em;">
+                                    <div class="col-4" style="text-align: center; margin-top: 0.5em;">
+                                        <Label>Documento:</Label>
+                                    </div>
+                                    <div class="col-8" style="margin: auto;">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control input" id="cedula_buscar">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3" style="margin: auto;">
+                                <button class="btn btn-outline-secondary" onclick="buscarAsesor()">
+                                    <i class="fa fa-search"></i> Buscar</button>
+                            </div>
+                            <div class="col-3" style="margin: auto;">
+                                <button class="btn btn-outline-success" data-toggle="modal" data-target="#modalRegistroAsesor">
+                                    <i class="fa fa-address-card-o"></i>
+                                    Nuevo Asesor
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Tabla de informacion de los asesores -->
+                        <div id="divAsesor">
+                            
+                        </div>
+                        <input type="hidden" id="id_asesor">
+                        
                     </div>
-                    <!-- Table de datos asesores -->
-                    <table class="table table-hover" id="datos-asesor">
-                        <thead>
-                            <tr>
-                                <th>Cedula</th>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Telefono</th>
-                                <th>Extension</th>
-                                <th><input type="hidden"></th>
-                                <th><input type="hidden"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th>1.090.495.147</th>
-                                <th>Luis Enrique</th>
-                                <th>Gelvis Cuellar</th>
-                                <th>3132277661</th>
-                                <th>7425</th>
-                                <th>
-                                    <button class="btn btn-editar"><i class="fa fa-pencil-square-o"></i> Editar</button>
-                                </th>
-                                <th>
-                                    <button class="btn btn-eliminar"><i class="fa fa-trash-o"></i> Eliminar</button>
-                                </th>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
+                    <!-- Historiales de llamadas por asesor -->
+                    <div class="container tab-pane fade" id="historialLlamadas">
+                        <div class="container-fluid">
+                            <div class="row" style="margin-top: 4em;">
+                                <div class="col-2" style="margin: auto; text-align: center;">
+                                    <Label>Docuemnto</Label>
+                                </div>
+                                <div class="col-4" >
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="cedula_historial" id="cedula_historial">
+                                    </div>
+                                </div>
+                                <div class="col-2" style="margin: auto; text-align: center;">
+                                    <Label>Fecha</Label>
+                                </div>
+                                <div class="col-4">
+                                    <input type="date" class="form-control" name="fecha_historial" id="fecha_historial">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12" style="margin: auto; text-align: center; margin-top: 1em;">
+                                    <button class="btn btn-outline-success"><i class="fa fa-file-text-o"></i> Generar Reporte</button>
+                                </div>
+                            </div>
+                            <!-- Tabla de reportes -->
+                            <div class="table-responsive" style="margin-top: 3em;">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Duracion</th>
+                                            <th>Destino</th>
+                                            <th>Ventas Efectivas</th>
+                                            <th>Monto Transacciones</th>
+                                            <th>Hora Inicio</th>
+                                            <th>Hora Final</th>
+                                            <th>Total Tiempo</th>
+                                            <th>Comprador</th>
+                                            <th>Vendedor</th>
+                                            <th>Asesor</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>10 Min</th>
+                                            <th>Peru</th>
+                                            <th>4</th>
+                                            <th>1.200.000 COP</th>
+                                            <th>17/04/2018 11:20 AM</th>
+                                            <th>17/04/2018 12:10 AM</th>
+                                            <th>50 Min</th>
+                                            <th>David Casadiego</th>
+                                            <th>Luis Gelvis</th>
+                                            <th>Wilmar Roa</th>
+                                        </tr>
+                                    </tbody>
+                                </table>                                
+                            </div>
+                            <div class="row" style="margin-top: 1em;">
+                                <div class="col-12" style="text-align: center;">
+                                    <button class="btn btn-outline-primary" ><i class="fa fa-floppy-o"></i> Guardar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Inicio -->
 
-                <!-- Historiales de llamadas por asesor -->
+
+                </div>
+            </div>
+        </div>
+        <!-- Modal de registro de nuevo asesor -->
+        <div class="modal fade" id="modalRegistroAsesor">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Nuevo Registro</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <Label>Cedula:</Label>
+                            <input type="text" class="form-control" name="cedula" id="cedula">
+                        </div>
+                        <div class="form-group">
+                            <Label>Nombres:</Label>
+                            <input type="text" class="form-control" name="nombre" id="nombre">
+                        </div>
+                        <div class="form-group">
+                            <Label>Apellidos:</Label>
+                            <input type="text" class="form-control" name="apellido" id="apellido">
+                        </div>
+                        <div class="form-group">
+                            <Label>Celular:</Label>
+                            <input type="text" class="form-control" name="celular" id="celular">
+                        </div>
+                        <div class="form-group">
+                            <Label>Extension:</Label>
+                            <input type="text" class="form-control" name="extension" id="extension">
+                        </div>
+                    </div>
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-success" data-dismiss="modal" onclick="registroNuevo()">Siguiente <i class="fa fa-angle-double-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal de editacion del asesor -->
+        <div class="modal fade" id="ModalEditar">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h3 class="modal-title">Informacion</h3>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal Body-->
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="form-group">
+                                <Label>Cedula</Label>
+                                <input type="text" class="form-control" name="cedula" id="cedula" disabled>
+                            </div>
+                            <div class="form-group">
+                                <Label>Nombres</Label>
+                                <input type="text" class="form-control" name="nombre" id="nombre" disabled>
+                            </div>
+                            <div class="form-group">
+                                <Label>Apellidos</Label>
+                                <input type="text" class="form-control" name="apellido" id="apellido" disabled>
+                            </div>
+                            <div class="form-group">
+                                <Label>Telefono</Label>
+                                <input type="text" class="form-control" name="telefono" id="telefono">
+                            </div>
+                            <div class="form-group">
+                                <Label>Extension</Label>
+                                <input type="text" class="form-control" name="extension" id="extension">
+                            </div>
+                            <div class="form-group">
+                                <Label>Usuario</Label>
+                                <input type="text" class="form-control" name="usuario" id="usuario" disabled>
+                            </div>
+                            <div class="form-group">
+                                <Label>Contrasena</Label>
+                                <input type="text" class="form-control" name="contrasena" id="contrase">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-success" data-dismiss="modal"><i class="fa fa-refresh"></i> Guardar Cambios</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Modal de usuario nuevo-->
+        <div class="modal fade" id="modalUsuario">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!--Modal Header-->
+                    <div class="modal-header">
+                        <h3 class="modal-title">Asignacion de Usuario</h3>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!--Modal Body-->
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="form-group">
+                                <Label>Usuario</Label>
+                                <input type="text" class="form-control" id="nombre_usuario">
+                            </div>
+                            <div class="form-group">
+                                <Label>Contraseña</Label>
+                                <input type="text" class="form-control" id="contrasena">
+                            </div>
+                        </div>
+                    </div>
+                    <!--Modal footer-->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-success" data-dismiss="modal" onclick="nuevoUsuario()">Finalizar</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</body>
 
+</body>
+<script src="../js/Login/script.js"></script>
+<script src="../js/index_admin/admin.js"></script>
 </html>

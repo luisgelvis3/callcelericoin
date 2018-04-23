@@ -11,6 +11,16 @@
     text-align: right;
 }
 
+/* Estado Circle */
+
+.estado-circle{
+    border: 1px solid #000000;
+    background-color: transparent;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+}
+
 /* Lista de asesores */
 
 .lista-asesores{
@@ -24,22 +34,14 @@
     height: 20px;
 }
 
-.div{
-    width: 20%;
-    margin-top: 2em;
-}
+/* Modal de nuevo registro */
 
-/* Tabla de datos de lo sasesores */
-
-.btn-eliminar{
-    background-color: transparent;
-    border: 1px solid #D32F2F;
-    color: #787878;
-}
-
-.btn-eliminar:hover{
-    background-color: #D32F2F;
-    border: 1px solid #D32F2F;
+.modal-header{
+    background-color: #009688;
     color: white;
 }
 
+.modal-footer{
+    background-color: #FAFAFA;
+
+}

@@ -4,8 +4,10 @@
     var datosAnunciosPRECIOMINMAX = [];
     var datosAnunciosMONEDAVENTA = [];
     var datosAnunciosMETODOPAGO = [];
+    var acumuladorCicloAnuncios = 0;
 
 function listarAnuncios(condicional){
+    document.getElementById("cont_anuncios_celeri").innerHTML = "";
     var query = connection2.query(
         "SELECT anun.id as id_anuncio, "+
         "usu.pseudonimo, "+
@@ -22,18 +24,17 @@ function listarAnuncios(condicional){
                 alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ");
             } else {
                 if (result1[0].id_anuncio != null && result1[0].id_anuncio != "") {                                                    
-         
+                    acumuladorCicloAnuncios = 0;
                     for(i = 0; i < result1.length; i++){
                         try {
                             datosAnunciosID[i] = result1[i].id_anuncio;
                             datosAnunciosPSEUDONIMO[i] = result1[i].pseudonimo;
                             datosAnunciosPRECIO[i] = result1[i].precio;
                             datosAnunciosPRECIOMINMAX[i] = result1[i].precio_min_max;
-                            datosAnunciosMONEDAVENTA = result1[i].moneda_venta;
-                            alert("---: "+i);
+                            datosAnunciosMONEDAVENTA[i] = result1[i].moneda_venta;
                             listarMetodosPagoMonedas(i, result1[i].id_anuncio);
                         } catch (error) {
-                            alert("Error Desconocido line 62 consultaAnuncios.js \n" + error + "\nPor favor comuníquese con el área de programación ")
+                            alert("Error Desconocido line 35 consultaAnuncios.js \n" + error + "\nPor favor comuníquese con el área de programación ")
                         }
                     }                                              
                     
@@ -43,11 +44,10 @@ function listarAnuncios(condicional){
     );
     
 }
+
 function listarMetodosPagoMonedas(i, id_anun){
-    
     /* datos metodos pago */
-    alert(":::::::::::::::::::::::::::::::: "+datosAnunciosPSEUDONIMO.length);
-        alert("---"+id_anun);
+    var contenidoTablaAnuncios = "";
         var query = connection2.query(
             "select group_concat(' ',for_pag.nombre) as forma_pago_nombre "+
             "FROM formas_pago for_pag "+
@@ -62,16 +62,99 @@ function listarMetodosPagoMonedas(i, id_anun){
                 try {
                     if(result2[0].forma_pago_nombre != null || result2[0].forma_pago_nombre != ""){    
                         datosAnunciosMETODOPAGO[i] = result2[i].forma_pago_nombre;
-                        alert("________________________: "+result2[0].forma_pago_nombre);
+                        contenidoDefaultAnuncios = 
+                        "<tr>"+
+                            "<th>"+datosAnunciosPSEUDONIMO[i]+"</th>"+
+                            "<th>"+datosAnunciosPRECIO[i]+"</th>"+
+                            "<th>"+datosAnunciosPRECIOMINMAX[i]+"</th>"+
+                            "<th>"+datosAnunciosMONEDAVENTA[i]+"</th>"+
+                            "<th>"+datosAnunciosMETODOPAGO[i]+"</th>"+
+                            "<th>"+
+                                "<button type='button' class='btn btn-detalle' data-toggle='modal' data-target='#modalDetalles'>Detalle</button>"+
+                            "</th>"+
+                        "</tr>";
+
+                        if(acumuladorCicloAnuncios == 0){
+                            contenidoTablaAnuncios = 
+                                "<div class='carousel-item active'>"+
+                                    "<table class='table table-hover table-anuncios'>"+
+                                        "<thead>"+
+                                            "<tr>"+
+                                                "<th>Proveedor</th>"+
+                                                "<th>Precio</th>"+
+                                                "<th>Min-Max</th>"+
+                                                "<th>Moneda</th>"+
+                                                "<th>Metodo de Pago</th>"+
+                                            "</tr>"+
+                                        "</thead>"+
+                                        "<tbody>"+contenidoDefaultAnuncios;
+                            acumuladorCicloAnuncios += 1;
+                        }else if(acumuladorCicloAnuncios == 1 || acumuladorCicloAnuncios == 2 || acumuladorCicloAnuncios == 3){
+                            contenidoTablaAnuncios = contenidoDefaultAnuncios;
+                            acumuladorCicloAnuncios += 1;
+                        }else if(acumuladorCicloAnuncios == 4){
+                            contenidoTablaAnuncios = 
+                                            contenidoDefaultAnuncios+
+                                        "</tbody>"+
+                                    "</table>"+
+                                "</div>";
+                                acumuladorCicloAnuncios = 0;
+                        }
+                        
+                        document.getElementById("cont_anuncios_celeri").innerHTML += contenidoTablaAnuncios;
                         /*console.log("- "+datosAnunciosID[i]+" - "+datosAnunciosPSEUDONIMO[i]+
                         " - "+datosAnunciosPRECIO[i]+" - "+datosAnunciosPRECIOMINMAX+" - "+datosAnunciosMONEDAVENTA+ 
                         " - "+datosAnunciosMETODOPAGO[i]);*/
                     }
+
                 }catch(error){
                     alert("Error Desconocido\n" + error + "\nPor favor comuníquese con el área de programación ");
                 }
             }
         });     
-    
     return;
+}
+
+function consultaMonedasFiltro(){
+    var contenidoSelectMonedas = "";
+    document.getElementById("moneda").innerHTML = "";
+    contenidoSelectMonedas = "<option value='todas'>Todas las ofertas</option>";
+    var query = connection2.query("select iso from monedas order by iso", function (error, result){
+        if (error) {
+            alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ");
+        } else {
+            try {
+                if (result[0].iso != null || result[0].iso != "") {
+                    for(i = 0; i < result.length; i++){
+                        contenidoSelectMonedas += "<option value='"+result[i].iso+"'>"+result[i].iso+"</option>";
+                    }
+                }
+                document.getElementById("moneda").innerHTML += contenidoSelectMonedas; 
+            }catch(error){
+                alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ");
+            }
+        }
+    });
+}
+
+function consultaPaisesFiltro(){
+    var contenidoSelectPaises = "";
+    document.getElementById("pais").innerHTML = "";
+    contenidoSelectPaises = "<option value='todas'>Todas las ofertas</option>";
+    var query = connection2.query("select nomb_esp from paises order by nomb_esp", function (error, result){
+        if (error) {
+            alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ");
+        } else {
+            try {
+                if (result[0].nomb_esp != null || result[0].nomb_esp != "") {
+                    for(i = 0; i < result.length; i++){
+                        contenidoSelectPaises += "<option value='"+result[i].nomb_esp+"'>"+result[i].nomb_esp+"</option>";
+                    }
+                }
+                document.getElementById("pais").innerHTML += contenidoSelectPaises; 
+            }catch(error){
+                alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ");
+            }
+        }
+    });
 }

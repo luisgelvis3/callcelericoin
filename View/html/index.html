@@ -57,7 +57,7 @@
                     <source type="audio/wav" src="./../../fonts/audio/audio.wav">
                 </audio>
                 <div class="contenedor-btn-anuncios">
-                    <button class="btn btn-anuncion" data-toggle="modal" data-target="#modalAnuncios" onclick="listarAnuncios(' ');">ANUNCIOS</button>
+                    <button class="btn btn-anuncion" data-toggle="modal" data-target="#modalAnuncios" onclick="listarAnuncios(' '); consultaPaisesFiltro(); consultaMonedasFiltro();">ANUNCIOS</button>
                 </div>
             </div>
             <!-- Menu Principal -->
@@ -229,7 +229,7 @@
             <!-- Lista de Espera -->
         </div>
         <div class="container">
-            <div class="row " style="margin-top: 1em;">
+            <div class="row " style="margin-top: 1em; margin-bottom: 1em;">
                 <!-- Tabla de llamadas en espera -->
                 <div class="col-12">
                     <div class="title-espera">
@@ -382,21 +382,18 @@
                                 <div class="col-2">
                                     <div class="form-group">
                                         <select name="moneda" id="moneda" class="form-control">
-                                            <option value="">COP</option>
-                                            <option value="">CNY</option>
-                                            <option value="">BRL</option>
+                                            <option value="">Todas las ofertas</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <div class="form-group">
                                         <select name="pais" id="pais" class="form-control">
-                                            <option value="">COLOMBIA</option>
-                                            <option value="">PERU</option>
-                                            <option value="">BRASIL</option>
+                                            <option value="">Todas las ofertas</option>
                                         </select>
                                     </div>
                                 </div>
+                                <!--
                                 <div class="col-3">
                                     <div class="form-group">
                                         <select name="ofertas" id="ofertas" class="form-control">
@@ -404,6 +401,7 @@
                                         </select>
                                     </div>
                                 </div>
+                                -->
                                 <div class="col-2">
                                     <button type="button" class="btn btn-buscar">BUSCAR</button>
                                 </div>
@@ -420,129 +418,7 @@
                             </ul>
                             <!-- Anucions -->
                             <div class="carousel-inner" id="cont_anuncios_celeri">
-                                <div class="carousel-item active">
-                                    <table class="table table-hover table-anuncios">
-                                        <thead>
-                                            <tr>
-                                                <th>Proveedor</th>
-                                                <th>Precio</th>
-                                                <th>Min-Max</th>
-                                                <th>Metodo de Pago</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>Luis</th>
-                                                <th>24.000.000</th>
-                                                <th>2.000.000 - 8.000.000</th>
-                                                <th>Wester Unios</th>
-                                                <th>
-                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
-                                                </th>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="carousel-item">
-                                    <table class="table table-hover table-anuncios">
-                                        <thead>
-                                            <tr>
-                                                <th>Proveedor</th>
-                                                <th>Precio</th>
-                                                <th>Min-Max</th>
-                                                <th>Metodo de Pago</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>Luis</th>
-                                                <th>24.000.000</th>
-                                                <th>2.000.000 - 8.000.000</th>
-                                                <th>Wester Unios</th>
-                                                <th>
-                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th>Luis</th>
-                                                <th>24.000.000</th>
-                                                <th>2.000.000 - 8.000.000</th>
-                                                <th>Wester Unios</th>
-                                                <th>
-                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th>Luis</th>
-                                                <th>24.000.000</th>
-                                                <th>2.000.000 - 8.000.000</th>
-                                                <th>Wester Unios</th>
-                                                <th>
-                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th>Luis</th>
-                                                <th>24.000.000</th>
-                                                <th>2.000.000 - 8.000.000</th>
-                                                <th>Wester Unios</th>
-                                                <th>
-                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
-                                                </th>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="carousel-item">
-                                    <table class="table table-hover table-anuncios">
-                                        <thead>
-                                            <tr>
-                                                <th>Proveedor</th>
-                                                <th>Precio</th>
-                                                <th>Min-Max</th>
-                                                <th>Metodo de Pago</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>Luis</th>
-                                                <th>24.000.000</th>
-                                                <th>2.000.000 - 8.000.000</th>
-                                                <th>Wester Unios</th>
-                                                <th>
-                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th>Luis</th>
-                                                <th>24.000.000</th>
-                                                <th>2.000.000 - 8.000.000</th>
-                                                <th>Wester Unios</th>
-                                                <th>
-                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th>Luis</th>
-                                                <th>24.000.000</th>
-                                                <th>2.000.000 - 8.000.000</th>
-                                                <th>Wester Unios</th>
-                                                <th>
-                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th>Luis</th>
-                                                <th>24.000.000</th>
-                                                <th>2.000.000 - 8.000.000</th>
-                                                <th>Wester Unios</th>
-                                                <th>
-                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
-                                                </th>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                
                             </div>
                             <!-- Controles de derecha y izquierda -->
                             <a class="carousel-control-prev" href="#anuncios" data-slide="prev">
@@ -668,7 +544,7 @@
                     </div>
                     <!-- Modal Footer -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-mensaje_pospuesto" onclick="asignarClaves('POSPUESTO')">FINALIZAR</button>
+                        <button type="button" class="btn btn-mensaje_pospuesto" onselect="asignarClaves('POSPUESTO')">FINALIZAR</button>
                     </div>
                 </div>
             </div>
