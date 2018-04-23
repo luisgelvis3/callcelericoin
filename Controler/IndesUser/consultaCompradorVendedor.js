@@ -80,6 +80,7 @@ function consulta_datos_transacciones(tipo){
                                                         $("#contrasena2_vendedor").val(datosFormulario[13]);
                                                         $("#forma_pago").val(datosFormulario[6]);
                                                         $("#cantBitcoin").val(convertPrecioBitcoin);
+                                                        cambioEstadoUsuario('Ocupado');
                                                         estado_function = true;
                                                         if(tipo){
                                                             var audio = document.getElementById("audio");
