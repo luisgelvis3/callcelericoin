@@ -10,17 +10,6 @@
 .text-right{
     text-align: right;
 }
-
-/* Estado Circle */
-
-.estado-circle{
-    border: 1px solid #000000;
-    background-color: transparent;
-    border-radius: 100%;
-    width: 20px;
-    height: 20px;
-}
-
 /* Lista de asesores */
 
 .lista-asesores{
@@ -28,7 +17,31 @@
 }
 
 .estado-asesor{
-    border: 1px solid black;
+    border: 1px solid #000000;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+}
+
+.estado-circle-disponible{
+    border: 1px solid #388E3C;
+    background-color: #388E3C;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+}
+
+.estado-circle-ausente{
+    border: 1px solid #F57C00;
+    background-color: #F57C00;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+}
+
+.estado-circle-ocupado{
+    border: 1px solid #D32F2F;
+    background-color: #D32F2F;
     border-radius: 100%;
     width: 20px;
     height: 20px;
