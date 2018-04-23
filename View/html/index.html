@@ -57,7 +57,7 @@
                     <source type="audio/wav" src="./../../fonts/audio/audio.wav">
                 </audio>
                 <div class="contenedor-btn-anuncios">
-                    <button class="btn btn-anuncion" data-toggle="modal" data-target="#modalAnuncios" onclick="listarAnuncios(' '); consultaPaisesFiltro(); consultaMonedasFiltro();">ANUNCIOS</button>
+                    <button class="btn btn-anuncion" data-toggle="modal" data-target="#modalAnuncios" onclick="listarAnuncios(); consultaPaisesFiltro(); consultaMonedasFiltro();">ANUNCIOS</button>
                 </div>
             </div>
             <!-- Menu Principal -->
@@ -376,25 +376,33 @@
                             <div class="row" style="padding-bottom: 1em;">
                                 <div class="col-3">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="monto" placeholder="Monto">
+                                        <input type="number" class="form-control" id="monto_anuncio" name="monto"  placeholder="Monto">
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <div class="form-group">
                                         <select name="moneda" id="moneda" class="form-control">
-                                            <option value="">Todas las ofertas</option>
+                                            <option value="">Todas las monedas</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <div class="form-group">
                                         <select name="pais" id="pais" class="form-control">
-                                            <option value="">Todas las ofertas</option>
+                                            <option value="">Todos los países</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-2">
-                                    <button type="button" class="btn btn-buscar">BUSCAR</button>
+                                    <div class="form-group">
+                                        <select name="criptomoneda" id="criptomoneda" class="form-control">
+                                            <option value="">Todas las criptomonedas
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <button type="button" class="btn btn-buscar" onclick="listarAnuncios();">BUSCAR</button>
                                 </div>
                             </div>
                         </div>

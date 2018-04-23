@@ -5,8 +5,24 @@
     var datosAnunciosMONEDAVENTA = [];
     var datosAnunciosMETODOPAGO = [];
     var acumuladorCicloAnuncios = 0;
+    
+$(document).ready(function(){
+    $("select[name=moneda]").change(function(){
+        listarAnuncios();
+    });
+    $("#pais").change(function(){
+        listarAnuncios();
+    });
+    $("#criptomoneda").change(function(){
+        listarAnuncios();
+    });
+    $("#monto_anuncio").on('keyup', function(){
+        listarAnuncios();
+    }).keyup();
+});
 
-function listarAnuncios(condicional){
+function listarAnuncios(){
+    var whereSQL = filtroBusqueda();
     document.getElementById("cont_anuncios_celeri").innerHTML = "";
     var query = connection2.query(
         "SELECT anun.id as id_anuncio, "+
@@ -18,26 +34,29 @@ function listarAnuncios(condicional){
         "JOIN usuarios usu "+
         "JOIN monedas mon "+
         "ON anun.usuarios_id_vendedor = usu.id "+
-        "AND mon.id = anun.monedas_id_venta "+condicional, function (error, result1) {
+        "AND mon.id = anun.monedas_id_venta "+whereSQL,function (error, result1) {
 
             if (error) {
                 alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ");
             } else {
-                if (result1[0].id_anuncio != null && result1[0].id_anuncio != "") {                                                    
-                    acumuladorCicloAnuncios = 0;
-                    for(i = 0; i < result1.length; i++){
-                        try {
-                            datosAnunciosID[i] = result1[i].id_anuncio;
-                            datosAnunciosPSEUDONIMO[i] = result1[i].pseudonimo;
-                            datosAnunciosPRECIO[i] = result1[i].precio;
-                            datosAnunciosPRECIOMINMAX[i] = result1[i].precio_min_max;
-                            datosAnunciosMONEDAVENTA[i] = result1[i].moneda_venta;
-                            listarMetodosPagoMonedas(i, result1[i].id_anuncio);
-                        } catch (error) {
-                            alert("Error Desconocido line 35 consultaAnuncios.js \n" + error + "\nPor favor comuníquese con el área de programación ")
-                        }
-                    }                                              
-                    
+                try{
+                    if (result1[0].id_anuncio != null && result1[0].id_anuncio != "") {                                                    
+                        acumuladorCicloAnuncios = 0;
+                        for(i = 0; i < result1.length; i++){
+                            try {
+                                datosAnunciosID[i] = result1[i].id_anuncio;
+                                datosAnunciosPSEUDONIMO[i] = result1[i].pseudonimo;
+                                datosAnunciosPRECIO[i] = result1[i].precio;
+                                datosAnunciosPRECIOMINMAX[i] = result1[i].precio_min_max;
+                                datosAnunciosMONEDAVENTA[i] = result1[i].moneda_venta;
+                                listarMetodosPagoMonedas(i, result1[i].id_anuncio);
+                            } catch (error) {
+                                alert("Error Desconocido line 35 consultaAnuncios.js \n" + error + "\nPor favor comuníquese con el área de programación ")
+                            }
+                        }                                              
+                    }
+                }catch(error){
+                    console.log(error);
                 }
             }
         }
@@ -118,7 +137,7 @@ function listarMetodosPagoMonedas(i, id_anun){
 function consultaMonedasFiltro(){
     var contenidoSelectMonedas = "";
     document.getElementById("moneda").innerHTML = "";
-    contenidoSelectMonedas = "<option value='todas'>Todas las ofertas</option>";
+    contenidoSelectMonedas = "<option value=''>Todas las monedas</option>";
     var query = connection2.query("select iso from monedas order by iso", function (error, result){
         if (error) {
             alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ");
@@ -140,7 +159,7 @@ function consultaMonedasFiltro(){
 function consultaPaisesFiltro(){
     var contenidoSelectPaises = "";
     document.getElementById("pais").innerHTML = "";
-    contenidoSelectPaises = "<option value='todas'>Todas las ofertas</option>";
+    contenidoSelectPaises = "<option value=''>Todos los países</option>";
     var query = connection2.query("select nomb_esp from paises order by nomb_esp", function (error, result){
         if (error) {
             alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ");
@@ -153,8 +172,40 @@ function consultaPaisesFiltro(){
                 }
                 document.getElementById("pais").innerHTML += contenidoSelectPaises; 
             }catch(error){
-                alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ");
+                alert("Error Desconocido en la línea 168 de consultaAnuncios.js\n" + error + "\nPor favor comuniquese con el área de programación ");
             }
         }
     });
 }
+
+function filtroBusqueda(){
+    var whereSQL = "";
+    var valorSelectMoneda = $('select[name=moneda]').val();
+    var valorSelectPais = $('select[name=pais]').val();
+    var valorSelectCriptomoneda = $('select[name=criptomoneda]').val();
+    var valorPrecioText = $('#monto_anuncio').val()
+
+    try{
+        if(valorSelectMoneda != "" && valorSelectMoneda != null){
+            whereSQL += " WHERE mon.iso = '"+valorSelectMoneda+"'";
+        }
+
+        if(valorPrecioText != "" && valorPrecioText != null){
+            if(whereSQL != "" ){
+                whereSQL += " AND "+valorPrecioText+" BETWEEN anun.precio_minimo AND anun.precio_maximo";
+            }else{
+                whereSQL += " WHERE "+valorPrecioText+" BETWEEN anun.precio_minimo AND anun.precio_maximo";
+            }
+        }
+
+/*        if(valorSelectPais != "" || valorSelectPais != null)
+            if(whereSQL != "")
+            whereSQL = " AND mon.iso = '"+valorSelectPais+"'";
+            whereSQL = " mon.iso = '"+valorSelectPais+"'";
+*/
+    }catch(error){
+        alert("Error Desconocido en la línea 184 de consultaAnuncios.js \n" + error + "\nPor favor comuniquese con el área de programación ");
+    }
+    return whereSQL;
+}
+
