@@ -25,9 +25,10 @@ function verifyCamposEspera() {
                                 "INNER JOIN celericoin.usuarios ON usuarios.paises_id = paises.id "+
                                 "WHERE usuarios.id = ?)", [id_usuario_celeri, id_usuario_celeri] , function (error, result) {
                                     if (error) {
-                                        alert("error en la consulta" + error);
+                                        alert("Error Desconocido\n" + error + "\nPor favor comuníquese con el área de programación ")
                                     } else {
                                         try {
+                                            cambioEstadoUsuario("Ocupado");
                                             document.getElementById('usuarioCeleri').value = result[0].pseudonimo;
                                             document.getElementById('nombre').value = result[0].nombre;
                                             document.getElementById('cedula').value = result[0].dni;
@@ -45,9 +46,7 @@ function verifyCamposEspera() {
                                 //$('#modalRegistro').addClass("nuevo-registro");
                             }
                         });                        
-                    } /*else {
-                                $('#modalRegistro').removeClass("nuevo-registro");
-                            }*/
+                    } 
                 } catch (error) {
                     $('#modalRegistro').removeClass("nuevo-registro");
                 }
@@ -210,6 +209,8 @@ function enEsperaTransaccion(){
                 alert("Error Desconocido\n" + error + "\nPor favor comuníquese con el área de programación ")
             }else{
                 try {
+                    //asignadoEstadoTransaccion('Disponible');
+                    cambioEstadoUsuario('Disponible');
                     limpiar_campos_transaccion();
                     consulta_datos_transacciones(false);
                     consulta_datos_en_espera();
@@ -265,6 +266,7 @@ function asignadoEstadoTransaccion(id_tran_espera){
             if(error){
                 alert("Error Desconocido\n" + error + "\nPor favor comuníquese con el área de programación ")
             }else{
+                cambioEstadoUsuario("Ocupado");
                 limpiar_campos_transaccion();
                 consulta_datos_transacciones(false);
                 consulta_datos_en_espera();
@@ -301,4 +303,14 @@ function btnDisponible(){
             $('.btn-ausente').removeAttr('disabled');            
         }
     });
+}
+
+function cambioEstadoUsuario(estado){
+    var id_asesor = document.getElementById('idUsuario').value;
+    var query = connection.query("UPDATE usuarios SET estado_usuario = ? WHERE id_usuario = ? ", [estado, id_asesor], function(error, result){
+        if(error){
+            alert("Error "+ error + "Pongase en contacto con el area de desarrollo");
+        }
+    });
+    return;
 }
