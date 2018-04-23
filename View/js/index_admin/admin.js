@@ -241,7 +241,7 @@ function listarAsesores() {
             document.getElementById("container_asesor").innerHTML = text;
         }
     });
-        internalProccessVerify = setInterval(listarAsesores, 2000);
+    internalProccessVerify = setInterval(listarAsesores, 2000);
 }
 
 /** Estado de los asesores  */

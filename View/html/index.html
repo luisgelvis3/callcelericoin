@@ -20,6 +20,7 @@
     <script>if (window.module) module = window.module;</script>
 
     <script src="../../Controler/db/connectionCallCenter.js"></script>
+    <script src="../../Controler/db/connectionCeleriCoin.js"></script>
     <script src="../../Controler/Login/Login.js"></script>
     <script src="../../Controler/Login/CloseLogin.js"></script>
 
@@ -52,8 +53,11 @@
                 <div class="contenedor-btn-cerrar-session">
                     <button class="btn btn-cerrar-session" onclick="cerrarSession();">CERRAR SESION</button>
                 </div>
+                <audio id="audio" controls style="display: none;">
+                    <source type="audio/wav" src="./../../fonts/audio/audio.wav">
+                </audio>
                 <div class="contenedor-btn-anuncios">
-                    <button class="btn btn-anuncion" data-toggle="modal" data-target="#modalAnuncios">ANUNCIOS</button>
+                    <button class="btn btn-anuncion" data-toggle="modal" data-target="#modalAnuncios" onclick="listarAnuncios(); consultaPaisesFiltro(); consultaMonedasFiltro();">ANUNCIOS</button>
                 </div>
             </div>
             <!-- Menu Principal -->
@@ -225,7 +229,7 @@
             <!-- Lista de Espera -->
         </div>
         <div class="container">
-            <div class="row " style="margin-top: 1em;">
+            <div class="row " style="margin-top: 1em; margin-bottom: 1em;">
                 <!-- Tabla de llamadas en espera -->
                 <div class="col-12">
                     <div class="title-espera">
@@ -255,7 +259,7 @@
                                 <div class="col-3 text-rigth">
                                     <Label class="labels">Usuario:</Label>
                                 </div>
-                                <div class="col-9">
+                                <div class="col-9"> 
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="usuarioCeleri">
                                     </div>
@@ -372,36 +376,33 @@
                             <div class="row" style="padding-bottom: 1em;">
                                 <div class="col-3">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="monto" placeholder="Monto">
+                                        <input type="number" class="form-control" id="monto_anuncio" name="monto"  placeholder="Monto">
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <div class="form-group">
                                         <select name="moneda" id="moneda" class="form-control">
-                                            <option value="">COP</option>
-                                            <option value="">CNY</option>
-                                            <option value="">BRL</option>
+                                            <option value="">Todas las monedas</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <div class="form-group">
                                         <select name="pais" id="pais" class="form-control">
-                                            <option value="">COLOMBIA</option>
-                                            <option value="">PERU</option>
-                                            <option value="">BRASIL</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="form-group">
-                                        <select name="ofertas" id="ofertas" class="form-control">
-                                            <option value="">Todas las ofertas</option>
+                                            <option value="">Todos los países</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-2">
-                                    <button type="button" class="btn btn-buscar">BUSCAR</button>
+                                    <div class="form-group">
+                                        <select name="criptomoneda" id="criptomoneda" class="form-control">
+                                            <option value="">Todas las criptomonedas
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <button type="button" class="btn btn-buscar" onclick="listarAnuncios();">BUSCAR</button>
                                 </div>
                             </div>
                         </div>
@@ -415,157 +416,8 @@
                                 <li data-target="#anuncios"></li>
                             </ul>
                             <!-- Anucions -->
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <table class="table table-hover table-anuncios">
-                                        <thead>
-                                            <tr>
-                                                <th>Proveedor</th>
-                                                <th>Precio</th>
-                                                <th>Min-Max</th>
-                                                <th>Metodo de Pago</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>Luis</th>
-                                                <th>24.000.000</th>
-                                                <th>2.000.000 - 8.000.000</th>
-                                                <th>Wester Unios</th>
-                                                <th>
-                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th>Luis</th>
-                                                <th>24.000.000</th>
-                                                <th>2.000.000 - 8.000.000</th>
-                                                <th>Wester Unios</th>
-                                                <th>
-                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th>Luis</th>
-                                                <th>24.000.000</th>
-                                                <th>2.000.000 - 8.000.000</th>
-                                                <th>Wester Unios</th>
-                                                <th>
-                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th>Luis</th>
-                                                <th>24.000.000</th>
-                                                <th>2.000.000 - 8.000.000</th>
-                                                <th>Wester Unios</th>
-                                                <th>
-                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
-                                                </th>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="carousel-item">
-                                    <table class="table table-hover table-anuncios">
-                                        <thead>
-                                            <tr>
-                                                <th>Proveedor</th>
-                                                <th>Precio</th>
-                                                <th>Min-Max</th>
-                                                <th>Metodo de Pago</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>Luis</th>
-                                                <th>24.000.000</th>
-                                                <th>2.000.000 - 8.000.000</th>
-                                                <th>Wester Unios</th>
-                                                <th>
-                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th>Luis</th>
-                                                <th>24.000.000</th>
-                                                <th>2.000.000 - 8.000.000</th>
-                                                <th>Wester Unios</th>
-                                                <th>
-                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th>Luis</th>
-                                                <th>24.000.000</th>
-                                                <th>2.000.000 - 8.000.000</th>
-                                                <th>Wester Unios</th>
-                                                <th>
-                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th>Luis</th>
-                                                <th>24.000.000</th>
-                                                <th>2.000.000 - 8.000.000</th>
-                                                <th>Wester Unios</th>
-                                                <th>
-                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
-                                                </th>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="carousel-item">
-                                    <table class="table table-hover table-anuncios">
-                                        <thead>
-                                            <tr>
-                                                <th>Proveedor</th>
-                                                <th>Precio</th>
-                                                <th>Min-Max</th>
-                                                <th>Metodo de Pago</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>Luis</th>
-                                                <th>24.000.000</th>
-                                                <th>2.000.000 - 8.000.000</th>
-                                                <th>Wester Unios</th>
-                                                <th>
-                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th>Luis</th>
-                                                <th>24.000.000</th>
-                                                <th>2.000.000 - 8.000.000</th>
-                                                <th>Wester Unios</th>
-                                                <th>
-                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th>Luis</th>
-                                                <th>24.000.000</th>
-                                                <th>2.000.000 - 8.000.000</th>
-                                                <th>Wester Unios</th>
-                                                <th>
-                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th>Luis</th>
-                                                <th>24.000.000</th>
-                                                <th>2.000.000 - 8.000.000</th>
-                                                <th>Wester Unios</th>
-                                                <th>
-                                                    <button type="button" class="btn btn-detalle" data-toggle="modal" data-target="#modalDetalles">Detalle</button>
-                                                </th>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div class="carousel-inner" id="cont_anuncios_celeri">
+                                
                             </div>
                             <!-- Controles de derecha y izquierda -->
                             <a class="carousel-control-prev" href="#anuncios" data-slide="prev">
@@ -691,7 +543,7 @@
                     </div>
                     <!-- Modal Footer -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-mensaje_pospuesto" onclick="asignarClaves('POSPUESTO')">FINALIZAR</button>
+                        <button type="button" class="btn btn-mensaje_pospuesto" onselect="asignarClaves('POSPUESTO')">FINALIZAR</button>
                     </div>
                 </div>
             </div>
@@ -704,6 +556,7 @@
 <script src="../js/index_user/script.js"></script>
 <script src="../../Controler/IndesUser/consultaCompradorVendedor.js"></script>
 <script src="../../Controler/IndesUser/consultaTransaccionesEspera.js"></script>
+<script src="../../Controler/IndesUser/consultaAnuncios.js"></script>
 <script src="../js/index_user/nuevoRegistro.js"></script>
 <script>
     consulta_datos_en_espera();
