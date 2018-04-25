@@ -260,5 +260,8 @@ function listarAsesores() {
 
 function reporteLlamadas() {
     var cedula_historial = document.getElementById('cedula_historial').value;
+    var fecha_historial = document.getElementById('fecha_historial').value;
+
+    
 
 }
