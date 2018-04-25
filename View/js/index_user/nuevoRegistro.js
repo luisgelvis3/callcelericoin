@@ -178,6 +178,7 @@ function finalizarTransaccion(){
                         }else{
                             try {
                                 alert("Transacción Finalizada");
+                                cambioEstadoUsuario('Disponible');
                                 limpiar_campos_transaccion();
                                 consulta_datos_transacciones(false);
                                 consulta_datos_en_espera();
@@ -238,7 +239,7 @@ function cancelarTransaccion(){
             }else{
                 try {
                     alert("Transacción Cancelada");
-
+                    cambioEstadoUsuario('Disponible');
                     limpiar_campos_transaccion();
                     consulta_datos_transacciones(false);
                     consulta_datos_en_espera();

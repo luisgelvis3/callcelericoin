@@ -16,7 +16,7 @@ $(document).ready(function(){
     $("#criptomoneda").change(function(){
         listarAnuncios();
     });
-    $("#monto_anuncio").on('keyup', function(){
+    $("#monto_anuncio").on('change', function(){
         listarAnuncios();
     }).keyup();
 });
@@ -89,7 +89,8 @@ function listarMetodosPagoMonedas(i, id_anun){
                             "<th>"+datosAnunciosMONEDAVENTA[i]+"</th>"+
                             "<th>"+datosAnunciosMETODOPAGO[i]+"</th>"+
                             "<th>"+
-                                "<button type='button' class='btn btn-detalle' data-toggle='modal' data-target='#modalDetalles'>Detalle</button>"+
+                                //"<button type='button' class='btn btn-detalle' data-toggle='modal' data-target='#modalDetalles'>Detalle</button>"+
+                                "<button type='button' class='btn btn-detalle' onclick='asignarTransaccionAnuncio("+id_anun+");'>Asignar</button>"+
                             "</th>"+
                         "</tr>";
 
@@ -207,5 +208,24 @@ function filtroBusqueda(){
         alert("Error Desconocido en la línea 184 de consultaAnuncios.js \n" + error + "\nPor favor comuniquese con el área de programación ");
     }
     return whereSQL;
+}
+
+function asignarTransaccionAnuncio(id_anuncio){
+    var query = connection2.query("select nomb_esp from paises order by nomb_esp", function (error, result){
+        if (error) {
+            alert("Error Desconocido\n" + error + "\nPor favor comuniquese con el área de programación ");
+        } else {
+            try {
+                if (result[0].nomb_esp != null || result[0].nomb_esp != "") {
+                    for(i = 0; i < result.length; i++){
+                        contenidoSelectPaises += "<option value='"+result[i].nomb_esp+"'>"+result[i].nomb_esp+"</option>";
+                    }
+                }
+                document.getElementById("pais").innerHTML += contenidoSelectPaises; 
+            }catch(error){
+                alert("Error Desconocido en la línea 168 de consultaAnuncios.js\n" + error + "\nPor favor comuniquese con el área de programación ");
+            }
+        }
+    });
 }
 
